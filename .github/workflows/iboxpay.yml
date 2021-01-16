@@ -8,6 +8,7 @@ on:
     types: started
   repository_dispatch:
     types: iboxpay
+    
 jobs:
   build:
     runs-on: ubuntu-latest
