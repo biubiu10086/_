@@ -36,60 +36,9 @@ if (isGetCookie) {
    $.done()
 } 
 if ($.isNode()) {
-//video
-  if (process.env.VIDEOHEADER && process.env.VIDEOHEADER.indexOf('#') > -1) {
-   videoheader = process.env.VIDEOHEADER.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
-  }
-  else if (process.env.VIDEOHEADER && process.env.VIDEOHEADER.indexOf('\n') > -1) {
-   videoheader = process.env.VIDEOHEADER.split('\n');
-   console.log(`您选择的是用换行隔开\n`)
-  } else {
-   videoheader = process.env.VIDEOHEADER.split()
-  };
-//  if (process.env. VIDEOBODY && process.env.VIDEOBODY.indexOf('#') > -1) {
-//   videobody = process.env.VIDEOBODY.split('#');
-//  }
-//  else if (process.env.VIDEOBODY && process.env.VIDEOBODY.split('\n').length > 0) {
-//   videobody = process.env.VIDEOBODY.split('\n');
-//  } else  {
-//   videobody = process.env.VIDEOBODY.split()
-//  };
-//  if (process.env.GOLDBODY && process.env.GOLDBODY.indexOf('#') > -1) {
-//   goldbody = process.env.GOLDBODY.split('#');
-//  }
-//  else if (process.env.GOLDBODY && process.env.GOLDBODY.split('\n').length > 0) {
-//   goldbody = process.env.GOLDBODY.split('\n');
-//  } else  {
-//   goldbody = process.env.GOLDBODY.split()
-//  };
-//video
-  Object.keys(videoheader).forEach((item) => {
-        if (videoheader[item]) {
-          videoheaderArr.push(videoheader[item])
-        }
-    });
-//    Object.keys(videobody).forEach((item) => {
-//        if (videobody[item]) {
-//          videobodyArr.push(videobody[item])
-//        }
-//    });
-//    Object.keys(goldbody).forEach((item) => {
-//        if (goldbody[item]) {
-//          goldbodyArr.push(goldbody[item])
-//        }
-//    });
-
-     //--大号
-//        videoheaderArr.push('{"Content-Type":"application/json; charset=utf-8","X-User-Agent":"VeiShop, 1.4.4 (iOS, 14.4, zh_CN, Apple, iPhone, B985B673-41A3-4FAB-8BE3-C4B97C95C87B)","Accept":"*/*","version":"1.4.4","shopkeeperId":"1148855820752977920","source":"VEISHOP_APP_IOS","Host":"veishop.iboxpay.com","Accept-Language":"zh-Hans;q=1","token":"d517daeb8f0e46c2b39b7fcfac63be2a","Accept-Encoding":"gzip, deflate, br","traceid":"31348506702289887232161072651988000002bfa26fc","Content-Length":"363","User-Agent":"VeiShop, 1.4.4 (iOS, 14.4, zh_CN, Apple, iPhone, B985B673-41A3-4FAB-8BE3-C4B97C95C87B)","Connection":"keep-alive","mchtNo":"100529600058887"}')
-        videobodyArr.push('{"type":1,"videoList":[{"videoId":"1303519125638828032","type":1,"isFinishWatch":false},{"videoId":"1332337912610816000","type":1,"isFinishWatch":false},{"videoId":"1342103991553908736","type":1,"isFinishWatch":false},{"videoId":"1333267673369325568","type":1,"isFinishWatch":false}],"actId":"259"}')
-        goldbodyArr.push('{"type":2,"videoList":[{"videoId":"1346882922383237120","type":1,"isFinishWatch":false},{"videoId":"1331114675340050432","type":1,"isFinishWatch":false},{"videoId":"1346361759448551433","type":1,"isFinishWatch":false},{"videoId":"1347245400057257984","type":1,"isFinishWatch":false},{"videoId":"1346706817789550592","type":1,"isFinishWatch":false},{"videoId":"15861349563469449","type":1,"isFinishWatch":false},{"videoId":"1330111993959542784","type":1,"isFinishWatch":false},{"videoId":"1322879615650910208","type":1,"isFinishWatch":false},{"videoId":"1316987054910525440","type":1,"isFinishWatch":false},{"videoId":"1346706825498681344","type":1,"isFinishWatch":false},{"videoId":"1346519783280041984","type":1,"isFinishWatch":false},{"videoId":"1347243860227596288","type":1,"isFinishWatch":false}],"actId":"259"}')
-
-        //--小号
-//        videoheaderArr.push('{"Content-Type":"application/json; charset=utf-8","X-User-Agent":"VeiShop, 1.4.4 (iOS, 12.2, zh_CN, Apple, iPhone, 212702D8-8D1E-4FBA-B13E-519613F7F592)","Accept":"*/*","version":"1.4.4","shopkeeperId":"1148855820752977920","source":"VEISHOP_APP_IOS","Accept-Encoding":"br, gzip, deflate","Host":"veishop.iboxpay.com","Accept-Language":"zh-Hans-CN;q=1","token":"1f7a3a37003c45e59ae98b50211b414c","traceid":"31348531586835341312161068277251600002bfa26fc","Content-Length":"166","User-Agent":"VeiShop, 1.4.4 (iOS, 12.2, zh_CN, Apple, iPhone, 212702D8-8D1E-4FBA-B13E-519613F7F592)","Connection":"keep-alive","mchtNo":"100529600058887"}')
-//        videobodyArr.push('{"type":1,"videoList":[{"videoId":"1342530673905573888","type":1,"isFinishWatch":false},{"videoId":"1332329192975761408","type":1,"isFinishWatch":false},{"videoId":"1321753841417371648","type":1,"isFinishWatch":false}],"actId":"259"}')
-//        videobodyArr.push('{"type":2,"videoList":[{"videoId":"1349891901921497088","type":1,"isFinishWatch":false},{"videoId":"1334474308007800832","type":1,"isFinishWatch":false},{"videoId":"1347197526187532288","type":1,"isFinishWatch":false},{"videoId":"1342530673905573888","type":1,"isFinishWatch":false}],"actId":"259"}')
-
+        videoheaderArr.push('{"Connection":"keep-alive","Accept-Encoding":"gzip, deflate, br","version":"1.4.4","mchtNo":"100529600058887","Content-Type":"application/json; charset=utf-8","source":"VEISHOP_APP_IOS","shopkeeperId":"1148855820752977920","User-Agent":"VeiShop, 1.4.4 (iOS, 14.3, zh_CN, Apple, iPhone, 1CC223A6-BB53-47A6-9091-AF666380AF50)","token":"628d244fba7b400aba8c65cbeb7de4f2","X-User-Agent":"VeiShop, 1.4.4 (iOS, 14.3, zh_CN, Apple, iPhone, 1CC223A6-BB53-47A6-9091-AF666380AF50)","traceid":"3134878986933678080016108197736592bfa26fca4b8","Host":"veishop.iboxpay.com","Accept-Language":"zh-Hans;q=1, en-CN;q=0.9","Accept":"*/*"}')
+        videobodyArr.push('{"type":1,"videoList":[{"videoId":"1349422788773953536","type":1,"isFinishWatch":false},{"videoId":"1349783642379927552","type":1,"isFinishWatch":false},{"videoId":"1332329192975761408","type":1,"isFinishWatch":false},{"videoId":"1333202605902442496","type":1,"isFinishWatch":false}],"actId":"259"}')
+        goldbodyArr.push('{"type":2,"videoList":[{"videoId":"1333202605902442496","type":1,"isFinishWatch":false}],"actId":"259"}')
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
  } else {
