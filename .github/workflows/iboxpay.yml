@@ -3,9 +3,11 @@ name: 笑谱
 on:
   workflow_dispatch:
   schedule:
-     - cron: '*/10 * * * *'
+     - cron: '*/5 * * * *'
   watch:
     types: started
+  repository_dispatch:
+    types: iboxpay
 jobs:
   build:
     runs-on: ubuntu-latest
