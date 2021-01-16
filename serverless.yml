@@ -18,10 +18,10 @@ inputs:
   events: # 触发器
     - timer: # 签到
         parameters:
-          name: xp
+          name: iboxpay
           cronExpression: "0 */5 * * * * *"
           enable: true
-          argument: xp
+          argument: iboxpay
   environment: #  环境变量
     variables: #  环境变量对象
       AAA: BBB # 不要删除，用来格式化对齐追加的变量的
