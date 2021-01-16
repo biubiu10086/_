@@ -36,49 +36,9 @@ if (isGetCookie) {
    $.done()
 } 
 if ($.isNode()) {
-//video
-  if (process.env.VIDEOHEADER && process.env.VIDEOHEADER.indexOf('#') > -1) {
-   videoheader = process.env.VIDEOHEADER.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
-  }
-  else if (process.env.VIDEOHEADER && process.env.VIDEOHEADER.indexOf('\n') > -1) {
-   videoheader = process.env.VIDEOHEADER.split('\n');
-   console.log(`您选择的是用换行隔开\n`)
-  } else {
-   videoheader = process.env.VIDEOHEADER.split()
-  };
-  if (process.env. VIDEOBODY && process.env.VIDEOBODY.indexOf('#') > -1) {
-   videobody = process.env.VIDEOBODY.split('#');
-  }
-  else if (process.env.VIDEOBODY && process.env.VIDEOBODY.split('\n').length > 0) {
-   videobody = process.env.VIDEOBODY.split('\n');
-  } else  {
-   videobody = process.env.VIDEOBODY.split()
-  };
-  if (process.env.GOLDBODY && process.env.GOLDBODY.indexOf('#') > -1) {
-   goldbody = process.env.GOLDBODY.split('#');
-  }
-  else if (process.env.GOLDBODY && process.env.GOLDBODY.split('\n').length > 0) {
-   goldbody = process.env.GOLDBODY.split('\n');
-  } else  {
-   goldbody = process.env.GOLDBODY.split()
-  };
-//video
-  Object.keys(videoheader).forEach((item) => {
-        if (videoheader[item]) {
-          videoheaderArr.push(videoheader[item])
-        }
-    });
-    Object.keys(videobody).forEach((item) => {
-        if (videobody[item]) {
-          videobodyArr.push(videobody[item])
-        }
-    });
-    Object.keys(goldbody).forEach((item) => {
-        if (goldbody[item]) {
-          goldbodyArr.push(goldbody[item])
-        }
-    });
+        videoheaderArr.push('{"Connection":"keep-alive","Accept-Encoding":"gzip, deflate, br","version":"1.4.4","mchtNo":"100529600058887","Content-Type":"application/json; charset=utf-8","source":"VEISHOP_APP_IOS","shopkeeperId":"1148855820752977920","User-Agent":"VeiShop, 1.4.4 (iOS, 14.3, zh_CN, Apple, iPhone, 1CC223A6-BB53-47A6-9091-AF666380AF50)","token":"628d244fba7b400aba8c65cbeb7de4f2","X-User-Agent":"VeiShop, 1.4.4 (iOS, 14.3, zh_CN, Apple, iPhone, 1CC223A6-BB53-47A6-9091-AF666380AF50)","traceid":"3134878986933678080016108197736592bfa26fca4b8","Host":"veishop.iboxpay.com","Accept-Language":"zh-Hans;q=1, en-CN;q=0.9","Accept":"*/*"}')
+        videobodyArr.push('{"type":1,"videoList":[{"videoId":"1349422788773953536","type":1,"isFinishWatch":false},{"videoId":"1349783642379927552","type":1,"isFinishWatch":false},{"videoId":"1332329192975761408","type":1,"isFinishWatch":false},{"videoId":"1333202605902442496","type":1,"isFinishWatch":false}],"actId":"259"}')
+        goldbodyArr.push('{"type":2,"videoList":[{"videoId":"1333202605902442496","type":1,"isFinishWatch":false}],"actId":"259"}')
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
  } else {
