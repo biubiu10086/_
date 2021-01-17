@@ -18,11 +18,13 @@ inputs:
   events: # 触发器
     - timer: # 签到
         parameters:
-          name: iboxpay
-          cronExpression: "0 */5 * * * * *"
+          name: xp
+          cronExpression: "0 */2 * * * * *"
           enable: true
-          argument: iboxpay
+          argument: xp
   environment: #  环境变量
     variables: #  环境变量对象
       AAA: BBB # 不要删除，用来格式化对齐追加的变量的
-      VIDEOHEADER:{"Connection":"keep-alive","Accept-Encoding":"gzip, deflate, br","version":"1.4.4","mchtNo":"100529600058887","Content-Type":"application/json; charset=utf-8","source":"VEISHOP_APP_IOS","shopkeeperId":"1148855820752977920","User-Agent":"VeiShop, 1.4.4 (iOS, 14.3, zh_CN, Apple, iPhone, 1CC223A6-BB53-47A6-9091-AF666380AF50)","token":"628d244fba7b400aba8c65cbeb7de4f2","X-User-Agent":"VeiShop, 1.4.4 (iOS, 14.3, zh_CN, Apple, iPhone, 1CC223A6-BB53-47A6-9091-AF666380AF50)","traceid":"3134878986933678080016108197736592bfa26fca4b8","Host":"veishop.iboxpay.com","Accept-Language":"zh-Hans;q=1, en-CN;q=0.9","Accept":"*/*"}
+      VIDEOHEADER: {"Connection":"keep-alive","Accept-Encoding":"gzip, deflate, br","version":"1.4.4","mchtNo":"100529600058887","Content-Type":"application/json; charset=utf-8","source":"VEISHOP_APP_IOS","shopkeeperId":"1148855820752977920","User-Agent":"VeiShop, 1.4.4 (iOS, 14.3, zh_CN, Apple, iPhone, 1CC223A6-BB53-47A6-9091-AF666380AF50)","token":"628d244fba7b400aba8c65cbeb7de4f2","X-User-Agent":"VeiShop, 1.4.4 (iOS, 14.3, zh_CN, Apple, iPhone, 1CC223A6-BB53-47A6-9091-AF666380AF50)","traceid":"3134878986933678080016108197736592bfa26fca4b8","Host":"veishop.iboxpay.com","Accept-Language":"zh-Hans;q=1, en-CN;q=0.9","Accept":"*/*"}
+      VIDEOBODY: {"type":1,"videoList":[{"videoId":"1349422788773953536","type":1,"isFinishWatch":false},{"videoId":"1349783642379927552","type":1,"isFinishWatch":false},{"videoId":"1332329192975761408","type":1,"isFinishWatch":false},{"videoId":"1333202605902442496","type":1,"isFinishWatch":false}],"actId":"259"}
+      GOLDBODY: {"type":2,"videoList":[{"videoId":"1333202605902442496","type":1,"isFinishWatch":false}],"actId":"259"}
