@@ -3,29 +3,37 @@ name: 笑谱
 on:
   workflow_dispatch:
   schedule:
-     - cron: '*/5 * * * *'
+    - cron: '*/5 * * * *'
   watch:
     types: started
   repository_dispatch:
     types: xp
-    
+
 jobs:
   build:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
+    env:
+        XP_iboxpayHEADER: ${{ secrets.XP_iboxpayHEADER }}
+        XP_CASH: ${{ secrets.XP_CASH }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        run: |
+          git clone https://github.com/ziye12/JavaScript.git ~/JavaScript
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
       - name: npm install
+        if: env.XP_iboxpayHEADER
         run: |
+          cd ~/JavaScript
           npm install
       - name: '运行 【笑谱】'
+        if: env.XP_iboxpayHEADER
         run: |
-          node xp.js
+          cd ~/JavaScript
+          node Task/iboxpay.js
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
