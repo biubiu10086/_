@@ -7,7 +7,7 @@ on:
   watch:
     types: started
   repository_dispatch:
-    types: iboxpay
+    types: xp
     
 jobs:
   build:
@@ -25,7 +25,7 @@ jobs:
           npm install
       - name: '运行 【笑谱】'
         run: |
-          node iboxpay.js
+          node xp.js
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
