@@ -50,7 +50,7 @@ if ($.isNode()) {
     videobodyArr.push($.getdata('videobody'))
     goldbodyArr.push($.getdata('goldbody'))
     let xpcount = ($.getval('xpcount') || '1');
-    cash = ($.getval('xpcash') || '0');
+    cash = ($.getval('xpcash') || '1');
   for (let i = 2; i <= xpcount; i++) {
     videoheaderArr.push($.getdata(`videoheader${i}`))
     videobodyArr.push($.getdata(`videobody${i}`))
@@ -115,7 +115,7 @@ async function control(){
    }else{
       await watch_video();
 }
-   if(no < 50 && hour >= 8 && hour <= 23 && $.getval("live") == 1){
+   if(no < 50 && hour >= 8 && hour <= 23 && $.getval("live") == 0){
        await watch_livevideo();
 }
 }
