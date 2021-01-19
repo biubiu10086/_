@@ -39,42 +39,13 @@ let WXTASKKEY = [];
 
 
 if ($.isNode()) {
-  Object.keys(userheaderVal).forEach((item) => {
-    if (userheaderVal[item]) {
-      userheaderArr.push(signheaderVal[item])
-    }
-  });
-  Object.keys(userkeyVal).forEach((item) => {
-    if (userkeyVal[item]) {
-      userkeyArr.push(userkeyVal[item])
-    }
-  });
-  Object.keys(signheaderVal).forEach((item) => {
-    if (signheaderVal[item]) {
-      signheaderArr.push(signheaderVal[item])
-    }
-  });
-  Object.keys(signkeyVal).forEach((item) => {
-    if (signkeyVal[item]) {
-      signkeyArr.push(signkeyVal[item])
-    }
-  });
-  Object.keys(taskheaderVal).forEach((item) => {
-    if (taskheaderVal[item]) {
-      taskheaderArr.push(taskheaderVal[item])
-    }
-  });
-  Object.keys(taskkeyVal).forEach((item) => {
-    if (taskkeyVal[item]) {
-      taskkeyArr.push(taskkeyVal[item])
-    }
-  });
-  Object.keys(wxtaskkeyVal).forEach((item) => {
-    if (wxtaskkeyVal[item]) {
-      wxtaskkeyArr.push(wxtaskkeyVal[item])
-    }
-  });
-
+      userheaderArr.push('oA0GbjuovN0In7FNGV-QYOzIYfCg&_appName=ios&_dev=iPhone10,3&_devId=6d81c0b9613539c5586a14f8e43fbb7f8ecc0bb9&_appver=8.7.1&_ifChId=&_isChId=1&_osVer=14.3&openid=oA0GbjuovN0In7FNGV-QYOzIYfCg&fskey=v0aaf63c2206006518045ccdf690094f&appid=wxcbc3ab3807acb685&access_token=41_v3ATcGkvvYjJPjS-IrciN2YCNgkBM_0aMoa5KFdQuYkzez0nqxny9-8Ee8YJt-5KRISNnzZrpWWXdbDMfZ36jPB65jtf3ZlJ0mXFRx9Zotg&buildType=store&check=11&_idfa=00000000-0000-0000-0000-000000000000&lang=zh_CN')
+      userkeyArr.push('pgv_pvid=6349304987; ts_last=/activity/page/welwareCenter/; ts_sid=1876593472; ts_uid=2018990695')
+      signheaderArr.push('oA0GbjuovN0In7FNGV-QYOzIYfCg&fskey=v0aaf63c2206006518045ccdf690094f&access_token=41_v3ATcGkvvYjJPjS-IrciN2YCNgkBM_0aMoa5KFdQuYkzez0nqxny9-8Ee8YJt-5KRISNnzZrpWWXdbDMfZ36jPB65jtf3ZlJ0mXFRx9Zotg&_appName=ios&_appver=8.7.1&_osVer=14.3&_devId=6d81c0b9613539c5586a14f8e43fbb7f8ecc0bb9')
+      signkeyArr.push('pgv_info=ssid=s1341325463; pgv_pvid=6349304987')
+      taskheaderArr.push('&_dev=iPhone10,3&_devId=6d81c0b9613539c5586a14f8e43fbb7f8ecc0bb9&_appver=8.7.1&_ifChId=&_isChId=1&_osVer=14.3&openid=oA0GbjuovN0In7FNGV-QYOzIYfCg&fskey=v0aaf63c2206006518045ccdf690094f&appid=wxcbc3ab3807acb685&access_token=41_v3ATcGkvvYjJPjS-IrciN2YCNgkBM_0aMoa5KFdQuYkzez0nqxny9-8Ee8YJt-5KRISNnzZrpWWXdbDMfZ36jPB65jtf3ZlJ0mXFRx9Zotg&buildType=store&check=11&_idfa=00000000-0000-0000-0000-000000000000&lang=zh_CN')
+      taskkeyArr.push('pgv_info=ssid=s1341325463; pgv_pvid=6349304987; ts_last=/activity/page/welwareCenter/; ts_sid=1876593472; ts_uid=2018990695')
+      wxtaskkeyArr.push('wzq_channel=..osz92p00qb187; pgv_info=ssid=s1191400020; pgv_pvid=8489532896; qlappid=wx9cf8c670ebd68ce4; qlskey=v09582974126005b0d32615cf3f6f67e; qluin=085e9858e1666d3e26a68af08@wx.tenpay.com; qq_logtype=16; wx_session_time=1610985683000; wzq_qlappid=wx9cf8c670ebd68ce4; wzq_qlskey=v09582974126005b0d32615cf3f6f67e; wzq_qluin=os-ppuNk4IDJQwuv7APN-A27pekk')
 
 } else {
   userheaderArr.push($.getdata('userheader'));
