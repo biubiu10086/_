@@ -1,6 +1,8 @@
 const $ = new Env('一刻视频')
-let CookieVal = $.getdata('yk_ck')
-let bodyVal = $.getdata('yk_body')
+let CookieVal = ('{"Accept-Encoding":"gzip, deflate, br","termSysVersion":"14.300000","Host":"api.yikeapp.com","termModel":"iPhone10,3","deviceType":"ios","platformId":"IOS","Connection":"keep-alive","latitude":"23.049140","Accept-Language":"zh-Hans;q=1, en-CN;q=0.9","User-Agent":"yi ke shi pin/3.1.9 (iPhone; iOS 14.3; Scale/3.00)","Content-Type":"application/json","channelID":"IOS","timestamp":"1611044092422","longitude":"112.454763","appVersionCode":"16","appVersionName":"","network":"IOS","Accept":"*/*","x-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiMDJhMGNmZDctN2IwYi00OGE2LTkxYmYtY2E5M2ZiYjAzNzRkIiwiSUQiOjU4MzE0LCJQaG9uZSI6IjEzMjExMDQ4MDA1IiwiTmlja05hbWUiOiIiLCJBdXRob3JpdHlJZCI6IiIsImV4cCI6MTY0MjU4MDA2NCwiaXNzIjoicW1QbHVzIiwibmJmIjoxNjExMDQzMDY0fQ.vqUO9PXVi4rIQsYJXx06TTyveEF6fWYdt7FKuY73930","appPackageName":"com.yikeapp.momentIos","termId":"B87F6846-8A59-40BD-A536-4309803F8E14","networkOperator":"IOS","Content-Length":"21"}')
+//$.getdata('yk_ck')
+let bodyVal = ('{"customer_id":58314}')
+//$.getdata('yk_body')
 
 now = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*60*60*1000);  
 
@@ -23,15 +25,15 @@ if (typeof $request !== 'undefined') {
 } else {
 !(async() => {
 
-   if (now.getHours() <= 12){//通知时间
+   if (now.getHours() <= 23){//通知时间
       $.msg($.name, '自動閱讀开始🎉🎉🎉')
    }else {
       $.log($.name, '当前不在执行时间段,将为您查询账户余额！')
    }
    if (now.getHours() == 0){
       await withDraw();
-   }if (now.getHours() >= 7 && now.getHours() <=10 ){//日常任务及普通任务执行时间7-11点
-   if (now.getHours() === 7 && now.getMinutes() < 30){//签到时间 7:30之前
+   }if (now.getHours() >= 1 && now.getHours() <=23 ){//日常任务及普通任务执行时间1-23点
+   if (now.getHours() === 7 && now.getMinutes() < 30 ){//签到时间 7:30之前
       await signIn();
       await doubleId()
       await dailyTaskList();
@@ -40,7 +42,7 @@ if (typeof $request !== 'undefined') {
       await dailyTaskList();
       await smVideoLimit()
     }
-}else if(now.getHours() <= 6 || now.getHours() >= 10 && now.getHours() <= 12){//广告视频执行时间 0-6点以及10-12点
+}else if(now.getHours() <= 23 ){//广告视频执行时间 0-23点
 for (var k = 1; k <= 119; k++){
       await inspireAd()
      }
