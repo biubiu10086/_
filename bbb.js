@@ -23,12 +23,9 @@ if(CookieVal)$.setdata(CookieVal,'bbb_ck')
 $.msg($.name,"開始🎉🎉🎉")
 
       await userInfo()
+      await checkDailyClickAdId()
+      await checkDailyWatchAd()
       await checkCode()
-      await checkHomeJin()
-      await checkH5Id()
-      await homeJin()
-      await getNewsId()
-      await h5Done()
       await showmsg()
 
 })()
@@ -43,13 +40,12 @@ function showmsg(){
      }
 
 var getBoxId = (function () {
-    var i = 0;i<=3;
+    var i = 0;
     return function () {
         return ++i;
     };
 })();
 
-var BOXID = getBoxId()
 
 
 function userInfo() {
@@ -62,8 +58,8 @@ return new Promise((resolve, reject) => {
    $.post(userInfo,async(error, response, data) =>{
      const userinfo = JSON.parse(data)
      if(response.statusCode == 200 && userinfo.code != -1){
-          $.log('\n模擬登陸成功\n')
-          await getQuestionId()
+          $.log('\n🎉模擬登陸成功\n')
+          //await getQuestionId()
      notice += '🎉步步寶帳號: '+userinfo.username+'\n'+'🎉當前金幣: '+userinfo.jinbi+'💰 約'+userinfo.money+'元💸\n'
     }else{
      notice += '⚠️異常原因: '+userinfo.msg+'\n'
@@ -73,6 +69,124 @@ return new Promise((resolve, reject) => {
    })
   } 
 
+
+function checkDailyWatchAd() {
+return new Promise((resolve, reject) => {
+  let timestamp=new Date().getTime();
+  let checkdailywatchad ={
+    url: `https://bububao.duoshoutuan.com/user/chuansj`,
+    headers: JSON.parse(CookieVal),
+    body: `mini_pos=0&c_type=1&`,
+}
+   $.post(checkdailywatchad,async(error, response, data) =>{
+$.log('\n🔔開始查詢每日觀看ID\n')
+     const dailywatch = JSON.parse(data)
+      if(dailywatch.code == 1) {
+      dailyWatchStr = dailywatch.nonce_str
+          //$.log('\n'+dailyWatchStr+'\n')
+          $.log('\n🎉查詢成功,30s後領取獎勵\n')
+          await $.wait(30000)
+          await DailyWatchAd()
+           }
+          resolve()
+    })
+   })
+  } 
+
+function DailyWatchAd() {
+return new Promise((resolve, reject) => {
+  let timestamp=new Date().getTime();
+  let dailywatchad ={
+    url: `https://bububao.duoshoutuan.com/you/callback`,
+    headers: JSON.parse(CookieVal),
+    body: `nonce_str=${dailyWatchStr}&tid=9&pos=1&`,
+}
+   $.post(dailywatchad,async(error, response, data) =>{
+     const dailywatch = JSON.parse(data)
+$.log('\n🔔開始領取每日觀看獎勵\n')
+      if(dailywatch.code == 1) {
+          $.log('\n🎉每日觀看獎勵領取成功,5m後查詢下一次廣告\n')
+          await $.wait(300000)
+          await checkDailyWatchAd()
+           }else{
+          $.log('\n⚠️每日獎勵領取失敗:'+dailywatch.msg+'\n')
+           }
+          resolve()
+    })
+   })
+  } 
+
+function checkDailyClickAdId() {
+return new Promise((resolve, reject) => {
+  let timestamp=new Date().getTime();
+  let checkdailyclickadid ={
+    url: `https://bububao.duoshoutuan.com/user/admobile_show`,
+    headers: JSON.parse(CookieVal),
+}
+   $.post(checkdailyclickadid,async(error, response, data) =>{
+$.log('\n🔔開始查詢每日廣告ID\n')
+     const dailyclickid = JSON.parse(data)
+      if(dailyclickid.code == 1) {
+      dailyClickAdId = dailyclickid.ad_id
+         // $.log('\n'+dailyClickAdId+'\n')
+          $.log('\n🎉查詢成功,1s後領取獎勵\n')
+          await $.wait(1000)
+          await checkDailyClickAd()
+           }
+          resolve()
+    })
+   })
+  } 
+
+
+function checkDailyClickAd() {
+return new Promise((resolve, reject) => {
+  let timestamp=new Date().getTime();
+  let checkdailyclickad ={
+    url: `https://bububao.duoshoutuan.com/user/admobile_click`,
+    headers: JSON.parse(CookieVal),
+    body: `ad_id=${dailyClickAdId}&`,
+}
+   $.post(checkdailyclickad,async(error, response, data) =>{
+$.log('\n🔔開始查詢每日廣告點擊ID\n')
+     const dailyclick = JSON.parse(data)
+      if(dailyclick.code == 1) {
+      dailyClickStr = dailyclick.nonce_str
+         // $.log('\n'+dailyClickStr+'\n')
+          $.log('\n🎉查詢成功,5s後返回領取獎勵\n')
+          await $.wait(5000)
+          await DailyClickAd()
+           }
+          resolve()
+    })
+   })
+  } 
+
+function DailyClickAd() {
+return new Promise((resolve, reject) => {
+  let timestamp=new Date().getTime();
+  let dailyclickad ={
+    url: `https://bububao.duoshoutuan.com/user/admobile_done`,
+    headers: JSON.parse(CookieVal),
+    body: `nonce_str=${dailyClickStr}&ad_id=${dailyClickAdId}&`,
+}
+   $.post(dailyclickad,async(error, response, data) =>{
+     const dailyclick = JSON.parse(data)
+$.log('\n🔔開始領取每日點擊獎勵\n')
+      if(dailyclick.code == 1) {
+          $.log('\n🎉每日點擊獎勵領取成功,1s後查詢下一次廣告ID\n')
+          await $.wait(1000)
+          await checkDailyClickAdId()
+           }else{
+          $.log('\n⚠️每日點擊領取失敗:'+dailyclick.msg+'\n')
+           }
+          resolve()
+    })
+   })
+  } 
+
+
+
 function checkHomeJin() {
 return new Promise((resolve, reject) => {
   let timestamp=new Date().getTime();
@@ -81,12 +195,14 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(checkhomejin,async(error, response, data) =>{
-$.log('\n查詢HomeJin:'+data+'\n')
+$.log('\n🔔開始查詢首頁金幣狀態\n')
      const checkhomejb = JSON.parse(data)
      if(checkhomejb.right_st == 0){
           await homeJin()
          }else if(checkhomejb.right_st == 1){
           await checkHomeGold()
+         }else{
+$.log('\n🔔首頁金幣狀態:'+checkhomejb.right_text+'\n🔔首頁紅包狀態:'+checkhomejb.hb_text+'\n🔔首頁金蛋狀態:'+checkhomejb.jindan_text+'\n')
          }
           resolve()
     })
@@ -101,7 +217,7 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(checkhomeredbag,async(error, response, data) =>{
-$.log('\n查詢HomeRedbag:'+data+'\n')
+$.log('\n🔔開始查詢首頁紅包狀態\n')
      const checkhomerb = JSON.parse(data)
      if(checkhomerb.hb_st == 0){
           await checkRedBagId()
@@ -124,14 +240,14 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(checkhomegold,async(error, response, data) =>{
-$.log('\n查詢HomeGold:'+data+'\n')
+$.log('\n🔔開始查詢首頁金蛋狀態\n')
      const checkhomegd = JSON.parse(data)
      if(checkhomegd.jindan_show == 0){
           await checkGoldEggId()
          }else if(checkhomegd.right_time > 0){
           await $.wait(checkhomegd.right_time*1000)
           await checkHomeJin()
-         }else{
+         }else if(checkhomegd.jindan_show == 1){
           await checkHomeJin()
          }
         
@@ -150,14 +266,14 @@ return new Promise((resolve, reject) => {
    $.post(homejin,async(error, response, data) =>{
      const homejb = JSON.parse(data)
      if(homejb.code == 1){
-$.log('\nhomeJin:'+data+'\n')
-          $.log('\n'+homejb.msg+'\n金幣+ '+homejb.jinbi+'\n')
+$.log('\n🔔開始領取首頁金幣\n')
+          $.log('\n🎉首頁金幣:'+homejb.msg+'\n金幣+ '+homejb.jinbi+'\n')
          homeJinStr = homejb.nonce_str
-          $.log('\n'+homeJinStr+'\n')
+          //$.log('\n'+homeJinStr+'\n')
           await $.wait(30000)
           await homeJinCallBack()
     }else{
-          $.log('\n'+homejb.msg+'\n')
+          $.log('\n⚠️首頁金幣失敗:'+homejb.msg+'\n')
            }
           resolve()
     })
@@ -176,12 +292,12 @@ return new Promise((resolve, reject) => {
 }
    $.post(homejincallback,async(error, response, data) =>{
      const hmjcallback = JSON.parse(data)
-$.log('\nhomeJinCallBack:'+data+'\n')
+$.log('\n🔔開始翻倍首頁金幣\n')
       if(hmjcallback.code == 1) {
-          $.log('\n首頁視頻翻倍成功\n')
+          $.log('\n🎉首頁金幣翻倍成功\n')
           await checkHomeRedbag()
            }else{
-          $.log('\n'+hmjcallback.msg+'\n')
+          $.log('\n🔔首頁金幣翻倍失敗'+hmjcallback.msg+'\n')
            }
           resolve()
     })
@@ -197,11 +313,11 @@ return new Promise((resolve, reject) => {
     body: `mini_pos=0&c_type=2&`,
 }
    $.post(checkredbagid,async(error, response, data) =>{
-$.log('\n查詢RedBagId:'+data+'\n')
+$.log('\n🔔開始查詢首頁紅包ID\n')
      const code = JSON.parse(data)
       if(code.code == 1) {
       redBagStr = code.nonce_str
-          $.log('\n'+redBagStr+'\n')
+         // $.log('\n'+redBagStr+'\n')
           await $.wait(30000)
           await redBagCallback()
            }
@@ -220,12 +336,12 @@ return new Promise((resolve, reject) => {
 }
    $.post(redbagcallback,async(error, response, data) =>{
      const redbag = JSON.parse(data)
-$.log('\nredBagCallback:'+data+'\n')
+$.log('\n🔔開始領取首頁紅包\n')
       if(redbag.code == 1) {
-          $.log('\n首頁紅包領取成功\n')
+          $.log('\n🎉首頁紅包領取成功\n')
           await checkHomeGold()
            }else{
-          $.log('\n'+redbag.msg+'\n')
+          $.log('\n⚠️首頁紅包領取失敗:'+redbag.msg+'\n')
           await checkHomeGold()
            }
           resolve()
@@ -241,13 +357,13 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(checkgoldeggid,async(error, response, data) =>{
-$.log('\n查詢GoldEggId:'+data+'\n')
+$.log('\n🔔開始查詢首頁金蛋ID\n')
      const goldegg = JSON.parse(data)
       if(goldegg.code == 1) {
       goldEggStr = goldegg.nonce_str
-          $.log('\n'+goldEggStr+'\n')
+         // $.log('\n'+goldEggStr+'\n')
       goldEggId = goldegg.taskid
-          $.log('\n'+goldEggId+'\n')
+         // $.log('\n'+goldEggId+'\n')
           await goldEggDone()
            }
           resolve()
@@ -264,13 +380,13 @@ return new Promise((resolve, reject) => {
     body: `taskid=${goldEggId}&clicktime=${timestamp}&donetime=${timestamp}+100&nonce_str=${goldEggStr}&`
 }
    $.post(goldeggdone,async(error, response, data) =>{
-$.log('\ngoldEggDone:'+data+'\n')
+$.log('\n🔔開始領取首頁金蛋\n')
      const goldegg2 = JSON.parse(data)
       if(goldegg2.code == 1) {
-          $.log('\n'+goldegg2.msg+'\n金幣+ '+goldegg2.jinbi+'\n')
+          $.log('\n🎉首頁金蛋:'+goldegg2.msg+'\n金幣+ '+goldegg2.jinbi+'\n')
           await goldEggCallback()
            }else{
-          $.log('\n'+goldegg2.msg+'\n')
+          $.log('\n⚠️首頁金蛋失敗:'+goldegg2.msg+'\n')
           await checkHomeJin()
            }
           resolve()
@@ -288,12 +404,12 @@ return new Promise((resolve, reject) => {
 }
    $.post(goldeggcallback,async(error, response, data) =>{
      const goldeggback = JSON.parse(data)
-$.log('\n金蛋callback:'+data+'\n')
+$.log('\n🔔開始翻倍首頁金蛋\n')
       if(goldeggback.code == 1) {
-          $.log('\n金蛋翻倍成功\n')
+          $.log('\n🎉金蛋翻倍成功\n')
           await checkHomeJin()
            }else{
-          $.log('\n'+goldeggback.msg+'\n')
+          $.log('\n⚠️金蛋翻倍失敗:'+goldeggback.msg+'\n')
           await checkHomeJin()
            }
           resolve()
@@ -313,7 +429,7 @@ return new Promise((resolve, reject) => {
      const code = JSON.parse(data)
       if(code.code == 1) {
       nonce_str = code.nonce_str
-          $.log('\n'+nonce_str+'\n')
+          //$.log('\n'+nonce_str+'\n')
           await helpClick()
            }
           resolve()
@@ -332,13 +448,13 @@ return new Promise((resolve, reject) => {
 }
    $.post(helpclick,async(error, response, data) =>{
      const help = JSON.parse(data)
-$.log('\nhelpClick:'+data+'\n')
+$.log('\n🔔開始觀看助力視頻\n')
       if(help.code == 1) {
-          $.log('\n'+help.jinbi+'\n')
+          $.log('\n🎉觀看助力視頻成功: '+help.jinbi+'\n')
           await $.wait(30000)
           await callBack()
            }else{
-          $.log('\n'+help.msg+'\n')
+          $.log('\n⚠️觀看助力視頻失敗: '+help.msg+'\n')
           await getNewsId()
            }
           resolve()
@@ -358,12 +474,12 @@ return new Promise((resolve, reject) => {
 }
    $.post(callback,async(error, response, data) =>{
      const back = JSON.parse(data)
-$.log('\ncallBack:'+data+'\n')
+$.log('\n🔔開始領取助力視頻獎勵\n')
       if(back.code == 1) {
-          $.log('\n視頻助力成功\n')
+          $.log('\n🎉助力視頻獎勵成功\n')
           await checkCode()
            }else{
-          $.log('\n'+back.msg+'\n')
+          $.log('\n⚠️助力視頻獎勵失敗:'+back.msg+'\n')
            }
           resolve()
     })
@@ -380,18 +496,18 @@ return new Promise((resolve, reject) => {
 }
    $.post(getnewsid,async(error, response, data) =>{
      const newsid = JSON.parse(data)
-$.log('\ngetNewsId:'+data+'\n')
+$.log('\n🔔開始查詢新聞ID\n')
      if(newsid.code == 1){
        if(newsid.is_first == 1)
          newsStr = newsid.nonce_str
-          $.log('\n'+newsStr+'\n')
+          $.log('\n🎉新聞ID查詢成功:'+newsStr+'\n')
        if(newsid.is_max == 0){
           await $.wait(15000)
           await autoRead()
           }else{
           await luckyClick()
          }}else{
-          $.log('\n'+newsid.msg+'\n')
+          $.log('\n⚠️查詢新聞ID失敗:'+newsid.msg+'\n')
            }
           resolve()
     })
@@ -408,12 +524,12 @@ return new Promise((resolve, reject) => {
 }
    $.post(autoread,async(error, response, data) =>{
      const read = JSON.parse(data)
-$.log('\n autoread:'+data+'\n')
+$.log('\n🔔開始閱讀新聞\n')
       if(read.code == 1) {
-          $.log('\n金幣+ '+read.jinbi+'💰\n')
+          $.log('\n🎉閱讀金幣+ '+read.jinbi+'💰\n')
             await getNewsId()
           }else{
-          $.log('\n'+data+'\n')
+          $.log('\n⚠️閱讀失敗:'+data+'\n')
            }
           resolve()
     })
@@ -431,19 +547,16 @@ return new Promise((resolve, reject) => {
 }
    $.post(luckclick,async(error, response, data) =>{
      const lucky = JSON.parse(data)
-$.log('\nlockyclick:'+data+'\n')
+$.log('\n🔔開始抽獎\n')
       if(lucky.code == 1) {
-          $.log('\n'+lucky.msg+'\n金幣+ '+lucky.jinbi+'\n')
+          $.log('\n🎉抽獎:'+lucky.msg+'\n金幣+ '+lucky.jinbi+'\n')
          luckyStr = lucky.nonce_str
           $.log('\n'+luckyStr+'\n')
-      if(lucky.jinbi != 0) {
           await $.wait(5000)
           await luckyCallBack()
          }else{
-          await luckyClick()
-        }}else{
+          $.log('\n⚠️抽獎失敗:'+lucky.msg+'\n')
           await luckyBox()
-          $.log('\n'+lucky.msg+'\n')
          }
           resolve()
     })
@@ -461,13 +574,13 @@ return new Promise((resolve, reject) => {
 }
    $.post(luckycallback,async(error, response, data) =>{
      const callback = JSON.parse(data)
-$.log('\ncallback:'+data+'\n')
+$.log('\n🔔開始翻倍抽獎\n')
       if(callback.code == 1) {
-          $.log('\n轉盤翻倍成功\n')
+          $.log('\n🎉抽獎翻倍成功\n')
           await $.wait(5000)
           await luckyClick()
            }else{
-          $.log('\n'+callback.msg+'\n')
+          $.log('\n⚠️抽獎翻倍失敗:'+callback.msg+'\n')
            }
           resolve()
     })
@@ -480,20 +593,20 @@ return new Promise((resolve, reject) => {
   let luckybox ={
     url: `https://bububao.duoshoutuan.com/user/lucky_box`,
     headers: JSON.parse(CookieVal),
-    body: `box=${BOXID}&`,
+    body: `box=${getBoxId()}&`,
 }
-$.log('\nlockyboxBODY:'+luckybox.body+'\n')
+//$.log('\nlockyboxBODY:'+luckybox.body+'\n')
    $.post(luckybox,async(error, response, data) =>{
      const boxlucky = JSON.parse(data)
-$.log('\nlockybox:'+data+'\n')
+$.log('\n🔔開始打開寶箱\n')
       if(boxlucky.code == 1) {
-          $.log('\n'+boxlucky.msg+'\n金幣+ '+boxlucky.jinbi+'\n')
+          $.log('🎉寶箱: '+boxlucky.msg+'\n金幣+ '+boxlucky.jinbi+'\n')
          luckyBoxStr = boxlucky.nonce_str
-          $.log('\n'+luckyBoxStr+'\n')
+          $.log('\n🔔寶箱翻倍ID'+luckyBoxStr+'\n')
           await $.wait(5000)
           await luckyBoxCallBack()
          }else{
-          $.log('\n'+boxlucky.msg+'\n')
+          $.log('\n⚠️寶箱失敗:'+boxlucky.msg+'\n')
           await getQuestionId()
          }
           resolve()
@@ -511,13 +624,13 @@ return new Promise((resolve, reject) => {
 }
    $.post(luckyboxcallback,async(error, response, data) =>{
      const boxcallback = JSON.parse(data)
-$.log('\nboxcallback:'+data+'\n')
+$.log('\n🔔開始翻倍寶箱\n')
       if(boxcallback.code == 1) {
-          $.log('\n轉盤翻倍成功\n')
-          await $.wait(1000)
+          $.log('\n🎉寶箱翻倍成功\n')
+          //await $.wait(1000)
           await luckyBox()
            }else{
-          $.log('\n'+boxcallback.msg+'\n')
+          $.log('\n⚠️寶箱翻倍失敗'+boxcallback.msg+'\n')
            }
           resolve()
     })
@@ -535,21 +648,21 @@ return new Promise((resolve, reject) => {
 }
    $.post(getquestionid,async(error, response, data) =>{
      const question = JSON.parse(data)
-$.log('\ngetquestionid:'+data+'\n')
+$.log('\n🔔開始查詢答題ID\n')
       if(question.code == 1) {
          questionSite = question.site
-          $.log('\n'+questionSite+'\n')
+          $.log('\n🎉答題ID1⃣️: '+questionSite+'\n')
          questionId = question.cy_id
-          $.log('\n'+questionId+'\n')
+          $.log('\n🎉答題ID2⃣️: '+questionId+'\n')
          spId = question.day_num
-          $.log('\n'+spId+'\n')
+          $.log('\n🎉答題視頻ID: '+spId+'\n')
       if(question.is_sp == 1) {
           await $.wait(5000)
           await checkSp()
          }else{
           await answerQue()
          }}else{
-          $.log('\n'+question.msg+'\n')
+          $.log('\n⚠️獲取問題ID失敗:'+question.msg+'\n')
          }
           resolve()
     })
@@ -568,7 +681,7 @@ return new Promise((resolve, reject) => {
      const sp = JSON.parse(data)
       if(sp.code == 1) {
       spStr = sp.nonce_str
-          $.log('\n'+spStr+'\n')
+          //$.log('\n'+spStr+'\n')
           await $.wait(5000)
           await cySp()
            }
@@ -588,8 +701,8 @@ return new Promise((resolve, reject) => {
    $.post(cysp,async(error, response, data) =>{
      const sp = JSON.parse(data)
       if(sp.code == 1) {
-          $.log('\n'+sp.msg+'\n')
-          await $.wait(5000)
+         // $.log('\n'+sp.msg+'\n')
+          //await $.wait(5000)
           await answerQue()
            }
           resolve()
@@ -605,18 +718,18 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
     body: `cy_id=${questionId}&site=${questionSite}&`,
 }
-$.log('\nanswerqueBODY:'+answerque.body+'\n')
+//$.log('\nanswerqueBODY:'+answerque.body+'\n')
    $.post(answerque,async(error, response, data) =>{
      const answer = JSON.parse(data)
-$.log('\nanswerque:'+data+'\n')
+$.log('\n🔔開始答題\n')
       if(answer.code == 1) {
-          $.log('\n'+answer.msg+'\n金幣+ '+answer.jinbi+'\n')
+          $.log('\n🎉答題: '+answer.msg+'\n金幣+ '+answer.jinbi+'\n')
          answerStr = answer.nonce_str
-          $.log('\n'+answerStr+'\n')
+          $.log('\n🎉答題翻倍ID:'+answerStr+'\n')
           await $.wait(5000)
           await answerQueCallBack()
          }else{
-          $.log('\n'+answer.msg+'\n')
+          $.log('\n⚠️答題失敗: '+answer.msg+'\n')
           await checkHomeJin()
          }
           resolve()
@@ -633,16 +746,16 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
     body: `nonce_str=${answerStr}&tid=18&pos=1&`,
 }
-$.log('\nanswerQueCallBackBODY:'+answerquecallback.body+'\n')
+//$.log('\nanswerQueCallBackBODY:'+answerquecallback.body+'\n')
    $.post(answerquecallback,async(error, response, data) =>{
      const answerback = JSON.parse(data)
-$.log('\nanswerQueCallBack:'+data+'\n')
+$.log('\n🔔開始翻倍答題金幣\n')
       if(answerback.code == 1) {
-          $.log('\n答題翻倍成功\n')
+          $.log('\n🎉答題金幣翻倍成功\n')
           await $.wait(5000)
           await getQuestionId()
            }else{
-          $.log('\n'+answerback.msg+'\n')
+          $.log('\n⚠️答題金幣翻倍失敗:'+answerback.msg+'\n')
            }
           resolve()
     })
@@ -691,7 +804,7 @@ $.log('\ndoTaskH5:'+data+'\n')
           $.log('\n'+H5Str+'\n')
          H5TaskID = doh5task.taskid
           $.log('\n'+H5TaskID+'\n')
-          await $.wait(30000)
+          //await $.wait(30000)
           await upLoadTime2()
            }else{
           $.log('\n'+data+'\n')
