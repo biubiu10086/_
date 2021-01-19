@@ -78,29 +78,7 @@ return new Promise((resolve, reject) => {
   } 
 
 
-/*
-function checkDailyWatchAd() {
-return new Promise((resolve, reject) => {
-  let timestamp=new Date().getTime();
-  let checkdailywatchad ={
-    url: `https://bububao.duoshoutuan.com/user/chuansj`,
-    headers: JSON.parse(CookieVal),
-    body: `mini_pos=0&c_type=1&`,
-}
-   $.post(checkdailywatchad,async(error, response, data) =>{
-$.log('\n🔔開始查詢每日觀看ID\n')
-     const dailywatch = JSON.parse(data)
-      if(dailywatch.code == 1) {
-      dailyWatchStr = dailywatch.nonce_str
-          //$.log('\n'+dailyWatchStr+'\n')
-          $.log('\n🎉查詢成功,30s後領取獎勵\n')
-          await $.wait(30000)
-          await DailyWatchAd()
-           }
-          resolve()
-    })
-   })
-  } 
+
 
 
 function signIn() {
@@ -363,9 +341,11 @@ return new Promise((resolve, reject) => {
 }
    $.post(watchtaskstatus,async(error, response, data) =>{
      const watchtask = JSON.parse(data)
-       if(watchtask.v_st != 2) {
 $.log('\n🔔開始查詢每日觀看廣告任務狀態\n')
-          await DailyWatchAd()
+       if(watchtask.v_st != 2) {
+$.log('\n🔔每日觀看廣告任務狀態查詢成功,1s後查詢每日觀看廣告ID\n')
+          await $.wait(1000)
+          await checkDailyWatchAdId()
          }else{
           $.log('\n⚠️每日看廣告任務已上限\n')
          }
@@ -373,6 +353,31 @@ $.log('\n🔔開始查詢每日觀看廣告任務狀態\n')
     })
    })
   } 
+
+
+function checkDailyWatchAdId() {
+return new Promise((resolve, reject) => {
+  let timestamp=new Date().getTime();
+  let checkdailywatchadid ={
+    url: `https://bububao.duoshoutuan.com/user/chuansj`,
+    headers: JSON.parse(CookieVal),
+    body: `mini_pos=0&c_type=1&`,
+}
+   $.post(checkdailywatchadid,async(error, response, data) =>{
+$.log('\n🔔開始查詢每日觀看廣告ID\n')
+     const dailywatchid = JSON.parse(data)
+      if(dailywatchid.code == 1) {
+      dailyWatchStr = dailywatchid.nonce_str
+         // $.log('\n'+dailyWatchStr+'\n')
+          $.log('\n🎉查詢成功,30s後領取獎勵\n')
+          await $.wait(30000)
+          await DailyWatchAd()
+           }
+          resolve()
+    })
+   })
+  } 
+
 
 function DailyWatchAd() {
 return new Promise((resolve, reject) => {
@@ -386,7 +391,7 @@ return new Promise((resolve, reject) => {
      const dailywatch = JSON.parse(data)
 $.log('\n🔔開始領取每日觀看獎勵\n')
       if(dailywatch.code == 1) {
-          $.log('\n🎉每日觀看獎勵領取成功,5m後查詢下一次廣告\n')
+          $.log('\n🎉每日觀看獎勵領取成功,5m(300s)後查詢下一次廣告\n')
           await $.wait(300000)
           await watchTaskStatus()
            }else{
@@ -396,7 +401,6 @@ $.log('\n🔔開始領取每日觀看獎勵\n')
     })
    })
   } 
-*/
 
 function checkDailyClickAdId() {
 return new Promise((resolve, reject) => {
