@@ -25,7 +25,7 @@ jobs:
           npm install
       - name: '运行 【QQ阅读】'
         run: |
-          node QQread.js
+          node QQread1.js
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
