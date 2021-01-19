@@ -722,6 +722,8 @@ $.log('\n🔔開始領取助力視頻獎勵\n')
    })
   } 
 
+/*
+
 function getNewsId() {
 return new Promise((resolve, reject) => {
   let timestamp=new Date().getTime();
@@ -772,6 +774,7 @@ $.log('\n🔔開始閱讀新聞\n')
    })
   } 
 
+*/
 
 
 function luckyClick() {
