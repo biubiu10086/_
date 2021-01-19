@@ -29,9 +29,11 @@ $.msg($.name,"開始🎉🎉🎉")
       await signIn()
       await sleepStatus()
       await checkWaterNum()
-      await checkDailyClickAdId()
-      await checkDailyWatchAd()
+      await clickTaskStatus()
+      await watchTaskStatus()
       await checkCode()
+      await getQuestionId()
+      await checkHomeJin()
       await showmsg()
 
 })()
@@ -153,7 +155,7 @@ return new Promise((resolve, reject) => {
    $.post(checkwaternum,async(error, response, data) =>{
 $.log('\n🔔開始查詢喝水杯數\n')
      const waternum = JSON.parse(data)
-      if(waternum.code == 1) {
+      if(waternum.code == 1 && waternum.day_num < 7) {
       waterNum = waternum.day_num
       if(waternum.is_sp == 1){
           $.log('\n🎉喝水前需要看廣告喔！,1s後開始看廣告\n')
@@ -164,7 +166,7 @@ $.log('\n🔔開始查詢喝水杯數\n')
           await $.wait(1000)
           await waterClick()
          }}else{
-          $.log('\n🎉'+signin.msg+'\n')
+          $.log('\n⚠️喝水失敗: 今日喝水已上限\n')
          }
           resolve()
     })
@@ -224,7 +226,7 @@ $.log('\n🔔開始領取喝水獎勵\n')
       if(clickwater.code == 1) {
           $.log('\n🎉'+clickwater.msg+'喝水金幣+ '+clickwater.jinbi+'💰\n')
            }else{
-          $.log('\n⚠️喝水失敗敗:'+clickwater.msg+'\n')
+          $.log('\n⚠️喝水失敗:'+clickwater.msg+'\n')
            }
           resolve()
     })
@@ -329,6 +331,48 @@ $.log('\n🔔開始領取睡覺金幣\n')
    })
   } 
 
+function clickTaskStatus() {
+return new Promise((resolve, reject) => {
+  let timestamp=new Date().getTime();
+  let clicktaskstatus ={
+    url: `https://bububao.duoshoutuan.com/user/renwu`,
+    headers: JSON.parse(CookieVal),
+    body: `idfa=${JSON.parse(CookieVal)['idfa']}&`,
+}
+   $.post(clicktaskstatus,async(error, response, data) =>{
+     const clicktask = JSON.parse(data)
+      if(clicktask.first.admobile_st != 2) {
+$.log('\n🔔開始查詢每日點擊任務狀態\n')
+          await checkDailyClickAdId()
+         }else{
+          $.log('\n⚠️每日點擊廣告任務已上限\n')
+         }
+       resolve()
+    })
+   })
+  } 
+
+function watchTaskStatus() {
+return new Promise((resolve, reject) => {
+  let timestamp=new Date().getTime();
+  let watchtaskstatus ={
+    url: `https://bububao.duoshoutuan.com/user/renwu`,
+    headers: JSON.parse(CookieVal),
+    body: `idfa=${JSON.parse(CookieVal)['idfa']}&`,
+}
+   $.post(watchtaskstatus,async(error, response, data) =>{
+     const watchtask = JSON.parse(data)
+       if(watchtask.v_st != 2) {
+$.log('\n🔔開始查詢每日觀看廣告任務狀態\n')
+          await DailyWatchAd()
+         }else{
+          $.log('\n⚠️每日看廣告任務已上限\n')
+         }
+       resolve()
+    })
+   })
+  } 
+
 function DailyWatchAd() {
 return new Promise((resolve, reject) => {
   let timestamp=new Date().getTime();
@@ -343,7 +387,7 @@ $.log('\n🔔開始領取每日觀看獎勵\n')
       if(dailywatch.code == 1) {
           $.log('\n🎉每日觀看獎勵領取成功,5m後查詢下一次廣告\n')
           await $.wait(300000)
-          await checkDailyWatchAd()
+          await watchTaskStatus()
            }else{
           $.log('\n⚠️每日獎勵領取失敗:'+dailywatch.msg+'\n')
            }
@@ -412,7 +456,7 @@ $.log('\n🔔開始領取每日點擊獎勵\n')
       if(dailyclick.code == 1) {
           $.log('\n🎉每日點擊獎勵領取成功,1s後查詢下一次廣告ID\n')
           await $.wait(1000)
-          await checkDailyClickAdId()
+          await clickTaskStatus()
            }else{
           $.log('\n⚠️每日點擊領取失敗:'+dailyclick.msg+'\n')
            }
@@ -663,9 +707,10 @@ return new Promise((resolve, reject) => {
 }
    $.post(checkcode,async(error, response, data) =>{
      const code = JSON.parse(data)
+$.log('\n🔔開始查詢助力視頻ID\n')
       if(code.code == 1) {
       nonce_str = code.nonce_str
-          //$.log('\n'+nonce_str+'\n')
+$.log('\n🔔查詢助力視頻ID成功, 開始觀看助力視頻\n')
           await helpClick()
            }
           resolve()
@@ -684,9 +729,9 @@ return new Promise((resolve, reject) => {
 }
    $.post(helpclick,async(error, response, data) =>{
      const help = JSON.parse(data)
-$.log('\n🔔開始觀看助力視頻\n')
+$.log('\n🔔開始觀看助力視頻, 30s後領取助力視頻獎勵\n')
       if(help.code == 1) {
-          $.log('\n🎉觀看助力視頻成功: '+help.jinbi+'\n')
+          $.log('\n🎉觀看助力視頻成功, 1s後領取金幣+ '+help.jinbi+'\n')
           await $.wait(30000)
           await callBack()
            }else{
@@ -712,7 +757,8 @@ return new Promise((resolve, reject) => {
      const back = JSON.parse(data)
 $.log('\n🔔開始領取助力視頻獎勵\n')
       if(back.code == 1) {
-          $.log('\n🎉助力視頻獎勵成功\n')
+          $.log('\n🎉領取助力視頻獎勵成功,1s後查詢下一次助力視頻ID\n')
+          await $.wait(1000)
           await checkCode()
            }else{
           $.log('\n⚠️助力視頻獎勵失敗:'+back.msg+'\n')
@@ -721,8 +767,6 @@ $.log('\n🔔開始領取助力視頻獎勵\n')
     })
    })
   } 
-
-/*
 
 function getNewsId() {
 return new Promise((resolve, reject) => {
@@ -734,16 +778,16 @@ return new Promise((resolve, reject) => {
 }
    $.post(getnewsid,async(error, response, data) =>{
      const newsid = JSON.parse(data)
-$.log('\n🔔開始查詢新聞ID\n')
      if(newsid.code == 1){
-       if(newsid.is_first == 1)
-         newsStr = newsid.nonce_str
-          $.log('\n🎉新聞ID查詢成功:\n'+newsStr+'\n')
-       if(newsid.is_max == 0){
+       if(newsid.is_first == 1 && newsid.is_max == 0){
+          $.log('\n🔔開始查詢新聞ID\n')
+          newsStr = newsid.nonce_str
+          $.log('\n🎉新聞ID查詢成功,15s後領取閱讀獎勵\n')
           await $.wait(15000)
           await autoRead()
           }else{
-          await luckyClick()
+          $.log('\n⚠️閱讀失敗: 今日閱讀已上限\n')
+          await checkLuckNum()
          }}else{
           $.log('\n⚠️查詢新聞ID失敗:'+newsid.msg+'\n')
            }
@@ -762,9 +806,8 @@ return new Promise((resolve, reject) => {
 }
    $.post(autoread,async(error, response, data) =>{
      const read = JSON.parse(data)
-$.log('\n🔔開始閱讀新聞\n')
       if(read.code == 1) {
-          $.log('\n🎉閱讀金幣+ '+read.jinbi+'💰\n')
+          $.log('\n🎉閱讀成功,金幣+ '+read.jinbi+'💰,開始查詢下一篇新聞ID\n')
             await getNewsId()
           }else{
           $.log('\n⚠️閱讀失敗:'+data+'\n')
@@ -774,8 +817,35 @@ $.log('\n🔔開始閱讀新聞\n')
    })
   } 
 
-*/
-
+function checkLuckNum() {
+return new Promise((resolve, reject) => {
+  let timestamp=new Date().getTime();
+  let lucknum ={
+    url: `https://bububao.duoshoutuan.com/user/lucky`,
+    headers: JSON.parse(CookieVal),
+}
+   $.post(lucknum,async(error, response, data) =>{
+     const num = JSON.parse(data)
+$.log('\n🔔開始查詢抽獎次數\n')
+      if(num.lucky_num != 0) {
+          $.log('\n🎉剩餘抽獎次數:'+num.lucky_num+'1s後開始抽獎\n')
+          await $.wait(1000)
+          await luckyClick()
+         }else if(num.lucky_num == 0) {
+          $.log('\n⚠️今日抽獎次數已用完,1s後查詢寶箱狀態\n')
+          await $.wait(1000)
+       for (box of num.lucky_box){
+          //$.log(box)
+          if (box != 2)
+          await luckyBox()
+          if (box == 2)
+          $.log('\n⚠️寶箱已開啟\n')
+         }
+       }
+          resolve()
+    })
+   })
+  } 
 
 function luckyClick() {
 return new Promise((resolve, reject) => {
@@ -790,13 +860,14 @@ $.log('\n🔔開始抽獎\n')
       if(lucky.code == 1) {
           $.log('\n🎉抽獎:'+lucky.msg+'\n金幣+ '+lucky.jinbi+'\n')
          luckyStr = lucky.nonce_str
-          $.log('\n'+luckyStr+'\n')
+          //$.log('\n'+luckyStr+'\n')
+      if(lucky.jinbi != 0) {
           await $.wait(5000)
           await luckyCallBack()
          }else{
-          $.log('\n⚠️抽獎失敗:'+lucky.msg+'\n')
-          await luckyBox()
+          await luckyClick()
          }
+       }
           resolve()
     })
    })
@@ -846,7 +917,6 @@ $.log('\n🔔開始打開寶箱\n')
           await luckyBoxCallBack()
          }else{
           $.log('\n⚠️寶箱失敗:'+boxlucky.msg+'\n')
-          await getQuestionId()
          }
           resolve()
     })
@@ -867,7 +937,7 @@ $.log('\n🔔開始翻倍寶箱\n')
       if(boxcallback.code == 1) {
           $.log('\n🎉寶箱翻倍成功\n')
           //await $.wait(1000)
-          await luckyBox()
+          await checkLuckNum()
            }else{
           $.log('\n⚠️寶箱翻倍失敗'+boxcallback.msg+'\n')
            }
@@ -887,8 +957,8 @@ return new Promise((resolve, reject) => {
 }
    $.post(getquestionid,async(error, response, data) =>{
      const question = JSON.parse(data)
+      if(question.code == 1 && question.day_num != 0) {
 $.log('\n🔔開始查詢答題ID\n')
-      if(question.code == 1) {
          questionSite = question.site
           $.log('\n🎉答題ID1⃣️: '+questionSite+'\n')
          questionId = question.cy_id
@@ -901,7 +971,7 @@ $.log('\n🔔開始查詢答題ID\n')
          }else{
           await answerQue()
          }}else{
-          $.log('\n⚠️獲取問題ID失敗:'+question.msg+'\n')
+          $.log('\n⚠️查詢答題ID成功,答題失敗: 今日答題已上限\n')
          }
           resolve()
     })
@@ -969,7 +1039,6 @@ $.log('\n🔔開始答題\n')
           await answerQueCallBack()
          }else{
           $.log('\n⚠️答題失敗: '+answer.msg+'\n')
-          await checkHomeJin()
          }
           resolve()
     })
