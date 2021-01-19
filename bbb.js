@@ -26,11 +26,6 @@ $.msg($.name,"開始🎉🎉🎉")
       await checkDailyClickAdId()
       await checkDailyWatchAd()
       await checkCode()
-      await checkHomeJin()
-      await checkH5Id()
-      await homeJin()
-      await getNewsId()
-      await h5Done()
       await showmsg()
 
 })()
@@ -64,7 +59,7 @@ return new Promise((resolve, reject) => {
      const userinfo = JSON.parse(data)
      if(response.statusCode == 200 && userinfo.code != -1){
           $.log('\n🎉模擬登陸成功\n')
-          await getQuestionId()
+          //await getQuestionId()
      notice += '🎉步步寶帳號: '+userinfo.username+'\n'+'🎉當前金幣: '+userinfo.jinbi+'💰 約'+userinfo.money+'元💸\n'
     }else{
      notice += '⚠️異常原因: '+userinfo.msg+'\n'
@@ -88,7 +83,7 @@ $.log('\n🔔開始查詢每日觀看ID\n')
      const dailywatch = JSON.parse(data)
       if(dailywatch.code == 1) {
       dailyWatchStr = dailywatch.nonce_str
-          $.log('\n'+dailyWatchStr+'\n')
+          //$.log('\n'+dailyWatchStr+'\n')
           $.log('\n🎉查詢成功,30s後領取獎勵\n')
           await $.wait(30000)
           await DailyWatchAd()
@@ -133,7 +128,7 @@ $.log('\n🔔開始查詢每日廣告ID\n')
      const dailyclickid = JSON.parse(data)
       if(dailyclickid.code == 1) {
       dailyClickAdId = dailyclickid.ad_id
-          $.log('\n'+dailyClickAdId+'\n')
+         // $.log('\n'+dailyClickAdId+'\n')
           $.log('\n🎉查詢成功,1s後領取獎勵\n')
           await $.wait(1000)
           await checkDailyClickAd()
@@ -157,7 +152,7 @@ $.log('\n🔔開始查詢每日廣告點擊ID\n')
      const dailyclick = JSON.parse(data)
       if(dailyclick.code == 1) {
       dailyClickStr = dailyclick.nonce_str
-          $.log('\n'+dailyClickStr+'\n')
+         // $.log('\n'+dailyClickStr+'\n')
           $.log('\n🎉查詢成功,5s後返回領取獎勵\n')
           await $.wait(5000)
           await DailyClickAd()
@@ -274,7 +269,7 @@ return new Promise((resolve, reject) => {
 $.log('\n🔔開始領取首頁金幣\n')
           $.log('\n🎉首頁金幣:'+homejb.msg+'\n金幣+ '+homejb.jinbi+'\n')
          homeJinStr = homejb.nonce_str
-          $.log('\n'+homeJinStr+'\n')
+          //$.log('\n'+homeJinStr+'\n')
           await $.wait(30000)
           await homeJinCallBack()
     }else{
@@ -322,7 +317,7 @@ $.log('\n🔔開始查詢首頁紅包ID\n')
      const code = JSON.parse(data)
       if(code.code == 1) {
       redBagStr = code.nonce_str
-          $.log('\n'+redBagStr+'\n')
+         // $.log('\n'+redBagStr+'\n')
           await $.wait(30000)
           await redBagCallback()
            }
@@ -366,9 +361,9 @@ $.log('\n🔔開始查詢首頁金蛋ID\n')
      const goldegg = JSON.parse(data)
       if(goldegg.code == 1) {
       goldEggStr = goldegg.nonce_str
-          $.log('\n'+goldEggStr+'\n')
+         // $.log('\n'+goldEggStr+'\n')
       goldEggId = goldegg.taskid
-          $.log('\n'+goldEggId+'\n')
+         // $.log('\n'+goldEggId+'\n')
           await goldEggDone()
            }
           resolve()
@@ -434,7 +429,7 @@ return new Promise((resolve, reject) => {
      const code = JSON.parse(data)
       if(code.code == 1) {
       nonce_str = code.nonce_str
-          $.log('\n'+nonce_str+'\n')
+          //$.log('\n'+nonce_str+'\n')
           await helpClick()
            }
           resolve()
@@ -491,7 +486,7 @@ $.log('\n🔔開始領取助力視頻獎勵\n')
    })
   } 
 
-/*function getNewsId() {
+function getNewsId() {
 return new Promise((resolve, reject) => {
   let timestamp=new Date().getTime();
   let getnewsid ={
@@ -539,7 +534,7 @@ $.log('\n🔔開始閱讀新聞\n')
           resolve()
     })
    })
-  } */
+  } 
 
 
 
@@ -600,7 +595,7 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
     body: `box=${getBoxId()}&`,
 }
-$.log('\nlockyboxBODY:'+luckybox.body+'\n')
+//$.log('\nlockyboxBODY:'+luckybox.body+'\n')
    $.post(luckybox,async(error, response, data) =>{
      const boxlucky = JSON.parse(data)
 $.log('\n🔔開始打開寶箱\n')
@@ -632,7 +627,7 @@ return new Promise((resolve, reject) => {
 $.log('\n🔔開始翻倍寶箱\n')
       if(boxcallback.code == 1) {
           $.log('\n🎉寶箱翻倍成功\n')
-          await $.wait(1000)
+          //await $.wait(1000)
           await luckyBox()
            }else{
           $.log('\n⚠️寶箱翻倍失敗'+boxcallback.msg+'\n')
@@ -686,7 +681,7 @@ return new Promise((resolve, reject) => {
      const sp = JSON.parse(data)
       if(sp.code == 1) {
       spStr = sp.nonce_str
-          $.log('\n'+spStr+'\n')
+          //$.log('\n'+spStr+'\n')
           await $.wait(5000)
           await cySp()
            }
@@ -706,8 +701,8 @@ return new Promise((resolve, reject) => {
    $.post(cysp,async(error, response, data) =>{
      const sp = JSON.parse(data)
       if(sp.code == 1) {
-          $.log('\n'+sp.msg+'\n')
-          await $.wait(5000)
+         // $.log('\n'+sp.msg+'\n')
+          //await $.wait(5000)
           await answerQue()
            }
           resolve()
@@ -723,7 +718,7 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
     body: `cy_id=${questionId}&site=${questionSite}&`,
 }
-$.log('\nanswerqueBODY:'+answerque.body+'\n')
+//$.log('\nanswerqueBODY:'+answerque.body+'\n')
    $.post(answerque,async(error, response, data) =>{
      const answer = JSON.parse(data)
 $.log('\n🔔開始答題\n')
@@ -751,7 +746,7 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
     body: `nonce_str=${answerStr}&tid=18&pos=1&`,
 }
-$.log('\nanswerQueCallBackBODY:'+answerquecallback.body+'\n')
+//$.log('\nanswerQueCallBackBODY:'+answerquecallback.body+'\n')
    $.post(answerquecallback,async(error, response, data) =>{
      const answerback = JSON.parse(data)
 $.log('\n🔔開始翻倍答題金幣\n')
@@ -809,7 +804,7 @@ $.log('\ndoTaskH5:'+data+'\n')
           $.log('\n'+H5Str+'\n')
          H5TaskID = doh5task.taskid
           $.log('\n'+H5TaskID+'\n')
-          await $.wait(30000)
+          //await $.wait(30000)
           await upLoadTime2()
            }else{
           $.log('\n'+data+'\n')
