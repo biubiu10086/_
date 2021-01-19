@@ -18,12 +18,6 @@ inputs:
   events: # 触发器
     - timer: # 签到
         parameters:
-          name: txstock
-          cronExpression: "0 1 0 * * * *"
-          enable: true
-          argument: txstock
-    - timer: # 签到
-        parameters:
           name: dy
           cronExpression: "0 */5 * * * * *"
           enable: true
@@ -34,12 +28,6 @@ inputs:
           cronExpression: "0 */5 * * * * *"
           enable: true
           argument: hotsoon
-    - timer: # 签到
-        parameters:
-          name: bbb
-          cronExpression: "0 */30 * * * * *"
-          enable: true
-          argument: bbb
   environment: #  环境变量
     variables: #  环境变量对象
       AAA: BBB # 不要删除，用来格式化对齐追加的变量的
