@@ -15,7 +15,7 @@ let readheader = $.getdata('readheader')
 let readkey = $.getdata('readkey')
 let tz = ($.getval('tz') || '1');//0关闭通知，1默认开启
 const invite=1;//新用户自动邀请，0关闭，1默认开启
-const logs =1;//0为关闭日志，1为开启
+const logs =0;//0为关闭日志，1为开启
 var hour=''
 var minute=''
 const readbody = `{
@@ -37,96 +37,10 @@ if (isGetCookie) {
    $.done()
 } 
 if ($.isNode()) {
-//sign
-  if (process.env.SIGNHEADER && process.env.SIGNHEADER.indexOf('#') > -1) {
-   signheader = process.env.SIGNHEADER.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
-  }
-  else if (process.env.SIGNHEADER && process.env.SIGNHEADER.indexOf('\n') > -1) {
-   signheader = process.env.SIGNHEADER.split('\n');
-   console.log(`您选择的是用换行隔开\n`)
-  } else {
-   signheader = process.env.SIGNHEADER.split()
-  };
-  if (process.env. SIGNCOOKIE&& process.env.SIGNCOOKIE.indexOf('#') > -1) {
-   signcookie = process.env.SIGNCOOKIE.split('#');
-  }
-  else if (process.env.SIGNCOOKIE && process.env.SIGNCOOKIE.split('\n').length > 0) {
-   signcookie = process.env.SIGNCOOKIE.split('\n');
-  } else  {
-   signcookie = process.env.SIGNCOOKIE.split()
-  };
-//step
-if (process.env.STEPHEADER && process.env.STEPHEADER.indexOf('#') > -1) {
-   stepheader = process.env.STEPHEADER.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
-  }
-  else if (process.env.STEPHEADER && process.env.STEPHEADER.indexOf('\n') > -1) {
-   stepheader = process.env.STEPHEADER.split('\n');
-   console.log(`您选择的是用换行隔开\n`)
-  } else {
-   stepheader = process.env.STEPHEADER.split()
-  };
-  if (process.env. STEPKEY&& process.env.STEPKEY.indexOf('#') > -1) {
-   stepkey = process.env.STEPKEY.split('#');
-  }
-  else if (process.env.STEPKEY && process.env.STEPKEY.split('\n').length > 0) {
-   stepkey = process.env.STEPKEY.split('\n');
-  } else  {
-   stepkey = process.env.STEPKEY.split()
-  };
-//read
-if (process.env.READHEADER && process.env.READHEADER.indexOf('#') > -1) {
-   readheader = process.env.READHEADER.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
-  }
-  else if (process.env.READHEADER && process.env.READHEADER.indexOf('\n') > -1) {
-   readheader = process.env.READHEADER.split('\n');
-   console.log(`您选择的是用换行隔开\n`)
-  } else {
-   readheader = process.env.READHEADER.split()
-  };
-  if (process.env. READKEY&& process.env.READKEY.indexOf('#') > -1) {
-   readkey = process.env.READKEY.split('#');
-  }
-  else if (process.env.READKEY && process.env.READKEY.split('\n').length > 0) {
-   readkey = process.env.READKEY.split('\n');
-  } else  {
-   readkey = process.env.READKEY.split()
-  };
-//sign
-  Object.keys(signheader).forEach((item) => {
-        if (signheader[item]) {
-          signheaderArr.push(signheader[item])
-        }
-    });
-    Object.keys(signcookie).forEach((item) => {
-        if (signcookie[item]) {
-          signcookieArr.push(signcookie[item])
-        }
-    });
-//step
-Object.keys(stepheader).forEach((item) => {
-        if (stepheader[item]) {
-          stepheaderArr.push(stepheader[item])
-        }
-    });
-    Object.keys(stepkey).forEach((item) => {
-        if (stepkey[item]) {
-          stepkeyArr.push(stepkey[item])
-        }
-    });
-//read
-Object.keys(readheader).forEach((item) => {
-        if (readheader[item]) {
-          readheaderArr.push(readheader[item])
-        }
-    });
-    Object.keys(readkey).forEach((item) => {
-        if (readkey[item]) {
-          readkeyArr.push(readkey[item])
-        }
-    });
+          signheaderArr.push(oA0GbjuovN0In7FNGV-QYOzIYfCg&fskey=v0aaf63c2206005b4f03fa5990f543bf&access_token=41_IlKD-ma07SNUxWh53i0nJXWqbk24z6ROEptsUrHCuNHe3xfgnxl8qtA1nTBLIdtvoRK682TlNERTK5VFdVYLMyeFlAYsaHtNLzLux6rYSi4&_appName=ios&_appver=8.7.1&_osVer=14.3&_devId=98efbbe71314475df56724fcaa0bacecfe20579f)
+          signcookieArr.push(excgd=20210117; install_id=4046616194456637; ttreq=1$3b22a6d9da0a03a82894d67b4ec36fac3b436273; passport_csrf_token=0a54b169516535857890beadcc1fdda0; passport_csrf_token_default=0a54b169516535857890beadcc1fdda0; d_ticket=d483d6315496be951a447495d32075e5e7297; n_mh=bRjoI2N3XukPdo-jM0hKAetcP7r0QuKIgpNiiaL6vhU; odin_tt=3498540636a8c9e9b587880039780a754cf567c2b87f5a48b0f6d36c1ed637a7f37b31536861316fda98c62a79ccaaba; sessionid=4e0f96a4912d8326779776e69dab451d; sessionid_ss=4e0f96a4912d8326779776e69dab451d; sid_guard=4e0f96a4912d8326779776e69dab451d%7C1610878449%7C5184000%7CThu%2C+18-Mar-2021+10%3A14%3A09+GMT; sid_tt=4e0f96a4912d8326779776e69dab451d; uid_tt=121dd4b0cf38aa5341a789e1e36c497b; uid_tt_ss=121dd4b0cf38aa5341a789e1e36c497b; MONITOR_WEB_ID=71012277663)
+          readheaderArr.push(version_code=13.3.1&js_sdk_version=1.77.0.2&tma_jssdk_version=1.77.0.2&app_name=douyin_lite&app_version=13.3.1&vid=8E371C73-DB4B-489F-998B-CD29CF0DCA54&device_id=71012277663&channel=App%20Store&mcc_mnc=46001&aid=2329&screen_width=1125&openudid=8d9896efcd4e1f4466d4997e213d49795173ad0c&cdid=B53AAE5A-E4D3-40BD-8650-C546FF123B5A&os_api=18&ac=WIFI&os_version=14.3&client_niu_ready=1&device_platform=iphone&build_number=133105&iid=4046616194456637&device_type=iPhone10,3&idfa=00000000-0000-0000-0000-000000000000)
+          readkeyArr.push({"x-tt-trace-id":"00-0fe09b3f0a1088a95d9f56efcbe90919-0fe09b3f0a1088a9-01","Connection":"keep-alive","Accept-Encoding":"gzip, deflate","X-SS-Cookie":"excgd=20210117; MONITOR_WEB_ID=71012277663; d_ticket=d483d6315496be951a447495d32075e5e7297; n_mh=bRjoI2N3XukPdo-jM0hKAetcP7r0QuKIgpNiiaL6vhU; odin_tt=3498540636a8c9e9b587880039780a754cf567c2b87f5a48b0f6d36c1ed637a7f37b31536861316fda98c62a79ccaaba; sessionid=4e0f96a4912d8326779776e69dab451d; sessionid_ss=4e0f96a4912d8326779776e69dab451d; sid_guard=4e0f96a4912d8326779776e69dab451d%7C1610878449%7C5184000%7CThu%2C+18-Mar-2021+10%3A14%3A09+GMT; sid_tt=4e0f96a4912d8326779776e69dab451d; uid_tt=121dd4b0cf38aa5341a789e1e36c497b; uid_tt_ss=121dd4b0cf38aa5341a789e1e36c497b; passport_csrf_token=0a54b169516535857890beadcc1fdda0; passport_csrf_token_default=0a54b169516535857890beadcc1fdda0; install_id=4046616194456637; ttreq=1$3b22a6d9da0a03a82894d67b4ec36fac3b436273","sdk-version":"2","Content-Type":"application/json; encoding=utf-8","x-Tt-Token":"004e0f96a4912d8326779776e69dab451d014b6cc7f0772eca84376ad911f45d7b1d04a262204394222cbf195fdcecd062cfc16c7a137e3385d849b23ba64e0c3c458133686d9d4fb96fa582fe4bfa7ac8cc129f138f490636c38a32382d30fa3aa2d-1.0.1","X-SS-STUB":"FB9613E49BC1669D908E1516EBF9F7B5","X-Khronos":"1610879113","User-Agent":"AwemeLite 13.3.1 rv:133105 (iPhone; iOS 14.3; zh_CN) Cronet","tt-request-time":"1610879113671","Cookie":"excgd=20210117; install_id=4046616194456637; ttreq=1$3b22a6d9da0a03a82894d67b4ec36fac3b436273; passport_csrf_token=0a54b169516535857890beadcc1fdda0; passport_csrf_token_default=0a54b169516535857890beadcc1fdda0; d_ticket=d483d6315496be951a447495d32075e5e7297; odin_tt=3498540636a8c9e9b587880039780a754cf567c2b87f5a48b0f6d36c1ed637a7f37b31536861316fda98c62a79ccaaba; n_mh=bRjoI2N3XukPdo-jM0hKAetcP7r0QuKIgpNiiaL6vhU; sid_guard=4e0f96a4912d8326779776e69dab451d%7C1610878449%7C5184000%7CThu%2C+18-Mar-2021+10%3A14%3A09+GMT; uid_tt=121dd4b0cf38aa5341a789e1e36c497b; uid_tt_ss=121dd4b0cf38aa5341a789e1e36c497b; sid_tt=4e0f96a4912d8326779776e69dab451d; sessionid=4e0f96a4912d8326779776e69dab451d; sessionid_ss=4e0f96a4912d8326779776e69dab451d; MONITOR_WEB_ID=71012277663","Host":"aweme.snssdk.com","passport-sdk-version":"5.12.1","X-Tyhon":"0Uy5dB4Eokg4B6hoYFa9TA0urUocIa5xNR+wxLQ=","X-Gorgon":"8404009110005de7a04de268ad479f4928122cc2c7bf6891d138","Accept":"application/json","Content-Length":"45"})
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
  } else {
