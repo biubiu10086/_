@@ -25,7 +25,7 @@ inputs:
     - timer: # 签到
         parameters:
           name: QQread
-          cronExpression: "0 0 * * * * *"
+          cronExpression: "0 0 */1 * * * *"
           enable: true
           argument: QQread
     - timer: # 签到
