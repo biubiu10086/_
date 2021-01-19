@@ -18,7 +18,7 @@ inputs:
   events: # 触发器
     - timer: # 签到
         parameters:
-          name: dy&hotsoon
+          name: dy_hotsoon
           cronExpression: "0 */5 * * * * *"
           enable: true
           argument: dy&hotsoon
