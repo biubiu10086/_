@@ -35,6 +35,7 @@ $.msg($.name,"開始🎉🎉🎉")
       await getQuestionId()
       await checkHomeJin()
       await showmsg()
+      await DailyWatchAd()
 
 })()
     .catch((e) => $.logErr(e))
