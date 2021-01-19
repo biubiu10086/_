@@ -23,6 +23,11 @@ $.msg($.name,"開始🎉🎉🎉")
 
       await userInfo()
       await checkCode()
+      await checkHomeJin()
+      await checkH5Id()
+      await homeJin()
+      await getNewsId()
+      await h5Done()
       await showmsg()
 
 })()
