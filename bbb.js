@@ -3,6 +3,34 @@ let notice = ''
 let CookieVal = ('{"store":"appstore","tokenstr":"4272292CA3B4D40D16E110683525012G1611073048","Connection":"keep-alive","Accept-Encoding":"gzip, deflate, br","version":"10","idfa":"00000000-0000-0000-0000-000000000000","User-Agent":"BBB/132 CFNetwork/1209 Darwin/20.2.0","platform":"2","imei":"DC8A8EEA-2325-4550-BC78-C64DBF7D21A4","Cookie":"PHPSESSID=3eqf1klkec2l5hrqbdhlea5rf6","Host":"bububao.duoshoutuan.com","Accept-Language":"zh-cn","Accept":"*/*","Content-Length":"0"}')
 //$.getdata('bbb_ck')
 
+
+/*
+adwktt
+轉載備註名字
+打开App获取Cookie
+下載地址：http://bububao.yichengw.cn/?id=524855
+圈x
+[rewrite_local]
+#步步宝
+https://bububao.duoshoutuan.com/user/profile url script-request-header https://raw.githubusercontent.com/adwktt/adwktt/master/BBB.js
+[task_local]
+0 8-23/2 * * * https://raw.githubusercontent.com/adwktt/adwktt/master/BBB.js, tag=步步宝, 
+loon
+[Script]
+http-request https://bububao.duoshoutuan.com/user/profile script-path= https://raw.githubusercontent.com/adwktt/adwktt/master/BBB.js, timeout=10, tag= 步步宝
+cron "0 8-23/2 * * *" script-path= https://raw.githubusercontent.com/adwktt/adwktt/master/BBB.js, tag= 步步宝
+surge
+步步宝 = type=cron,cronexp="0 8-23/2 * * *",wake-system=1,script-path=https://raw.githubusercontent.com/adwktt/adwktt/master/BBB.js,script-update-interval=0
+步步宝 = type=http-request,pattern=https://bububao.duoshoutuan.com/user/profile,requires-body=0,max-size=0,script-path=https://raw.githubusercontent.com/adwktt/adwktt/master/BBB.js,script-update-interval=0
+hostname = bububao.duoshoutuan.com,
+*/
+
+
+
+const $ = new Env('步步寶')
+let notice = ''
+let CookieVal = $.getdata('bbb_ck')
+
 if ($.isNode()) {
       console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
       console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
@@ -392,6 +420,13 @@ return new Promise((resolve, reject) => {
 $.log('\n🔔開始領取每日觀看獎勵\n')
       if(dailywatch.code == 1) {
           $.log('\n🎉每日觀看獎勵領取成功,5m(300s)後查詢下一次廣告\n')
+          for(let i=1;i<=60;i++){
+              (function(){
+                  setTimeout(() => {
+                    $.log('\n🎉請等待'+(60-i)*5+'s後查詢下一次廣告\n')
+                  }, 5000*i);
+              })()
+          }
           await $.wait(300000)
           await watchTaskStatus()
            }else{
@@ -737,8 +772,8 @@ return new Promise((resolve, reject) => {
      const help = JSON.parse(data)
 $.log('\n🔔開始觀看助力視頻, 30s後領取助力視頻獎勵\n')
       if(help.code == 1) {
-          $.log('\n🎉觀看助力視頻成功, 1s後領取金幣+ '+help.jinbi+'\n')
           await $.wait(30000)
+          $.log('\n🎉觀看助力視頻成功, 1s後領取金幣+ '+help.jinbi+'\n')
           await callBack()
            }else{
           $.log('\n⚠️觀看助力視頻失敗: '+help.msg+'\n')
