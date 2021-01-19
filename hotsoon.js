@@ -33,96 +33,12 @@ if (isGetCookie) {
    $.done()
 } 
 if ($.isNode()) {
-//sign
-  if (process.env.HOTSOONSIGNHEADER && process.env.HOTSOONSIGNHEADER.indexOf('#') > -1) {
-   hotsoonsignheader = process.env.HOTSOONSIGNHEADER.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
-  }
-  else if (process.env.HOTSOONSIGNHEADER && process.env.HOTSOONSIGNHEADER.indexOf('\n') > -1) {
-   hotsoonsignheader = process.env.HOTSOONSIGNHEADER.split('\n');
-   console.log(`您选择的是用换行隔开\n`)
-  } else {
-   hotsoonsignheader = process.env.HOTSOONSIGNHEADER.split()
-  };
-  if (process.env.HOTSOONSIGNKEY&& process.env.HOTSOONSIGNKEY.indexOf('#') > -1) {
-   hotsoonsignkey = process.env.HOTSOONSIGNKEY.split('#');
-  }
-  else if (process.env.HOTSOONSIGNKEY && process.env.HOTSOONSIGNKEY.split('\n').length > 0) {
-   hotsoonsignkey = process.env.HOTSOONSIGNKEY.split('\n');
-  } else  {
-   hotsignkey = process.env.HOTSOONSIGNKEY.split()
-  };
-//AD
-if (process.env.HOTSOONADHEADER && process.env.HOTSOONADHEADER.indexOf('#') > -1) {
-   hotsoonadheader = process.env.HOTSOONADHEADER.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
-  }
-  else if (process.env.HOTSOONADHEADER && process.env.HOTSOONADHEADER.indexOf('\n') > -1) {
-   hotsoonadheader = process.env.HOTSOONADHEADER.split('\n');
-   console.log(`您选择的是用换行隔开\n`)
-  } else {
-   hotsoonadheader = process.env.HOTSOONADHEADER.split()
-  };
-  if (process.env. HOTSOONADKEY&& process.env.HOTSOONADKEY.indexOf('#') > -1) {
-   hotsoonadkey = process.env.HOTSOONADKEY.split('#');
-  }
-  else if (process.env.HOTSOONADKEY && process.env.HOTSOONADKEY.split('\n').length > 0) {
-   hotsoonadkey = process.env.HOTSOONADKEY.split('\n');
-  } else  {
-   hotsoonadkey = process.env.HOTSOONADKEY.split()
-  };
-//video
-if (process.env.HOTSOONREADHEADER && process.env.HOTSOONREADHEADER.indexOf('#') > -1) {
-   hotsoonreadheader = process.env.HOTSOONREADHEADER.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
-  }
-  else if (process.env.HOTSOONREADHEADER && process.env.HOTSOONREADHEADER.indexOf('\n') > -1) {
-   hotsoonreadheader = process.env.HOTSOONREADHEADER.split('\n');
-   console.log(`您选择的是用换行隔开\n`)
-  } else {
-   hotsoonreadheader = process.env.HOTSOONREADHEADER.split()
-  };
-  if (process.env. HOTSOONREADKEY&& process.env.HOTSOONREADKEY.indexOf('#') > -1) {
-   hotsoonreadkey = process.env.HOTSOONREADKEY.split('#');
-  }
-  else if (process.env.HOTSOONREADKEY && process.env.HOTSOONREADKEY.split('\n').length > 0) {
-   hotsoonreadkey = process.env.HOTSOONREADKEY.split('\n');
-  } else  {
-   hotsoonreadkey = process.env.HOTSOONREADKEY.split()
-  };
-//sign
-  Object.keys(hotsoonsignheader).forEach((item) => {
-        if (hotsoonsignheader[item]) {
-          hotsoonsignheaderArr.push(hotsoonsignheader[item])
-        }
-    });
-    Object.keys(hotsoonsignkey).forEach((item) => {
-        if (hotsoonsignkey[item]) {
-          hotsoonsignkeyArr.push(hotsoonsignkey[item])
-        }
-    });
-//step
-Object.keys(hotsoonadheader).forEach((item) => {
-        if (hotsoonadheader[item]) {
-          hotsoonadheaderArr.push(hotsoonadheader[item])
-        }
-    });
-    Object.keys(hotsoonadkey).forEach((item) => {
-        if (hotsoonadkey[item]) {
-          hotsoonadkeyArr.push(hotsoonadkey[item])
-        }
-    });
-//read
-Object.keys(hotsoonreadheader).forEach((item) => {
-        if (hotsoonreadheader[item]) {
-          hotsoonreadheaderArr.push(hotsoonreadheader[item])
-        }
-    });
-    Object.keys(hotsoonreadkey).forEach((item) => {
-        if (hotsoonreadkey[item]) {
-          hotsoonreadkeyArr.push(hotsoonreadkey[item])
-        }
-    });
+          hotsoonsignheaderArr.push('version_code=7.6.2&app_name=live_stream_lite&vid=8E371C73-DB4B-489F-998B-CD29CF0DCA54&device_id=71012277663&new_nav=0&channel=App%20Store&aid=1350&ab_group=1568501&screen_width=1125&client_request_id=3152f44c9f3a9d23d275673b601af950&update_version_code=7621&live_sdk_version=7.6.2&openudid=648f70ba76a276026db0f3d80d76a8a10c96ef03&os_api=18&ws_status=CONNECTED&ac=WIFI&mccmnc=46001&os_version=14.3&client_version_code=762&device_platform=iphone&device_type=iPhone10,3&idfa=00000000-0000-0000-0000-000000000000')
+          hotsoonsignkeyArr.push('{"Accept-Encoding":"gzip, deflate","x-Tt-Token":"001165b9d11178f21707c8dcdb73f84af103af74b6212abf8bb8d6b8edbd1a031fa74d175547542d69691ff94a66203f23e8513a2723218dddc66a8cbfe68b0b278f2079eae43e674429f7b7fd44ab6de0162-1.0.0","Connection":"keep-alive","Cookie":"odin_tt=c2db980308dcc604a22fde857054aca05c4fcb9c2b65e7a2f3f05730585a9fb712a55a5f08c0e6ead3bf31b5d4af125ae4a8a8c973e1333de5c1905df64a4f90; passport_csrf_token=4521d7977de19eb5176a0cbc0f4ba7c5; passport_csrf_token_default=4521d7977de19eb5176a0cbc0f4ba7c5; n_mh=bRjoI2N3XukPdo-jM0hKAetcP7r0QuKIgpNiiaL6vhU; d_ticket=8b9d470f24917167efdc464e5eb097a1e7297; sid_guard=1165b9d11178f21707c8dcdb73f84af1%7C1610414545%7C5184000%7CSat%2C+13-Mar-2021+01%3A22%3A25+GMT; uid_tt=bb266db5019161e2a2d56832972807a9; uid_tt_ss=bb266db5019161e2a2d56832972807a9; sid_tt=1165b9d11178f21707c8dcdb73f84af1; sessionid=1165b9d11178f21707c8dcdb73f84af1; sessionid_ss=1165b9d11178f21707c8dcdb73f84af1","Host":"ib.snssdk.com","User-Agent":"HotsoonLite 7.6.2 rv:7621 (iPhone; iOS 14.3; zh_CN) Cronet","X-Khronos":"1610414603","sdk-version":"1","x-tt-trace-id":"00-f430bef00a1088a95d9f5facf2740546-f430bef00a1088a9-01","X-Gorgon":"8402a05100002f92e6b3dea10f7925e1c21c167ac1869b544d00"}')
+          hotsoonadheaderArr.push('')
+          hotsoonadkeyArr.push('')
+          hotsoonreadheaderArr.push('version_code=7.6.2&app_name=live_stream_lite&vid=8E371C73-DB4B-489F-998B-CD29CF0DCA54&device_id=71012277663&new_nav=0&channel=App%20Store&aid=1350&ab_group=1568501&screen_width=1125&client_request_id=7809f35bc1513efd39d1690f74297242&update_version_code=7621&live_sdk_version=7.6.2&openudid=648f70ba76a276026db0f3d80d76a8a10c96ef03&os_api=18&ws_status=CLOSED&ac=WIFI&mccmnc=46001&os_version=14.3&client_version_code=762&device_platform=iphone&device_type=iPhone10,3&idfa=00000000-0000-0000-0000-000000000000')
+          hotsoonreadkeyArr.push('{"x-tt-trace-id":"00-f4308d790a1088a95d9fb683b3380546-f4308d790a1088a9-01","Connection":"keep-alive","Accept-Encoding":"gzip, deflate","X-SS-Cookie":"d_ticket=8b9d470f24917167efdc464e5eb097a1e7297; n_mh=bRjoI2N3XukPdo-jM0hKAetcP7r0QuKIgpNiiaL6vhU; passport_csrf_token=4521d7977de19eb5176a0cbc0f4ba7c5; passport_csrf_token_default=4521d7977de19eb5176a0cbc0f4ba7c5; sessionid=1165b9d11178f21707c8dcdb73f84af1; sessionid_ss=1165b9d11178f21707c8dcdb73f84af1; sid_guard=1165b9d11178f21707c8dcdb73f84af1%7C1610414545%7C5184000%7CSat%2C+13-Mar-2021+01%3A22%3A25+GMT; sid_tt=1165b9d11178f21707c8dcdb73f84af1; uid_tt=bb266db5019161e2a2d56832972807a9; uid_tt_ss=bb266db5019161e2a2d56832972807a9; odin_tt=c2db980308dcc604a22fde857054aca05c4fcb9c2b65e7a2f3f05730585a9fb712a55a5f08c0e6ead3bf31b5d4af125ae4a8a8c973e1333de5c1905df64a4f90","sdk-version":"1","Content-Type":"application/json; encoding=utf-8","x-Tt-Token":"001165b9d11178f21707c8dcdb73f84af103af74b6212abf8bb8d6b8edbd1a031fa74d175547542d69691ff94a66203f23e8513a2723218dddc66a8cbfe68b0b278f2079eae43e674429f7b7fd44ab6de0162-1.0.0","X-SS-STUB":"D41D8CD98F00B204E9800998ECF8427E","X-Khronos":"1610414590","User-Agent":"HotsoonLite 7.6.2 rv:7621 (iPhone; iOS 14.3; zh_CN) Cronet","tt-request-time":"1610414590977","Cookie":"odin_tt=c2db980308dcc604a22fde857054aca05c4fcb9c2b65e7a2f3f05730585a9fb712a55a5f08c0e6ead3bf31b5d4af125ae4a8a8c973e1333de5c1905df64a4f90; passport_csrf_token=4521d7977de19eb5176a0cbc0f4ba7c5; passport_csrf_token_default=4521d7977de19eb5176a0cbc0f4ba7c5; n_mh=bRjoI2N3XukPdo-jM0hKAetcP7r0QuKIgpNiiaL6vhU; d_ticket=8b9d470f24917167efdc464e5eb097a1e7297; sid_guard=1165b9d11178f21707c8dcdb73f84af1%7C1610414545%7C5184000%7CSat%2C+13-Mar-2021+01%3A22%3A25+GMT; uid_tt=bb266db5019161e2a2d56832972807a9; uid_tt_ss=bb266db5019161e2a2d56832972807a9; sid_tt=1165b9d11178f21707c8dcdb73f84af1; sessionid=1165b9d11178f21707c8dcdb73f84af1; sessionid_ss=1165b9d11178f21707c8dcdb73f84af1","Host":"ib.snssdk.com","X-Gorgon":"8402805b0000c07f4e8371c0447209c1f7e421dff2ec80ea1f43","Accept":"application/json","Content-Length":"0"}')
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
  } else {
