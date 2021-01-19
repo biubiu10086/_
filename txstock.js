@@ -72,8 +72,8 @@ if ($.isNode()) {
   wxtaskkeyVal = wxtaskkeyArr[0];
   console.log(`\n✅ 查询目前账户金币\n`)
   await userhome(); //金币查询
-  //console.log(`\n✅ 执行【签到】任务\n`)
-  //await signtask();
+  console.log(`\n✅ 执行【签到】任务\n`)
+  await signtask();
   if (!taskheaderArr[0]) {
     console.log($.name, '【提示】请先前往获取任务cookie')
     return;
@@ -100,7 +100,7 @@ if ($.isNode()) {
   await wxtask9();
   await wxtask10();
   await wxtask11();
-  //await cashorder(cash, money);//自动提现测试
+  await cashorder(cash, money);//自动提现测试
   await showmsg();
 })()
 .catch((e) => $.logErr(e))
