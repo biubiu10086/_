@@ -35,7 +35,6 @@ $.msg($.name,"開始🎉🎉🎉")
       await getQuestionId()
       await checkHomeJin()
       await showmsg()
-      await DailyWatchAd()
 
 })()
     .catch((e) => $.logErr(e))
@@ -79,6 +78,7 @@ return new Promise((resolve, reject) => {
   } 
 
 
+/*
 function checkDailyWatchAd() {
 return new Promise((resolve, reject) => {
   let timestamp=new Date().getTime();
@@ -396,6 +396,7 @@ $.log('\n🔔開始領取每日觀看獎勵\n')
     })
    })
   } 
+*/
 
 function checkDailyClickAdId() {
 return new Promise((resolve, reject) => {
