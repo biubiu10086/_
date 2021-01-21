@@ -27,7 +27,7 @@ inputs:
           name: bbb_yk
           cronExpression: "0 */30 * * *"
           enable: true
-          argument: bbb_yk
+          argument: bbb&yk
   environment: #  环境变量
     variables: #  环境变量对象
       AAA: BBB # 不要删除，用来格式化对齐追加的变量的
