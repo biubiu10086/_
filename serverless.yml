@@ -19,19 +19,19 @@ inputs:
     - timer: # 签到
         parameters:
           name: dy_hotsoon
-          cronExpression: "0 */5 * * * * *"
+          cronExpression: "0 */5 * * *"
           enable: true
           argument: dy&hotsoon
     - timer: # 签到
         parameters:
           name: QQread
-          cronExpression: "0 0 */1 * * * *"
+          cronExpression: "0 0 */1 * *"
           enable: true
           argument: QQread
     - timer: # 签到
         parameters:
           name: bbb_yk
-          cronExpression: "0 */30 * * * * *"
+          cronExpression: "0 */30 * * *"
           enable: true
           argument: bbb&yk
   environment: #  环境变量
