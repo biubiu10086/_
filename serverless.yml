@@ -1,3 +1,4 @@
+
 # serverless.yml
 
 #组件信息
@@ -16,24 +17,66 @@ inputs:
   memorySize: 128 # 内存大小，单位MB
   timeout: 900 # 超时时间，单位秒
   events: # 触发器
-    - timer: # 签到
+    - timer: # 宝洁
         parameters:
-          name: dy_hotsoon
-          cronExpression: "*/5 * * * *"
+          name: jd_bj
+          cronExpression: "0 8,9 14-31/1 1 *"
           enable: true
-          argument: dy&hotsoon
-    - timer: # 签到
+          argument: jd_bj
+    - timer: # 工业品爱消除
         parameters:
-          name: QQread
-          cronExpression: "0 */1 * * *"
+          name: jd_gyec
+          cronExpression: "22 * * * *"
           enable: true
-          argument: QQread
-    - timer: # 签到
+          argument: jd_gyec
+    - timer: # 直播间红包雨
         parameters:
-          name: bbb
-          cronExpression: "*/30 * * * *"
+          name: jd_live_redrain2
+          cronExpression: "0,1 19-21/1 * * *"
           enable: true
-          argument: bbb
+          argument: jd_live_redrain2
+    - timer: # 半点红包雨
+        parameters:
+          name: jd_live_redrain_half
+          cronExpression: "30,31 12-23/1 * * *"
+          enable: true
+          argument: jd_live_redrain_half
+    - timer: # 年货直播红包雨
+        parameters:
+          name: jd_live_redrain_nian
+          cronExpression: "0 0,9-23/2 3,5,20-30/1 1,2 *"
+          enable: true
+          argument: jd_live_redrain_nian
+    - timer: # 官方号直播红包雨
+        parameters:
+          name: jd_live_redrain_offical
+          cronExpression: "1 0,9-23/2 * * *"
+          enable: true
+          argument: jd_live_redrain_offical
+    - timer: # 盲盒抽京豆# 京东秒秒币# 小鸽有礼# 海产新年抽奖
+        parameters:
+          name: mh_ms_xg_sx
+          cronExpression: "11 7 * * *"
+          enable: true
+          argument: jd_mh&jd_ms&jd_xg&jd_sx
+    - timer: # 京东粉丝专享
+        parameters:
+          name: jd_wechat_sign
+          cronExpression: "10 0 * * *"
+          enable: true
+          argument: jd_wechat_sign
+    - timer: # 东东爱消除
+        parameters:
+          name: jd_xxl
+          cronExpression: "0 * * * *"
+          enable: true
+          argument: jd_xxl
+    - timer: # 个护爱消除
+        parameters:
+          name: jd_xxl_gh
+          cronExpression: "40 * * * *"
+          enable: true
+          argument: jd_xxl_gh
   environment: #  环境变量
     variables: #  环境变量对象
       AAA: BBB # 不要删除，用来格式化对齐追加的变量的
