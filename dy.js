@@ -1,4 +1,3 @@
-
 const jsname='抖音极速版'
 const $ = Env(jsname)
 const notify = $.isNode() ?require('./sendNotify') : '';
