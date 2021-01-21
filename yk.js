@@ -4,35 +4,6 @@ const $ = new Env('一刻视频')
  let bodyVal = ('{"customer_id":58314}')
  //$.getdata('yk_body')
 
-
-/*
-adwktt
-轉載備註名字
-打开'我的'获取Cookie
-邀请码：12642334
-圈x
-[rewrite_local]
-#一刻视频
-https://api.yikeapp.com url script-request-body https://raw.githubusercontent.com/adwktt/adwktt/master/yk.js
-[task_local]
-0 0-23/4 * * * https://raw.githubusercontent.com/adwktt/adwktt/master/yk.js, tag=一刻, 
-loon
-[Script]
-http-request https://api.yikeapp.com script-path= https://raw.githubusercontent.com/adwktt/adwktt/master/yk.js, requires-body=true, timeout=10, tag= 一刻
-cron "0 0-23/4 * * *" script-path= https://raw.githubusercontent.com/adwktt/adwktt/master/yk.js, tag= 一刻
-surge
-一刻视频 = type=cron,cronexp="0 0-23/4 * * *",wake-system=1,script-path=https://raw.githubusercontent.com/adwktt/adwktt/master/yk.js,script-update-interval=0
-一刻视频 = type=http-request,pattern=https://api.yikeapp.com,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/adwktt/adwktt/master/yk.js,script-update-interval=0
-hostname = api.yikeapp.com,
-⚠️⚠️⚠️⚠️cron为 0 0-23/4 * * *
-如果经常断线,可设置为0 0-23 * * *
-*/
-
-
-const $ = new Env('一刻视频')
-let CookieVal = $.getdata('yk_ck')
-let bodyVal = $.getdata('yk_body')
-
 now = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*60*60*1000);  
 
 if ($.isNode()) {
