@@ -1,3 +1,4 @@
+
 /*
  * @Author: LXK9301 https://github.com/LXK9301
  * @Date: 2020-08-19 16:12:40 
@@ -130,7 +131,7 @@ if (process.env.PUSH_PLUS_USER) {
 
 async function sendNotify(text, desp, params = {}) {
   //提供7种通知
-  desp += `\nLexho`;
+  desp += `\n本脚本开源免费使用 By：https://github.com/LXK9301/jd_scripts`;
   await Promise.all([
     serverNotify(text, desp),//微信server酱
     pushPlusNotify(text, desp)//pushplus(推送加)
