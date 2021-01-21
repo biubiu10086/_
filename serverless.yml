@@ -1,9 +1,8 @@
-
 # serverless.yml
 
 #组件信息
 component: scf # (必选) 组件名称，在该实例中为scf
-name: Lexho # (必选) 组件实例名称。
+name: Lexho_ # (必选) 组件实例名称。
 
 #组件参数配置
 inputs:
@@ -17,6 +16,19 @@ inputs:
   memorySize: 128 # 内存大小，单位MB
   timeout: 900 # 超时时间，单位秒
   events: # 触发器
+    - timer: # Lexho
+        parameters:
+          name: dy_hotsoon
+          cronExpression: "*/5 * * * *"
+          enable: true
+          argument: dy&hotsoon
+    - timer: # Lexho
+        parameters:
+          name: bbb_yk
+          cronExpression: "0 */30 * * *"
+          enable: true
+          argument: bbb_yk
+/*
     - timer: # 宝洁
         parameters:
           name: jd_bj
@@ -77,6 +89,7 @@ inputs:
           cronExpression: "40 * * * *"
           enable: true
           argument: jd_xxl_gh
+*/
   environment: #  环境变量
     variables: #  环境变量对象
       AAA: BBB # 不要删除，用来格式化对齐追加的变量的
