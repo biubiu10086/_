@@ -25,31 +25,10 @@ if (isGetCookie) {
    $.done()
 } 
 if ($.isNode()) {
-  if (process.env.ZCYHEADER && process.env.ZCYHEADER.indexOf('#') > -1) {
-   zcyheader = process.env.ZCYHEADER.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
-  }
-  else if (process.env.ZCYHEADER && process.env.ZCYHEADER.indexOf('\n') > -1) {
-   zcyheader = process.env.ZCYHEADER.split('\n');
-   console.log(`您选择的是用换行隔开\n`)
-  } else {
-   zcyheader = process.env.ZCYHEADER.split()
-  };
-  if (process.env.ZCYBODY && process.env.ZCYBODY.indexOf('#') > -1) {
-   zcybody = process.env.ZCYBODY.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
-  }
-  else if (process.env.ZCYBODY && process.env.ZCYBODY.indexOf('\n') > -1) {
-   zcybody = process.env.ZCYBODY.split('\n');
-   console.log(`您选择的是用换行隔开\n`)
-  } else {
-   zcybody = process.env.ZCYBODY.split()
-  };
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
- } else {
-    zcyheaderArr.push($.getdata('zcyheader'))
-    zcybodyArr.push($.getdata('zcybody'))
+    zcyheaderArr.push('{"Accept":"application/json","Accept-Encoding":"gzip;q=1.0, compress;q=0.5","Connection":"keep-alive","Content-Type":"application/x-www-form-urlencoded; charset=utf-8","Host":"step-money.quanxiangweilai.cn","User-Agent":"step-money-iphone/1.7.22 (com.quanxiang.stepmoney; build:456; iOS 14.3.0) Alamofire/4.9.1","Authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjkyODM5YzcyMjRhZGJlNmI0MGZmOTAyZGY3ZGY5YjBkMTk3MjAxZGNkNzA4MzkxODNiNmJmNmJiNzA5YzMyMDc4NDBjZmQxMzI4YzhhNmYyIn0.eyJhdWQiOiI1IiwianRpIjoiOTI4MzljNzIyNGFkYmU2YjQwZmY5MDJkZjdkZjliMGQxOTcyMDFkY2Q3MDgzOTE4M2I2YmY2YmI3MDljMzIwNzg0MGNmZDEzMjhjOGE2ZjIiLCJpYXQiOjE2MTEyNzk0NTcsIm5iZiI6MTYxMTI3OTQ1NywiZXhwIjoxNjQyODE1NDU3LCJzdWIiOiI3ODY2MiIsInNjb3BlcyI6W119.fl2puEiIyo6pZkT1kg3F_RkfvjObdfu04YWIF9i1iGWdyHaNiPWf-H17yj4iiC-ETxhFD5G-_Q1HUwVW64FCK0HqMj83CRaGXEvNKpNufnSjvCuGKEkAKPkSn17i0l6V9arg-tIKxh7ZUohQLGqeZV8zoMSPjwI8S1nzgC2asx_rCce2sRdKnNz3d-HrdoJoXBCkY1nSUHGwaycY96wcZoALyKjAnAmd-0Z7cPzMFisR92IWynzwoFuu7Qzq6M1GDZUxvReypcXGz5MbJHUXYZR0mS0WTYAyqGbjPh_Aym8l2j4Fx0NLRR0QLYvLM5agPRW59z4VTZft9tXDByBL4WOe0GzNe_VQO_Nhd0rHQ9cbD6h6r8voKbpZ4DoZ8mcvEAucgmXBItZ0V7Np45OGJIYd3a3p6GToPgn0Gu_yTmOpVV5QwVUKB9TLDxaeYZQxA10Edi7D7G-RkNuaAldVXZLCKOfDsXWK1CuUhRemMoxRGAIsUoea4agU3oi0SQx2NZZIvNDoTXi4PNbIzd49tIkR-qUzHRjeRFSsRyzJRZIJlCkjZxdms_Jt4cZxZQ5UEshrIuf3sk8ZGY8JmwH0gFXukxtBWMyCDvVuLE7248bUDvwQIIfaNv1FgdeJjwMmCHUu8eYZMhcRX26UODTrMcVOJe0POxJ8oB2B8v_vzgc","Content-Length":"36","Accept-Language":"zh-Hans;q=1.0, en-CN;q=0.9"}')
+    zcybodyArr.push('account_id=78662&device_step_count=118.0')
     let zcycount = ($.getval('zcycount') || '1');
   for (let i = 2; i <= zcycount; i++) {
     zcyheaderArr.push($.getdata(`zcyheader${i}`))
