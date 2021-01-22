@@ -1,4 +1,3 @@
-
 const $ = new Env('步步寶')
  let notice = ''
  let CookieVal = ('{"store":"appstore","tokenstr":"4272292CA3B4D40D16E110683525012G1611073048","Connection":"keep-alive","Accept-Encoding":"gzip, deflate, br","version":"10","idfa":"00000000-0000-0000-0000-000000000000","User-Agent":"BBB/132 CFNetwork/1209 Darwin/20.2.0","platform":"2","imei":"DC8A8EEA-2325-4550-BC78-C64DBF7D21A4","Cookie":"PHPSESSID=3eqf1klkec2l5hrqbdhlea5rf6","Host":"bububao.duoshoutuan.com","Accept-Language":"zh-cn","Accept":"*/*","Content-Length":"0"}')
@@ -26,17 +25,19 @@ if(CookieVal)$.setdata(CookieVal,'bbb_ck')
 
 $.msg($.name,"開始🎉🎉🎉")
 
+      await cashCheck()
       await signIn()
       await checkWaterNum()
       await zaoWanDkInfo()
       await sleepStatus()
       await clickTaskStatus()
       await watchTaskStatus()
-      await helpStatus()
+      //await helpStatus()
       await getNewsId()
       await checkWaterNum()
       await getQuestionId()
       await guaList()
+      await checkWaterNum()
       await checkHomeJin()
       await userInfo()
       await showmsg()
@@ -71,7 +72,7 @@ return new Promise((resolve, reject) => {
    $.post(userInfo,async(error, response, data) =>{
      const userinfo = JSON.parse(data)
      if(response.statusCode == 200 && userinfo.code != -1){
-          $.log('\n🎉模擬登陸成功\n')
+$.log('\n🎉模擬登陸成功\n')
      notice += '🎉步步寶帳號: '+userinfo.username+'\n'+'🎉當前金幣: '+userinfo.jinbi+'💰 約'+userinfo.money+'元💸\n'
     }else{
      notice += '⚠️異常原因: '+userinfo.msg+'\n'
@@ -80,9 +81,6 @@ return new Promise((resolve, reject) => {
     })
    })
   } 
-
-
-
 
 
 function signIn() {
@@ -1062,7 +1060,7 @@ $.log('\n🔔開始抽獎\n')
           await $.wait(5000)
           await luckyCallBack()
          }else{
-          await luckyClick()
+          await checkLuckNum()
          }
        }
           resolve()
@@ -1085,7 +1083,7 @@ $.log('\n🔔開始翻倍抽獎\n')
       if(callback.code == 1) {
           $.log('\n🎉抽獎翻倍成功\n')
           await $.wait(5000)
-          await luckyClick()
+          await checkLuckNum()
            }else{
           $.log('\n⚠️抽獎翻倍失敗:'+callback.msg+'\n')
            }
@@ -1223,7 +1221,6 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
     body: `cy_id=${questionId}&site=${questionSite}&`,
 }
-//$.log('\nanswerqueBODY:'+answerque.body+'\n')
    $.post(answerque,async(error, response, data) =>{
      const answer = JSON.parse(data)
 $.log('\n🔔開始答題\n')
@@ -1250,7 +1247,6 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
     body: `nonce_str=${answerStr}&tid=18&pos=1&`,
 }
-//$.log('\nanswerQueCallBackBODY:'+answerquecallback.body+'\n')
    $.post(answerquecallback,async(error, response, data) =>{
      const answerback = JSON.parse(data)
 $.log('\n🔔開始翻倍答題金幣\n')
@@ -1265,6 +1261,57 @@ $.log('\n🔔開始翻倍答題金幣\n')
     })
    })
   } 
+
+
+function cashCheck() {
+return new Promise((resolve, reject) => {
+  let timestamp=new Date().getTime();
+  let cashcheck ={
+    url: 'https://bububao.duoshoutuan.com/user/profile',
+    headers: JSON.parse(CookieVal),
+}
+   $.post(cashcheck,async(error, response, data) =>{
+     const cash = JSON.parse(data)
+     if(response.statusCode == 200 && cash.code != -1){
+if(cash.jinbi >= 500000){
+     tip = 50
+     }else if(cash.day_jinbi > 5000){
+     tip = 0.3
+     }
+      await withDraw()
+           }
+          resolve()
+    })
+   })
+  } 
+
+
+
+
+function withDraw() {
+return new Promise((resolve, reject) => {
+  let timestamp=new Date().getTime();
+  let withdraw ={
+    url: `https://bububao.duoshoutuan.com/user/tixian?`,
+    headers: JSON.parse(CookieVal),
+    body: `tx=${tip}&`,
+}
+   $.post(withdraw,async(error, response, data) =>{
+$.log(data)
+     const draw = JSON.parse(data)
+      if(withdraw.code == 1) {
+           $.msg(draw.msg)
+          }else{
+           notice +=draw.tip+'\n'+draw.msg+'\n'
+          }
+          resolve()
+    })
+   })
+  } 
+
+
+
+
 
 
 
