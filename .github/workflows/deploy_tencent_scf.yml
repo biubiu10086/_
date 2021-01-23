@@ -38,6 +38,7 @@ jobs:
           wget -O package.json https://raw.githubusercontent.com/LXK9301/jd_scripts/master/package.json
           wget -O package-lock.json https://raw.githubusercontent.com/LXK9301/jd_scripts/master/package-lock.json
           wget -O sendNotify.js https://raw.githubusercontent.com/LXK9301/jd_scripts/master/sendNotify.js
+          wget -O youth.js https://raw.githubusercontent.com/Sunert/Scripts/master/Task/youth.js
 
       - name: "将Secrets里面配置的变量添加到severless.yml里面作为环境变量"
         run: |
