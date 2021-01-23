@@ -30,6 +30,9 @@ jobs:
           wget -O index.py https://raw.githubusercontent.com/Sitoi/dailycheckin/main/index.py
           wget -O xmly.py https://raw.githubusercontent.com/Sitoi/dailycheckin/main/xmly/xmly.py
           wget -O deploy.sh https://raw.githubusercontent.com/Sitoi/dailycheckin/main/deploy.sh
+          wget -O __init__.py https://raw.githubusercontent.com/Sitoi/dailycheckin/main/xmly/__init__.py
+          wget -O .gitignore https://raw.githubusercontent.com/Sitoi/dailycheckin/main/.gitignore
+          wget -O requirements.txt https://raw.githubusercontent.com/Sitoi/dailycheckin/main/requirements.txt
 
       - name: "将 Secrets 里面配置的变量渲染成 config.json 文件"
         run: |
