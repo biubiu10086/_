@@ -36,7 +36,7 @@ jobs:
           wget -O xmly_speed.py https://raw.githubusercontent.com/Zero-S1/xmly_speed/master/xmly_speed.py
 
       - name: "部署到腾讯云函数"
-        run: |
+        run: serverless deploy
         env:
           STAGE: dev
           SERVERLESS_PLATFORM_VENDOR: tencent
