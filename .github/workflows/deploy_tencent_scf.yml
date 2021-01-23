@@ -1,4 +1,3 @@
-
 name: 部署到腾讯云函数
 
 on:
@@ -29,10 +28,12 @@ jobs:
         run: |
           npm install
           sudo npm install serverless -g
+
       - name: "替换文件"
         run: |
           wget -O serverless.yml https://raw.githubusercontent.com/Lexho1/_/master/serverless.yml
           wget -O index.js https://raw.githubusercontent.com/Lexho1/_/master/index.js
+
       - name: "将Secrets里面配置的变量添加到severless.yml里面作为环境变量"
         run: |
           if [ $SCF_REGION ]; then sed -i "s/region:.*$/region: $SCF_REGION/g" serverless.yml; fi;
@@ -179,6 +180,7 @@ jobs:
         run: |
           wget -O serverless.yml https://raw.githubusercontent.com/LXK9301/jd_scripts/master/serverless.yml
           wget -O index.js https://raw.githubusercontent.com/LXK9301/jd_scripts/master/index.js
+
       - name: "Secrets环境变量 jd_scripts"
         run: |
           if [ $SCF_REGION ]; then sed -i "s/region:.*$/region: $SCF_REGION/g" serverless.yml; fi;
@@ -325,6 +327,7 @@ jobs:
         run: |
           wget -O serverless.yml https://raw.githubusercontent.com/Sirius2s/JSfromGT.AC/main/serverless_SL.yml
           wget -O index.js https://raw.githubusercontent.com/Lexho1/_/master/index_SL.js
+
       - name: "Secrets环境变量 SL_scripts"
         run: |
           if [ $SCF_REGION ]; then sed -i "s/region:.*$/region: $SCF_REGION/g" serverless.yml; fi;
