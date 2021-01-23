@@ -12,25 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: 配置用户信息(必须先配置secrets)并生成配置文件config.json
-      run: |
-        string='${{ secrets.advconfig }}'
-        if [ -n "$string" ]; then
-        echo "$string" > ./config/config.json
-        echo "成功将secrets(advconfig)内容输出到配置文件config.json"
-        exit 0
-        fi
-        echo "未填写secrets(advconfig)尝试读取secrets(biliconfig)"
-        string='${{ secrets.biliconfig }}'
-        if [ -z "$string" ]; then
-        echo "secrets(biliconfig)未填写"
-        exit -1
-        fi
-        array=(${string})
-        sed -i "s/账号SESSDATA/${array[0]}/g" ./config/config.json
-        sed -i "s/账号bili_jct/${array[1]}/g" ./config/config.json
-        sed -i "s/账号uid/${array[2]}/g" ./config/config.json
-        echo "成功用secrets(biliconfig)生成配置文件config.json"
     - name: 安装依赖模块(aiohttp)
       run: |
         sudo -H pip3 install --upgrade pip
