@@ -36,7 +36,7 @@ jobs:
           wget -O .gitignore https://raw.githubusercontent.com/Zero-S1/xmly_speed/master/.gitignore
           wget -O xmly_speed.py https://raw.githubusercontent.com/Zero-S1/xmly_speed/master/xmly_speed.py
 
-      - name: 安装ServerlessFramework
+      - name: "安装ServerlessFramework"
           run: sudo npm install -g serverless
 
       - name: "部署到腾讯云函数"
