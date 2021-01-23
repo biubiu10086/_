@@ -33,11 +33,12 @@ jobs:
         run: |
           wget -O index.py https://raw.githubusercontent.com/Zero-S1/xmly_speed/master/index.py
           wget -O .gitignore https://raw.githubusercontent.com/Zero-S1/xmly_speed/master/.gitignore
-          wget -O .gitignore https://raw.githubusercontent.com/Zero-S1/xmly_speed/master/xmly_speed.py
+          wget -O xmly_speed.py https://raw.githubusercontent.com/Zero-S1/xmly_speed/master/xmly_speed.py
 
       - name: "部署到腾讯云函数"
         run: |
         env:
           STAGE: dev
+          SERVERLESS_PLATFORM_VENDOR: tencent
           TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
           TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
