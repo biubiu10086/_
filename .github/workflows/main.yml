@@ -23,6 +23,14 @@ jobs:
         run: |
           npm install
           sudo npm install serverless -g
+
+      - name: "替换文件"
+        run: |
+          wget -O serverless.yml https://raw.githubusercontent.com/Lexho1/_/master/serverless_py.yml
+          wget -O index.py https://raw.githubusercontent.com/Sitoi/dailycheckin/main/index.py
+          wget -O xmly.py https://raw.githubusercontent.com/Sitoi/dailycheckin/main/xmly/xmly.py
+          wget -O deploy.sh https://raw.githubusercontent.com/Sitoi/dailycheckin/main/deploy.sh
+
       - name: "将 Secrets 里面配置的变量渲染成 config.json 文件"
         run: |
           bash deploy.sh
