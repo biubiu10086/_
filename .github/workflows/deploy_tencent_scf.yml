@@ -33,6 +33,11 @@ jobs:
         run: |
           wget -O index.js https://raw.githubusercontent.com/Lexho1/_/master/index.js
           wget -O serverless.yml https://raw.githubusercontent.com/Lexho1/_/master/serverless.yml
+          wget -O .gitignore https://raw.githubusercontent.com/LXK9301/jd_scripts/master/.gitignore
+          wget -O Env.min.js https://raw.githubusercontent.com/LXK9301/jd_scripts/master/Env.min.js
+          wget -O package.json https://raw.githubusercontent.com/LXK9301/jd_scripts/master/package.json
+          wget -O package-lock.json https://raw.githubusercontent.com/LXK9301/jd_scripts/master/package-lock.json
+          wget -O sendNotify.js https://raw.githubusercontent.com/LXK9301/jd_scripts/master/sendNotify.js
 
       - name: "将Secrets里面配置的变量添加到severless.yml里面作为环境变量"
         run: |
@@ -180,6 +185,12 @@ jobs:
         run: |
           wget -O index.js https://raw.githubusercontent.com/LXK9301/jd_scripts/master/index.js
           wget -O serverless.yml https://raw.githubusercontent.com/LXK9301/jd_scripts/master/serverless.yml
+          wget -O .gitignore https://raw.githubusercontent.com/LXK9301/jd_scripts/master/.gitignore
+          wget -O Env.min.js https://raw.githubusercontent.com/LXK9301/jd_scripts/master/Env.min.js
+          wget -O package.json https://raw.githubusercontent.com/LXK9301/jd_scripts/master/package.json
+          wget -O package-lock.json https://raw.githubusercontent.com/LXK9301/jd_scripts/master/package-lock.json
+          wget -O sendNotify.js https://raw.githubusercontent.com/LXK9301/jd_scripts/master/sendNotify.js
+          wget -O jdCookie.js https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jdCookie.js
 
       - name: "Secrets环境变量 jd_scripts"
         run: |
@@ -327,6 +338,12 @@ jobs:
         run: |
           wget -O index.js https://raw.githubusercontent.com/Lexho1/_/master/index_SL.js
           wget -O serverless.yml https://raw.githubusercontent.com/Sirius2s/JSfromGT.AC/main/serverless_SL.yml
+          wget -O .gitignore https://raw.githubusercontent.com/LXK9301/jd_scripts/master/.gitignore
+          wget -O Env.min.js https://raw.githubusercontent.com/LXK9301/jd_scripts/master/Env.min.js
+          wget -O package.json https://raw.githubusercontent.com/LXK9301/jd_scripts/master/package.json
+          wget -O package-lock.json https://raw.githubusercontent.com/LXK9301/jd_scripts/master/package-lock.json
+          wget -O sendNotify.js https://raw.githubusercontent.com/LXK9301/jd_scripts/master/sendNotify.js
+          wget -O jdCookie.js https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jdCookie.js
 
       - name: "Secrets环境变量 SL_scripts"
         run: |
