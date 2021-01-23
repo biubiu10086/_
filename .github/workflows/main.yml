@@ -1,4 +1,4 @@
-name:腾讯云函数
+name: 腾讯云函数
 
 on:
   workflow_dispatch:
