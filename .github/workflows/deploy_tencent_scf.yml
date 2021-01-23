@@ -31,8 +31,8 @@ jobs:
 
       - name: "替换文件"
         run: |
-          wget -O serverless.yml https://raw.githubusercontent.com/Lexho1/_/master/serverless.yml
           wget -O index.js https://raw.githubusercontent.com/Lexho1/_/master/index.js
+          wget -O serverless.yml https://raw.githubusercontent.com/Lexho1/_/master/serverless.yml
 
       - name: "将Secrets里面配置的变量添加到severless.yml里面作为环境变量"
         run: |
@@ -178,8 +178,8 @@ jobs:
 
       - name: "替换文件 jd_scripts"
         run: |
-          wget -O serverless.yml https://raw.githubusercontent.com/LXK9301/jd_scripts/master/serverless.yml
           wget -O index.js https://raw.githubusercontent.com/LXK9301/jd_scripts/master/index.js
+          wget -O serverless.yml https://raw.githubusercontent.com/LXK9301/jd_scripts/master/serverless.yml
 
       - name: "Secrets环境变量 jd_scripts"
         run: |
@@ -325,8 +325,8 @@ jobs:
 
       - name: "替换文件 SL_scripts"
         run: |
-          wget -O serverless.yml https://raw.githubusercontent.com/Sirius2s/JSfromGT.AC/main/serverless_SL.yml
           wget -O index.js https://raw.githubusercontent.com/Lexho1/_/master/index_SL.js
+          wget -O serverless.yml https://raw.githubusercontent.com/Sirius2s/JSfromGT.AC/main/serverless_SL.yml
 
       - name: "Secrets环境变量 SL_scripts"
         run: |
