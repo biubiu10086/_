@@ -1,43 +1,67 @@
-name: 'deploy for tencentyun'
+
+name: 部署到腾讯云函数
 
 on:
   workflow_dispatch:
-  watch:
-    types: started
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
-    - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ github.repository }}
 
-    - name: 安装依赖模块(aiohttp)
-      run: |
-        sudo -H pip3 install --upgrade pip
-        sudo -H pip3 install setuptools
-        mkdir other_models
-        sudo -H pip3 install -r requirements.txt -t ./other_models
-    - name: 安装ServerlessFramework
-      run: sudo npm install -g serverless
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: 重构文件目录结构并部署至腾讯云 #将云函数相关文件全移动到./serverless,并以此为根目录上传部署到SCF
-      run: |
-        if [ -z "$TENCENT_SECRET_ID" ]; then
-        echo "部署至腾讯云需要填写TENCENT_SECRET_ID和TENCENT_SECRET_KEY两个secrets"
-        exit -1
-        fi
-        sudo mv BiliExp.py ./serverless
-        sudo mv ./tasks ./serverless
-        sudo mv ./BiliClient ./serverless
-        sudo mv ./other_models/* ./serverless
-        sudo mkdir ./serverless/config
-        sudo mv ./config/*.json ./serverless/config
-        cd ./serverless
-        sudo rm -f aliyun_serverless.yml
-        sls deploy --debug
-      env:
-          SERVERLESS_PLATFORM_VENDOR: tencent #serverless 境外默认为 aws，配置为腾讯
+      - name: "安装依赖和 serverless 工具"
+        run: |
+          npm install
+          sudo npm install serverless -g
+      - name: "将 Secrets 里面配置的变量渲染成 config.json 文件"
+        run: |
+          bash deploy.sh
+        env: #因为直接读取secrets里面的值很多字符不会自动转译，导致写入serverless.yml异常，所以设置到环境变量，在读取环境变量转译过的值
+          DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
+          DINGTALK_ACCESS_TOKEN: ${{secrets.DINGTALK_ACCESS_TOKEN}}
+          SCKEY: ${{secrets.SCKEY}}
+          BARK_URL: ${{secrets.BARK_URL}}
+          QMSG_KEY: ${{secrets.QMSG_KEY}}
+          TG_BOT_TOKEN: ${{secrets.TG_BOT_TOKEN}}
+          TG_USER_ID: ${{secrets.TG_USER_ID}}
+          COOLPUSHSKEY: ${{secrets.COOLPUSHSKEY}}
+          COOLPUSHQQ: ${{secrets.COOLPUSHQQ}}
+          COOLPUSHWX: ${{secrets.COOLPUSHWX}}
+          COOLPUSHEMAIL: ${{secrets.COOLPUSHEMAIL}}
+          CITY_NAME_LIST: ${{secrets.CITY_NAME_LIST}}
+          MOTTO: ${{secrets.MOTTO}}
+          IQIYI_COOKIE_LIST: ${{secrets.IQIYI_COOKIE_LIST}}
+          VQQ_COOKIE_LIST: ${{secrets.VQQ_COOKIE_LIST}}
+          YOUDAO_COOKIE_LIST: ${{secrets.YOUDAO_COOKIE_LIST}}
+          KGQQ_COOKIE_LIST: ${{secrets.KGQQ_COOKIE_LIST}}
+          MUSIC163_ACCOUNT_LIST: ${{secrets.MUSIC163_ACCOUNT_LIST}}
+          XMLY_COOKIE_LIST: ${{secrets.XMLY_COOKIE_LIST}}
+          ONEPLUSBBS_COOKIE_LIST: ${{secrets.ONEPLUSBBS_COOKIE_LIST}}
+          FMAPP_ACCOUNT_LIST: ${{secrets.FMAPP_ACCOUNT_LIST}}
+          BAIDU_URL_SUBMIT_LIST: ${{secrets.BAIDU_URL_SUBMIT_LIST}}
+          TIEBA_COOKIE_LIST: ${{secrets.TIEBA_COOKIE_LIST}}
+          BILIBILI_COOKIE_LIST: ${{secrets.BILIBILI_COOKIE_LIST}}
+          LIANTONG_ACCOUNT_LIST: ${{secrets.LIANTONG_ACCOUNT_LIST}}
+          V2EX_COOKIE_LIST: ${{secrets.V2EX_COOKIE_LIST}}
+          WWW2NZZ_COOKIE_LIST: ${{secrets.WWW2NZZ_COOKIE_LIST}}
+          SMZDM_COOKIE_LIST: ${{secrets.SMZDM_COOKIE_LIST}}
+          MIMOTION_ACCOUNT_LIST: ${{secrets.MIMOTION_ACCOUNT_LIST}}
+          ACFUN_ACCOUNT_LIST: ${{secrets.ACFUN_ACCOUNT_LIST}}
+
+      - name: "部署到腾讯云函数"
+        run: sls deploy --debug
+        env:
+          STAGE: dev
+          SERVERLESS_PLATFORM_VENDOR: tencent
           TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
           TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
-          TIMEOUT: 120
