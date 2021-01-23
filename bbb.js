@@ -3,6 +3,34 @@ const $ = new Env('步步寶')
  let CookieVal = ('{"store":"appstore","tokenstr":"4272292CA3B4D40D16E110683525012G1611073048","Connection":"keep-alive","Accept-Encoding":"gzip, deflate, br","version":"10","idfa":"00000000-0000-0000-0000-000000000000","User-Agent":"BBB/132 CFNetwork/1209 Darwin/20.2.0","platform":"2","imei":"DC8A8EEA-2325-4550-BC78-C64DBF7D21A4","Cookie":"PHPSESSID=3eqf1klkec2l5hrqbdhlea5rf6","Host":"bububao.duoshoutuan.com","Accept-Language":"zh-cn","Accept":"*/*","Content-Length":"0"}')
  //$.getdata('bbb_ck')
 
+
+/*
+adwktt
+轉載備註名字
+打开App获取Cookie
+下載地址：http://bububao.yichengw.cn/?id=524855
+圈x
+[rewrite_local]
+#步步宝
+https://bububao.duoshoutuan.com/user/profile url script-request-header https://raw.githubusercontent.com/adwktt/adwktt/master/BBB.js
+[task_local]
+0 8-23/2 * * * https://raw.githubusercontent.com/adwktt/adwktt/master/BBB.js, tag=步步宝, 
+loon
+[Script]
+http-request https://bububao.duoshoutuan.com/user/profile script-path= https://raw.githubusercontent.com/adwktt/adwktt/master/BBB.js, timeout=10, tag= 步步宝
+cron "0 8-23/2 * * *" script-path= https://raw.githubusercontent.com/adwktt/adwktt/master/BBB.js, tag= 步步宝
+surge
+步步宝 = type=cron,cronexp="0 8-23/2 * * *",wake-system=1,script-path=https://raw.githubusercontent.com/adwktt/adwktt/master/BBB.js,script-update-interval=0
+步步宝 = type=http-request,pattern=https://bububao.duoshoutuan.com/user/profile,requires-body=0,max-size=0,script-path=https://raw.githubusercontent.com/adwktt/adwktt/master/BBB.js,script-update-interval=0
+hostname = bububao.duoshoutuan.com,
+*/
+
+
+
+const $ = new Env('步步寶')
+let notice = ''
+let CookieVal = $.getdata('bbb_ck')
+
 if ($.isNode()) {
       console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
       console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
@@ -203,8 +231,8 @@ return new Promise((resolve, reject) => {
 $.log('\n🔔開始查詢刮刮卡ID\n')
      const guaid = JSON.parse(data)
       if(guaid.ka > 0){
-      for (guaId of guaid.list){
-      if(guaId.is_ad == 0)
+      for (guaId of guaid.list)
+      if(guaId.is_ad == 0){
       GID = guaId.id
 $.log('\n🔔查詢刮刮卡ID成功,5s後開始查询刮卡签名\n')
 $.log('\nGID: '+GID+'\n')
