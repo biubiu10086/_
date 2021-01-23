@@ -31,15 +31,13 @@ jobs:
 
       - name: "替换文件"
         run: |
-          wget -O requirements.txt https://raw.githubusercontent.com/Zero-S1/xmly_speed/master/requirements.txt
           wget -O index.py https://raw.githubusercontent.com/Zero-S1/xmly_speed/master/index.py
           wget -O .gitignore https://raw.githubusercontent.com/Zero-S1/xmly_speed/master/.gitignore
           wget -O .gitignore https://raw.githubusercontent.com/Zero-S1/xmly_speed/master/xmly_speed.py
 
       - name: "部署到腾讯云函数"
-        run: serverless deploy
+        run: |
         env:
           STAGE: dev
-          SERVERLESS_PLATFORM_VENDOR: tencent
           TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
           TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
