@@ -6,6 +6,9 @@ on:
      - cron: '*/5 * * * *'
   watch:
     types: started
+  repository_dispatch:
+    types: youth
+
 
 jobs:
   build:
