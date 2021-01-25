@@ -18,10 +18,10 @@ inputs:
   events: # 触发器
     - timer: # Lexho
         parameters:
-          name: dy_hotsoon_zcy
+          name: dy_hotsoon
           cronExpression: "*/5 * * * *"
           enable: true
-          argument: dy&hotsoon&zcy
+          argument: dy&hotsoon
     - timer: # Lexho
         parameters:
           name: bbb
