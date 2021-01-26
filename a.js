@@ -14,8 +14,8 @@ let x = 0;
 async function sign_in(){
  return new Promise((resolve) => {
     let sign_in_url = {
-   		url: 'http://coin.makingmoney.cn:8088/task/award?guid=53193025-9109-495C-8A6A-3FE4C6965DAB&task_id=6029&adtask_id=74&ver=1.1.1&systemver=13.3&bid=com.calendar.jishi.app&mt=1&sw=414&sh=896&device=iPhone&idiom=0&chl=AppStore&language=zh-Hans-CN&locale=CN&zone=Asia%2FShanghai&sign=9e9c55babd81249e4e20c3fd34ad55ec',
-    	headers: JSON.parse('{"Accept": "*/*","Accept-Encoding": "gzip, deflate","Accept-Language": "zh-cn","Connection": "close","Cookie": "beegosessionID=f2fc11ada6ea95d02cb176eba3ea78cc","Host": "coin.makingmoney.cn:8088","User-Agent": "%E4%B8%87%E5%B9%B4%E5%8E%86%E6%9E%81%E9%80%9F%E7%89%88/1 CFNetwork/1121.2.2 Darwin/19.2.0"}'),
+   		url: 'http://coin.makingmoney.cn:8088/data/fuli?guid=F2BF6F20-B056-4E16-9E45-77280E26A5F5&ver=1.1.1&systemver=14.3&bid=com.calendar.jishi.app&mt=1&sw=375&sh=812&device=iPhone&idiom=0&chl=AppStore&language=zh-Hans&locale=CN&zone=Asia%2FShanghai&sign=93e05abe22d0ac2a0e0d3ab8042cfd7f',
+    	headers: JSON.parse('{"Accept": "*/*","Accept-Encoding": "gzip, deflate","Accept-Language": "zh-cn","Connection": "close","Cookie": "beegosessionID=ae20b5afd534b1fe7483f3cb50d07b7c","Host": "coin.makingmoney.cn:8088","User-Agent": "%E4%B8%87%E5%B9%B4%E5%8E%86%E6%9E%81%E9%80%9F%E7%89%88/1 CFNetwork/1209 Darwin/20.2.0"}'),
     	}
    $.get(sign_in_url,async(error, response, data) =>{
     try{
@@ -37,8 +37,8 @@ async function sign_in(){
 async function task(){
  return new Promise((resolve) => {
     let taskurl = {
-   		url: 'http://coin.makingmoney.cn:8088/task/award?guid=53193025-9109-495C-8A6A-3FE4C6965DAB&task_id=6029&adtask_id=74&ver=1.1.1&systemver=13.3&bid=com.calendar.jishi.app&mt=1&sw=414&sh=896&device=iPhone&idiom=0&chl=AppStore&language=zh-Hans-CN&locale=CN&zone=Asia%2FShanghai&sign=9e9c55babd81249e4e20c3fd34ad55ec',
-    	headers: JSON.parse('{"Accept": "*/*","Accept-Encoding": "gzip, deflate","Accept-Language": "zh-cn","Connection": "close","Cookie": "beegosessionID=f2fc11ada6ea95d02cb176eba3ea78cc","Host": "coin.makingmoney.cn:8088","User-Agent": "%E4%B8%87%E5%B9%B4%E5%8E%86%E6%9E%81%E9%80%9F%E7%89%88/1 CFNetwork/1121.2.2 Darwin/19.2.0"}'),
+   		url: 'http://coin.makingmoney.cn:8088/data/fuli?guid=F2BF6F20-B056-4E16-9E45-77280E26A5F5&ver=1.1.1&systemver=14.3&bid=com.calendar.jishi.app&mt=1&sw=375&sh=812&device=iPhone&idiom=0&chl=AppStore&language=zh-Hans&locale=CN&zone=Asia%2FShanghai&sign=93e05abe22d0ac2a0e0d3ab8042cfd7f',
+    	headers: JSON.parse('{"Accept": "*/*","Accept-Encoding": "gzip, deflate","Accept-Language": "zh-cn","Connection": "close","Cookie": "beegosessionID=ae20b5afd534b1fe7483f3cb50d07b7c","Host": "coin.makingmoney.cn:8088","User-Agent": "%E4%B8%87%E5%B9%B4%E5%8E%86%E6%9E%81%E9%80%9F%E7%89%88/1 CFNetwork/1209 Darwin/20.2.0"}'),
     	}
    $.get(taskurl,async(error, response, data) =>{
     try{
