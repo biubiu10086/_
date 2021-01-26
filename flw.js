@@ -1,3 +1,51 @@
+
+/* ziye 
+github地址 https://github.com/ziye12
+TG频道地址  https://t.me/ziyescript
+TG交流群   https://t.me/joinchat/AAAAAE7XHm-q1-7Np-tF3g
+boxjs链接  https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/ziye.boxjs.json
+转载请备注个名字，谢谢
+⚠️返利网
+1.20 调整为完整版
+1.23 增加签到任务等
+1.24 修复错误
+1.24 优化显示
+1.24 修复判定错误，调整视频延迟，修复node环境错误
+1.25 修复各种判定，设置CASH变量>=0.3，启动天天领现金模块
+1.26 修复延迟判定问题，修复node环境问题
+⚠️一共4个位置 4个ck  👉 5条 Secrets 
+多账号换行
+第一步 添加  hostname=huodong.fanli.com,passport.fanli.com,gw.fanli.com,
+第二步 添加重写 
+点击 我的 获取flwurlVal
+flwurlVal 👉FL_flwURL
+点击 首页 签到赚钱 获取flwheaderVal
+flwheaderVal 👉FL_flwHEADER
+注释header重写 点击 首页 签到赚钱 视频任务 获取flwspbodyVal
+flwurlVal 👉FL_flwspBODY
+注释header重写 点击 首页 签到赚钱 火山热门视频 获取flwqwbodyVal
+flwurlVal 👉FL_flwqwBODY
+设置提现变量 可设置 0.3以上 务必关注官方公众号，并且手动领取红包
+CASH  👉  FL_CASH
+⚠️主机名以及重写👇
+hostname=huodong.fanli.com,passport.fanli.com,gw.fanli.com,
+############## 圈x
+#返利网获取header
+https:\/\/(huodong\.fanli\.com\/*||passport\.fanli\.com\/*||gw\.fanli\.com\/*) url script-request-header https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/flw.js   
+#返利网获取body
+https:\/\/(huodong\.fanli\.com\/*||passport\.fanli\.com\/*||gw\.fanli\.com\/*) url script-request-body https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/flw.js   
+############## loon
+#返利网获取header
+http-request https:\/\/(huodong\.fanli\.com\/*||passport\.fanli\.com\/*||gw\.fanli\.com\/*) script-path=https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/flw.js, requires-header=true, tag=返利网获取header
+http-request https:\/\/(huodong\.fanli\.com\/*||passport\.fanli\.com\/*||gw\.fanli\.com\/*) script-path=https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/flw.js,requires-body=true, tag=返利网获取body
+############## surge
+#返利网获取header
+返利网获取header = type=http-request,pattern=https:\/\/(huodong\.fanli\.com\/*||passport\.fanli\.com\/*||gw\.fanli\.com\/*),script-path=https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/flw.js,
+#返利网获取body
+返利网获取body = type=http-request,pattern=https:\/\/(huodong\.fanli\.com\/*||passport\.fanli\.com\/*||gw\.fanli\.com\/*),script-path=https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/flw.js, 
+*/
+
+
 const $ = Env("返利网");
 $.idx = ($.idx = ($.getval('flwSuffix') || '1') - 1) > 0 ? ($.idx + 1 + '') : ''; // 账号扩展字符
 const notify = $.isNode() ? require("./sendNotify") : ``;
@@ -215,9 +263,18 @@ if (!Length) {
   flwspbodyVal = flwspbodyArr[i];  
   flwqwbodyVal = flwqwbodyArr[i];   
   }
-//  ts = Math.round((new Date().getTime() +
-//    new Date().getTimezoneOffset() * 60 * 1000 +
-//    8 * 60 * 60 * 1000)/1000).toString();
+  if ($.isNode()) {
+    tts = Math.round(new Date().getTime() +
+      new Date().getTimezoneOffset() * 60 * 1000 ).toString();
+  ts = Math.round((new Date().getTime() +
+      new Date().getTimezoneOffset() * 60 * 1000 )/1000).toString();
+  }else {tts = Math.round(new Date().getTime() +
+      new Date().getTimezoneOffset() * 60 * 1000 +
+      8 * 60 * 60 * 1000).toString();
+  ts = Math.round((new Date().getTime() +
+      new Date().getTimezoneOffset() * 60 * 1000 +
+      8 * 60 * 60 * 1000)/1000).toString();
+    }
  flwurlValsplit=flwurlVal.split('&')
  uid=flwurlValsplit[1].split('=')[1]
  token=flwurlValsplit[2].split('=')[1]
@@ -244,8 +301,8 @@ let cookie_is_live = await flwdl(i + 1);//登录
       await flwtask();//任务列表	  
 if($.flwtask.data&&qw.status==0){
 dd=qw.new_point/2
-}else if($.flwtask.data&&sp.status==0){
-dd=14
+}else if($.flwtask.data&&$.flwtask.data&&sp.complete_count!=7){
+dd=(7-sp.complete_count)*2
 }
 console.log(`📍本次运行等待${dd}秒`)
 if ($.flwtask.data&&ms.status==0){
@@ -253,7 +310,7 @@ if ($.flwtask.data&&ms.status==0){
       await flwzrw();//做任务
       await flwlrw();//领任务
 }
-if ($.flwtask.data&&sp.status==0){       
+if ($.flwtask.data&&sp.complete_count!=7){       
 	   await flwksp();//看视频
       await flwlsp();//领视频
 }
@@ -288,9 +345,6 @@ function msgShow() {
 function flwdl(timeout = 0) {
   return new Promise((resolve) => {
     setTimeout( ()=>{
-tts = Math.round(new Date().getTime() +
-    new Date().getTimezoneOffset() * 60 * 1000 +
-    8 * 60 * 60 * 1000).toString();
 	  let url = {
         url: flwurlVal,        
       }
@@ -327,9 +381,6 @@ if($.isNode()){
 function flwhbcoin(timeout = 0) {
   return new Promise((resolve) => {
     setTimeout( ()=>{
-tts = Math.round(new Date().getTime() +
-    new Date().getTimezoneOffset() * 60 * 1000 +
-    8 * 60 * 60 * 1000).toString();
 	  let url = {
         url:`https://huodong.fanli.com/h5/fanlishare20201212/ajaxInit`,        
         headers: JSON.parse(flwheaderVal),
@@ -357,9 +408,6 @@ tts = Math.round(new Date().getTime() +
 function flwhb(timeout = 0) {
   return new Promise((resolve) => {
     setTimeout( ()=>{
-tts = Math.round(new Date().getTime() +
-    new Date().getTimezoneOffset() * 60 * 1000 +
-    8 * 60 * 60 * 1000).toString();
 	  let url = {
         url:`https://huodong.fanli.com/h5/fanlishare20201212/ajaxDoTask76728`,        
         headers: JSON.parse(flwheaderVal),
@@ -388,9 +436,6 @@ $.message +='【开启完毕】✖️:'+'礼盒已全部开启'+'\n'
 function flwhbtx(timeout = 0) {
   return new Promise((resolve) => {
     setTimeout( ()=>{
-tts = Math.round(new Date().getTime() +
-    new Date().getTimezoneOffset() * 60 * 1000 +
-    8 * 60 * 60 * 1000).toString();
 	  let url = {
         url:`https://huodong.fanli.com/h5/fanlishare20201212/ajaxExchangeCash`,        
         headers: JSON.parse(flwheaderVal),
@@ -418,9 +463,11 @@ $.message +='【活动提现】✖️:'+$.flwhbtx.info+'\n'
 function flwsign(timeout = 0) {
   return new Promise((resolve) => {
     setTimeout( ()=>{
-tts = Math.round(new Date().getTime() +
-    new Date().getTimezoneOffset() * 60 * 1000 +
-    8 * 60 * 60 * 1000).toString();
+if ($.isNode()) {
+	tts = Math.round(new Date().getTime() +
+new Date().getTimezoneOffset() * 60 * 1000 ).toString();
+}else tts = Math.round(new Date().getTime() +
+new Date().getTimezoneOffset() * 60 * 1000 +8 * 60 * 60 * 1000).toString();
 	  let url = {
         url:`https://huodong.fanli.com/sign53023/ajaxGetPointBySign?t=${tts}`,        
         headers: JSON.parse(flwheaderVal),
@@ -446,9 +493,6 @@ tts = Math.round(new Date().getTime() +
 function flwzh(timeout = 0) {
   return new Promise((resolve) => {
     setTimeout( ()=>{
-tts = Math.round(new Date().getTime() +
-    new Date().getTimezoneOffset() * 60 * 1000 +
-    8 * 60 * 60 * 1000).toString();
 	  let url = {
         url:`https://huodong.fanli.com/sign53023/ajaxGetNewInitState`,        
         headers: JSON.parse(flwheaderVal),
@@ -476,9 +520,6 @@ $.message +='【账户】✖️:'+$.flwzh.info+'\n'
 function flwtask(timeout = 0) {
   return new Promise((resolve) => {
     setTimeout( ()=>{
-tts = Math.round(new Date().getTime() +
-    new Date().getTimezoneOffset() * 60 * 1000 +
-    8 * 60 * 60 * 1000).toString();
 	  let url = {
         url:`https://huodong.fanli.com/sign53023/ajaxGetTasks`,       
         headers: JSON.parse(flwheaderVal),
@@ -544,12 +585,10 @@ function flwksp(timeout = 0) {
 		for (let i = 0; i < 7; i++) {
 $.index = i+1
         setTimeout(() => {	
-tts = Math.round(new Date().getTime() +
-    new Date().getTimezoneOffset() * 60 * 1000 +
-    8 * 60 * 60 * 1000).toString();
 flwspurlVal=`https://gw.fanli.com/app/v1/reward.htm?src=1&v=7.16.6.1&nt=wifi&abtest=${abtest}`
       let url = {
         url:flwspurlVal,
+        headers: HEADER,
         body: flwspbodyVal,
       }
       $.post(url, async(err, resp, data) => {
@@ -577,9 +616,11 @@ function flwlsp(timeout = 0) {
 		for (let i = 0; i < 7; i++) {
 $.index = i+1
         setTimeout(() => {	
-tts = Math.round(new Date().getTime() +
-    new Date().getTimezoneOffset() * 60 * 1000 +
-    8 * 60 * 60 * 1000).toString();
+if ($.isNode()) {
+	tts = Math.round(new Date().getTime() +
+new Date().getTimezoneOffset() * 60 * 1000 ).toString();
+}else tts = Math.round(new Date().getTime() +
+new Date().getTimezoneOffset() * 60 * 1000 +8 * 60 * 60 * 1000).toString();
       let url = {url:`https://huodong.fanli.com/sign53023/ajaxGetPointByCompleteTask?id=17&content=&t=${tts}&start_time=&source=1`,
         headers: JSON.parse(flwheaderVal),
       }
@@ -607,13 +648,20 @@ function flwqw(timeout = 0) {
     setTimeout( ()=>{
 		for (let i = 0; i < 200; i++) {
 $.index = i+1
-        setTimeout(() => {	
-tts = Math.round(new Date().getTime() +
+        setTimeout(() => {		
+	if ($.isNode()) {
+	tts = Math.round(new Date().getTime() +
+    new Date().getTimezoneOffset() * 60 * 1000 ).toString();
+ts = Math.round((new Date().getTime() +
+    new Date().getTimezoneOffset() * 60 * 1000 )/1000).toString();
+}else {tts = Math.round(new Date().getTime() +
     new Date().getTimezoneOffset() * 60 * 1000 +
     8 * 60 * 60 * 1000).toString();
 ts = Math.round((new Date().getTime() +
     new Date().getTimezoneOffset() * 60 * 1000 +
     8 * 60 * 60 * 1000)/1000).toString();
+	}
+		
 	flwqwurlVal=`https://gw.fanli.com/app/v1/videofeed/report.htm?uid=${uid}&token=${token}&nonce=&t=${ts}&pageType=0&sn=${sn}&src=1&v=7.16.6.1&abtest=${abtest}`
       let url = {
         url:flwqwurlVal,
@@ -646,12 +694,6 @@ function flwzrw(timeout = 0) {
         setTimeout(() => {
 $.index = i+1			
 iid = id[i]
-tts = Math.round(new Date().getTime() +
-    new Date().getTimezoneOffset() * 60 * 1000 +
-    8 * 60 * 60 * 1000).toString();
-ts = Math.round((new Date().getTime() +
-    new Date().getTimezoneOffset() * 60 * 1000 +
-    8 * 60 * 60 * 1000)/1000).toString();	
       let url = {
         url:`https://huodong.fanli.com/sign53023/ajaxReportOtherTaskStatus?id=${iid}`,
         headers: JSON.parse(flwheaderVal),
@@ -682,12 +724,18 @@ function flwlrw(timeout = 0) {
         setTimeout(() => {	
 $.index = i+1		
 iid = id[i]
-tts = Math.round(new Date().getTime() +
+if ($.isNode()) {
+	tts = Math.round(new Date().getTime() +
+    new Date().getTimezoneOffset() * 60 * 1000 ).toString();
+ts = Math.round((new Date().getTime() +
+    new Date().getTimezoneOffset() * 60 * 1000 )/1000).toString();
+}else {tts = Math.round(new Date().getTime() +
     new Date().getTimezoneOffset() * 60 * 1000 +
     8 * 60 * 60 * 1000).toString();
 ts = Math.round((new Date().getTime() +
     new Date().getTimezoneOffset() * 60 * 1000 +
-    8 * 60 * 60 * 1000)/1000).toString();	
+    8 * 60 * 60 * 1000)/1000).toString();
+	}
       let url = {
         url:`https://huodong.fanli.com/sign53023/ajaxGetPointByCompleteTask?id=${iid}&content=&t=${tts}&start_time=&source=`,
         headers: JSON.parse(flwheaderVal),
