@@ -34,5 +34,6 @@ jobs:
           cd ~/Scripts
           node Task/baidu_speed.js
         env:
+          BAIDU_CASH: ${{ secrets.BAIDU_CASH }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
