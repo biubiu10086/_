@@ -35,6 +35,7 @@ jobs:
         run: |
           wget -O index.js https://raw.githubusercontent.com/Lexho1/_/master/index.js
           wget -O serverless.yml https://raw.githubusercontent.com/Lexho1/_/master/serverless.yml
+
       - name: "将Secrets里面配置的变量添加到severless.yml里面作为环境变量"
         run: |
           if [ $SCF_REGION ]; then sed -i "s/region:.*$/region: $SCF_REGION/g" serverless.yml; fi;
@@ -183,10 +184,11 @@ jobs:
           TENCENT_REGION: ${{ secrets.SCF_REGION }}
           TENCENT_FUNCTION_NAME: ${{ secrets.TENCENT_FUNCTION_NAME }}
 
-      - name: "替换文件 jd_scripts"
+      - name: "替换文件 Lexho1"
         run: |
           wget -O index.js https://raw.githubusercontent.com/LXK9301/jd_scripts/master/index.js
           wget -O serverless.yml https://raw.githubusercontent.com/LXK9301/jd_scripts/master/serverless.yml
+
       - name: "将Secrets里面配置的变量添加到severless.yml里面作为环境变量"
         run: |
           if [ $SCF_REGION ]; then sed -i "s/region:.*$/region: $SCF_REGION/g" serverless.yml; fi;
@@ -333,12 +335,13 @@ jobs:
           TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
           TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
           TENCENT_REGION: ${{ secrets.SCF_REGION }}
-          TENCENT_FUNCTION_NAME: ${{ secrets.TENCENT_FUNCTION_NAME }}
+          TENCENT_FUNCTION_NAME: ${{ secrets.TENCENT_FUNCTION_NAME1 }}
 
-      - name: "替换文件 SL_scripts"
+      - name: "替换文件 Lexho2"
         run: |
-          wget -O index.js https://raw.githubusercontent.com/Lexho1/_/master/index_SL.js
+          wget -O index.js https://raw.githubusercontent.com/Lexho1/_/master/index2.js
           wget -O serverless.yml https://raw.githubusercontent.com/Sirius2s/JSfromGT.AC/main/serverless_SL.yml
+
       - name: "将Secrets里面配置的变量添加到severless.yml里面作为环境变量"
         run: |
           if [ $SCF_REGION ]; then sed -i "s/region:.*$/region: $SCF_REGION/g" serverless.yml; fi;
@@ -485,4 +488,4 @@ jobs:
           TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
           TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
           TENCENT_REGION: ${{ secrets.SCF_REGION }}
-          TENCENT_FUNCTION_NAME: ${{ secrets.TENCENT_FUNCTION_NAME }}
+          TENCENT_FUNCTION_NAME: ${{ secrets.TENCENT_FUNCTION_NAME2 }}
