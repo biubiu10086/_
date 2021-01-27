@@ -18,10 +18,16 @@ inputs:
   events: # 触发器
     - timer: # Lexho
         parameters:
-          name: dy_hotsoon_xp
+          name: dy_hotsoon
           cronExpression: "*/5 * * * *"
           enable: true
-          argument: dy&hotsoon&xp
+          argument: dy&hotsoon
+    - timer: # Lexho
+        parameters:
+          name: xp
+          cronExpression: "*/2 * * * *"
+          enable: true
+          argument: xp
     - timer: # Lexho
         parameters:
           name: flw
