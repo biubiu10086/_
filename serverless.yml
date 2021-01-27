@@ -24,12 +24,6 @@ inputs:
           argument: dy&hotsoon
     - timer: # Lexho
         parameters:
-          name: xp
-          cronExpression: "*/2 * * * *"
-          enable: true
-          argument: xp
-    - timer: # Lexho
-        parameters:
           name: bbb
           cronExpression: "*/30 * * * *"
           enable: true
