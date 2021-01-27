@@ -1,4 +1,4 @@
- name: main
+ name: 笑谱
 
  on:
    workflow_dispatch:
@@ -7,7 +7,7 @@
    watch:
      types: started
    repository_dispatch:
-     types: main
+     types: xp
 
  jobs:
    build:
@@ -23,9 +23,9 @@
        - name: npm install
          run: |
            npm install
-       - name: '运行 【main】'
+       - name: '运行 【笑谱】'
          run: |
-           node xp1.js
+           node xp.js
          env:
            TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
            TG_USER_ID: ${{ secrets.TG_USER_ID }}
