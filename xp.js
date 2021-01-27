@@ -1,28 +1,3 @@
-
-/*
-tgchannel：https://t.me/ZhiYi_Script
-github：https://github.com/ZhiYi-N/script
-boxjs：https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/ZhiYi-N.boxjs.json
-转载留个名字，谢谢
-邀请码：
-来笑谱，一起领20元现金！￥10.c3Zdady#*H^7
-1.长按【复制】整条信息
-2.下载并打开笑谱App：http://jzi7.cn/7szkKX 
-谢谢
-作者：执意ZhiYi-N
-目前只有看视频，群友推荐，欢迎推荐
-脚本初成，非专业人士制作，欢迎指正
-#看一个视频弹出金币获取videoheader and videobody(存在一定几率获取不到videobody）多试几次 and 金蛋获取 gold body(第六个视频，最后一圈）
-[mitm]
-hostname = veishop.iboxpay.com
-#圈x
-[rewrite local]
-https:\/\/veishop\.iboxpay\.com\/nf_gateway\/nf_customer_activity\/day_cash\/v1\/give_gold_coin_by_video\.json url script-request-body https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/xp.js
-#loon
-http-request https:\/\/veishop\.iboxpay\.com\/nf_gateway\/nf_customer_activity\/day_cash\/v1\/give_gold_coin_by_video\.json script-path=https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/xp.js, requires-body=true, timeout=10, tag=笑谱
-#surge
-笑谱 = type=http-request,pattern=^https:\/\/veishop\.iboxpay\.com\/nf_gateway\/nf_customer_activity\/day_cash\/v1\/give_gold_coin_by_video\.json,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/xp.js,script-update-interval=0
-*/
 const jsname='笑谱'
 const $ = Env(jsname)
 const notify = $.isNode() ?require('./sendNotify') : '';
@@ -33,7 +8,7 @@ let videobody = $.getdata('videobody')
 let goldbody = $.getdata('goldbody')
 
 let tz = ($.getval('tz') || '1');//0关闭通知，1默认开启
-const invite=1;//新用户自动邀请，0关闭，1默认开启
+const invite=0;//新用户自动邀请，0关闭，1默认开启
 const logs =0;//0为关闭日志，1为开启
 var hour=''
 var minute=''
@@ -61,49 +36,9 @@ if (isGetCookie) {
    $.done()
 } 
 if ($.isNode()) {
-//video
-  if (process.env.VIDEOHEADER && process.env.VIDEOHEADER.indexOf('#') > -1) {
-   videoheader = process.env.VIDEOHEADER.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
-  }
-  else if (process.env.VIDEOHEADER && process.env.VIDEOHEADER.indexOf('\n') > -1) {
-   videoheader = process.env.VIDEOHEADER.split('\n');
-   console.log(`您选择的是用换行隔开\n`)
-  } else {
-   videoheader = process.env.VIDEOHEADER.split()
-  };
-  if (process.env. VIDEOBODY && process.env.VIDEOBODY.indexOf('#') > -1) {
-   videobody = process.env.VIDEOBODY.split('#');
-  }
-  else if (process.env.VIDEOBODY && process.env.VIDEOBODY.split('\n').length > 0) {
-   videobody = process.env.VIDEOBODY.split('\n');
-  } else  {
-   videobody = process.env.VIDEOBODY.split()
-  };
-  if (process.env.GOLDBODY && process.env.GOLDBODY.indexOf('#') > -1) {
-   goldbody = process.env.GOLDBODY.split('#');
-  }
-  else if (process.env.GOLDBODY && process.env.GOLDBODY.split('\n').length > 0) {
-   goldbody = process.env.GOLDBODY.split('\n');
-  } else  {
-   goldbody = process.env.GOLDBODY.split()
-  };
-//video
-  Object.keys(videoheader).forEach((item) => {
-        if (videoheader[item]) {
-          videoheaderArr.push(videoheader[item])
-        }
-    });
-    Object.keys(videobody).forEach((item) => {
-        if (videobody[item]) {
-          videobodyArr.push(videobody[item])
-        }
-    });
-    Object.keys(goldbody).forEach((item) => {
-        if (goldbody[item]) {
-          goldbodyArr.push(goldbody[item])
-        }
-    });
+          videoheaderArr.push('{"Connection":"keep-alive","Accept-Encoding":"gzip, deflate, br","version":"1.4.4","mchtNo":"100529600058887","Content-Type":"application/json; charset=utf-8","source":"VEISHOP_APP_IOS","shopkeeperId":"1148855820752977920","User-Agent":"VeiShop, 1.4.4 (iOS, 14.3, zh_CN, Apple, iPhone, 1CC223A6-BB53-47A6-9091-AF666380AF50)","token":"477d38c1aeea438cb4bad3c7291bcc01","X-User-Agent":"VeiShop, 1.4.4 (iOS, 14.3, zh_CN, Apple, iPhone, 1CC223A6-BB53-47A6-9091-AF666380AF50)","traceid":"313487898693367808001611715708282a4b82bfa26fc","Host":"veishop.iboxpay.com","Accept-Language":"zh-Hans;q=1","Accept":"*/*","Content-Length":"428"}')
+          videobodyArr.push('{"type":1,"videoList":[{"videoId":"1350684278835400704","type":1,"isFinishWatch":false},{"videoId":"1352993240385626112","type":1,"isFinishWatch":false},{"videoId":"1354133216116645888","type":1,"isFinishWatch":false},{"videoId":"1351958584190062592","type":1,"isFinishWatch":false},{"videoId":"1352321118336208896","type":1,"isFinishWatch":false}],"actId":"282"}')
+          goldbodyArr.push('{"type":2,"videoList":[{"videoId":"1352321118336208896","type":1,"isFinishWatch":false},{"videoId":"1350871422254206976","type":1,"isFinishWatch":false},{"videoId":"1353040614034284544","type":1,"isFinishWatch":false},{"videoId":"1353533048937816064","type":1,"isFinishWatch":false},{"videoId":"1346361758982983683","type":1,"isFinishWatch":false},{"videoId":"1351592248347742208","type":1,"isFinishWatch":false}],"actId":"282"}')
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
  } else {
