@@ -1,3 +1,35 @@
+
+/* ziye 
+github地址 https://github.com/ziye12
+TG频道地址  https://t.me/ziyescript
+TG交流群   https://t.me/joinchat/AAAAAE7XHm-q1-7Np-tF3g
+boxjs链接  https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/ziye.boxjs.json
+转载请备注个名字，谢谢
+⚠️笑谱
+1.15 调整金蛋延迟为60秒
+1.17 增加ck失效提醒，以及金币满额停止
+1.27 笑谱恢复，活动id284
+⚠️一共1个位置 1个ck  👉 2条 Secrets 
+多账号换行
+第一步 添加  hostname=veishop.iboxpay.com,
+第二步 添加header重写 
+点击 我的 获取header
+iboxpayheaderVal 👉XP_iboxpayHEADER
+设置提现变量 可设置 1 15 30 100 
+CASH  👉  XP_CASH
+⚠️主机名以及重写👇
+hostname=veishop.iboxpay.com
+#笑谱获取header
+https:\/\/veishop\.iboxpay\.com\/* url script-request-header https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/iboxpay.js
+############## loon
+#笑谱获取header
+http-request https:\/\/veishop\.iboxpay\.com\/* script-path=https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/iboxpay.js, requires-header=true, tag=笑谱获取header
+############## surge
+#笑谱获取body
+笑谱获取body = type=http-request,pattern=https:\/\/veishop\.iboxpay\.com\/*,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/iboxpay.js, script-update-interval=0
+*/
+
+
 const $ = Env("笑谱");
 $.idx = ($.idx = ($.getval('iboxpaySuffix') || '1') - 1) > 0 ? ($.idx + 1 + '') : ''; // 账号扩展字符
 const notify = $.isNode() ? require("./sendNotify") : ``;
@@ -22,7 +54,7 @@ const nowTimes = new Date(
 );
 // 没有设置 XP_CASH 则默认为 0 不提现
 if ($.isNode()) {
- CASH = process.env.XP_CASH || 1;
+ CASH = process.env.XP_CASH || 0;
 } 
 if ($.isNode() && process.env.XP_iboxpayHEADER) {
   COOKIES_SPLIT = process.env.COOKIES_SPLIT || "\n";
@@ -331,7 +363,7 @@ tts = Math.round(new Date().getTime() +
     new Date().getTimezoneOffset() * 60 * 1000 +
     8 * 60 * 60 * 1000).toString();
 header=iboxpayheaderVal.replace(`${oldtime}`, `${tts}`)
-		videobodyVal=`{"type":1,"videoList":[{"videoId":"${videoPublishId}","type":1,"isFinishWatch":false}],"actId":"282"}`
+		videobodyVal=`{"type":1,"videoList":[{"videoId":"${videoPublishId}","type":1,"isFinishWatch":false}],"actId":"284"}`
       let url = {
         url: `https://veishop.iboxpay.com/nf_gateway/nf_customer_activity/day_cash/v1/give_gold_coin_by_video.json`,
         headers: JSON.parse(header),
@@ -372,7 +404,7 @@ tts = Math.round(new Date().getTime() +
     new Date().getTimezoneOffset() * 60 * 1000 +
     8 * 60 * 60 * 1000).toString();
 header=iboxpayheaderVal.replace(`${oldtime}`, `${tts}`)
-		goldvideobodyVal=`{"type":2,"videoList":[{"videoId":"${videoPublishId3}","type":1,"isFinishWatch":false},{"videoId":"${videoPublishId4}","type":1,"isFinishWatch":false},{"videoId":"${videoPublishId5}","type":1,"isFinishWatch":false},{"videoId":"${videoPublishId6}","type":1,"isFinishWatch":false}],"actId":"282"}`
+		goldvideobodyVal=`{"type":2,"videoList":[{"videoId":"${videoPublishId3}","type":1,"isFinishWatch":false},{"videoId":"${videoPublishId4}","type":1,"isFinishWatch":false},{"videoId":"${videoPublishId5}","type":1,"isFinishWatch":false},{"videoId":"${videoPublishId6}","type":1,"isFinishWatch":false}],"actId":"284"}`
       let url = {
         url: `https://veishop.iboxpay.com/nf_gateway/nf_customer_activity/day_cash/v1/give_gold_coin_by_video.json`,
         headers: JSON.parse(header),
