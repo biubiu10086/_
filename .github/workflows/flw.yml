@@ -13,6 +13,12 @@
    build:
      runs-on: ubuntu-latest
      if: github.event.repository.owner.id == github.event.sender.id
+     env:
+         FL_flwURL: ${{ secrets.FL_flwURL }}
+         FL_flwHEADER: ${{ secrets.FL_flwHEADER }}		
+         FL_flwspBODY: ${{ secrets.FL_flwspBODY }}	
+         FL_flwqwBODY: ${{ secrets.FL_flwqwBODY }}        
+         FL_CASH: ${{ secrets.FL_CASH }}
      steps:
        - name: Checkout
          run: |
