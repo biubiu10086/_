@@ -18,10 +18,10 @@ inputs:
   events: # 触发器
     - timer: # Lexho
         parameters:
-          name: dy_hotsoon_iboxpay
+          name: dy_hotsoon_xp
           cronExpression: "*/5 * * * *"
           enable: true
-          argument: dy&hotsoon&iboxpay
+          argument: dy&hotsoon&xp
     - timer: # Lexho
         parameters:
           name: flw
