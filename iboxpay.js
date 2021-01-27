@@ -1,3 +1,4 @@
+
 /* ziye 
 github地址 https://github.com/ziye12
 TG频道地址  https://t.me/ziyescript
@@ -7,6 +8,7 @@ boxjs链接  https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/ziye.
 ⚠️笑谱
 1.15 调整金蛋延迟为60秒
 1.17 增加ck失效提醒，以及金币满额停止
+1.27 笑谱恢复，活动id282
 ⚠️一共1个位置 1个ck  👉 2条 Secrets 
 多账号换行
 第一步 添加  hostname=veishop.iboxpay.com,
@@ -402,7 +404,7 @@ tts = Math.round(new Date().getTime() +
     new Date().getTimezoneOffset() * 60 * 1000 +
     8 * 60 * 60 * 1000).toString();
 header=iboxpayheaderVal.replace(`${oldtime}`, `${tts}`)
-		goldvideobodyVal=`{"type":2,"videoList":[{"videoId":"${videoPublishId3}","type":1,"isFinishWatch":false},{"videoId":"${videoPublishId4}","type":1,"isFinishWatch":false},{"videoId":"${videoPublishId5}","type":1,"isFinishWatch":false},{"videoId":"${videoPublishId6}","type":1,"isFinishWatch":false}],"actId":"259"}`
+		goldvideobodyVal=`{"type":2,"videoList":[{"videoId":"${videoPublishId3}","type":1,"isFinishWatch":false},{"videoId":"${videoPublishId4}","type":1,"isFinishWatch":false},{"videoId":"${videoPublishId5}","type":1,"isFinishWatch":false},{"videoId":"${videoPublishId6}","type":1,"isFinishWatch":false}],"actId":"282"}`
       let url = {
         url: `https://veishop.iboxpay.com/nf_gateway/nf_customer_activity/day_cash/v1/give_gold_coin_by_video.json`,
         headers: JSON.parse(header),
