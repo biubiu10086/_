@@ -1,30 +1,3 @@
-
-/*
-羊毛很少、自己取舍，每天2-3毛
-github：https://github.com/ZhiYi-N/script
-转载留个名字，谢谢
-邀请码：JFN4M3
-作者：执意ZhiYi-N
-目前包含：
-时段奖励
-大转盘
-红包雨
-金币悬赏任务
-#获取一次时段奖励获得cookie
-kkdheader和kkdcookie
-ACTION YML
-KKDHEADER-kkdheader
-KKDCOOKIE-kkdcookie
-[mitm]
-hostname = api.yuncheapp.cn
-#圈x
-[rewrite local]
-^https:\/\/api\.yuncheapp\.cn\/pearl-incentive\/api\/v1\/task\/intervalAward\/receive url script-request-header https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/kkd.js
-#loon
-http-request ^https:\/\/api\.yuncheapp\.cn\/pearl-incentive\/api\/v1\/task\/intervalAward\/receive script-path=https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/kkd.js, requires-body=true, timeout=10, tag=快看点cookie
-#surge
-kkdcookie = type=http-request,pattern=^https:\/\/api\.yuncheapp\.cn\/pearl-incentive\/api\/v1\/task\/intervalAward\/receive,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/kkd.js,script-update-interval=0
-*/
 const jsname='快看点'
 const $ = Env(jsname)
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -59,35 +32,8 @@ if (isGetCookie) {
    $.done()
 } 
 if ($.isNode()) {
-  if (process.env.KKDHEADER && process.env.KKDHEADER.indexOf('#') > -1) {
-   kkdheader = process.env.KKDHEADER.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
-  }
-  else if (process.env.KKDHEADER && process.env.KKDHEADER.indexOf('\n') > -1) {
-   kkdheader = process.env.KKDHEADER.split('\n');
-   console.log(`您选择的是用换行隔开\n`)
-  } else {
-   kkdheader = process.env.KKDHEADER.split()
-  };
-  if (process.env. KKDCOOKIE&& process.env.KKDCOOKIE.indexOf('#') > -1) {
-   kkdcookie = process.env.KKDCOOKIE.split('#');
-  }
-  else if (process.env.KKDCOOKIE && process.env.KKDCOOKIE.split('\n').length > 0) {
-   kkdcookie = process.env.KKDCOOKIE.split('\n');
-  } else  {
-   kkdcookie = process.env.KKDCOOKIE.split()
-  };
-  Object.keys(kkdheader).forEach((item) => {
-        if (kkdheader[item]) {
-          kkdheaderArr.push(kkdheader[item])
-        }
-    });
-    Object.keys(kkdcookie).forEach((item) => {
-        if (kkdcookie[item]) {
-          kkdcookieArr.push(kkdcookie[item])
-        }
-    });
-
+          kkdheaderArr.push('oc=apple&lon=&dpbs=3sCt3iAAMzE4NTA4ODM3AQIQAIinM9cIsaW3TBAAAAC1e4eqFnhrRLWwUK%2BwfrGN&kpf=IPHONE&isp=460_01&kpn=pearl&fr=iOS&os=14.4&md=iPhone%20X&app=pearl&mi=&ve=3.12.0&did=81DC0D4E-17A6-4582-BD33-8128660481DA&sr=1125*2436&egid=DFPE190354FE8C784D628716F8F27219164B11F4B1FC89BE65EE716BC743BE79&nt=WIFI&lat=&__clientSign2=wv9oSWAUmrEzMTg1MDg4MzU4YzUyMTNiNDc2ZTZmYjk3NGY3M2UyOWEyOGYxOTBiNzk%3D&ss=')
+          kkdcookieArr.push('did=81DC0D4E-17A6-4582-BD33-8128660481DA;userId=59048165;pearl.api_st=CgxwZWFybC5hcGkuc3QSkAHoRFa9Uj3zrZOLjNUjdqqmiBugb-umvKv8r5Po7AQZmVNih2Gb1o8lIzPCtD-yhOn4FP-v4BhSe7gdhe4xVkgofzyRyewm9BQYGERDwLFYjvISoP1YIQA6d1qwwZKCfV5t0e760vM25d10KK5DpV7414o0-D_2JvMXsnZsozkPGvqx-JvumOn0a4qRRMZNgjoaEpv_p5SM5IvhO4Lkelu05WqV1SIgNf1zJqfJpK_Zlv7WxGavakixwDtXdUXnNvP1FI1nIKIoBTAB')
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
  } else {
