@@ -1,4 +1,4 @@
- name: 笑谱直播
+ name: 笑谱iboxpay
 
  on:
    workflow_dispatch:
@@ -7,7 +7,7 @@
    watch:
      types: started
    repository_dispatch:
-     types: xpzb
+     types: iboxpay
 
  jobs:
    build:
@@ -31,7 +31,7 @@
        - name: '运行 【笑谱】'
          run: |
            cd ~/JavaScript
-           node Task/XPZB.js
+           node Task/iboxpay.js
          env:
            TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
            TG_USER_ID: ${{ secrets.TG_USER_ID }}
