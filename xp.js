@@ -3,7 +3,7 @@ const notify = $.isNode() ?require('./sendNotify') : '';
 $.idx = ($.idx = ($.getval("xpsetting") || "1") - 1) > 0 ? `${$.idx + 1}` : ""; // 賬號擴展字符
 const CookieArr = []
 
-let CookieVal = ('{"Connection":"keep-alive","Accept-Encoding":"gzip, deflate, br","version":"1.4.4","payFlag":"false","mchtNo":"100529600058887","shopkeeperCustomerId":"","source":"VEISHOP_APP_IOS","shopkeeperId":"","User-Agent":"Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148","token":"f96bdea8eedc4df792c91fd2f02b169e","Referer":"https://veishop.iboxpay.com/","Host":"veishop.iboxpay.com","Accept-Language":"zh-cn","Accept":"application/json, text/plain, */*"}')
+let CookieVal = $.getdata('xp_ck')
 
 let refreshToken = ('1e684cf7b8154474980b282ddf744c39')
 
