@@ -1,37 +1,11 @@
-
-/*
-adwktt
-轉載備註名字
-1、登录状态打开App,点“我的”获取Cookie
-2、用微信或者短信重新登录获取token,
-下載地址：
-来笑谱，一起领20元现金！￥10.S0AQZrKps9Oz
-1.长按【复制】整条信息
-2.下载并打开笑谱App：http://jzi7.cn/7szkKX
-圈x
-[rewrite_local]
-#笑谱
-https://veishop.iboxpay.com/nf_gateway/nf_user_center_web/shopkeeper/v1/get_context_info.json url script-request-header https://raw.githubusercontent.com/adwktt/adwktt/master/xp.js
-https://veishop.iboxpay.com/nf_gateway/nf-user-auth-web/ignore_tk/veishop/v1/login_by_wx.json url script-response-body https://raw.githubusercontent.com/adwktt/adwktt/master/xp.js
-[task_local]
-0,30 7-23 * * * https://raw.githubusercontent.com/adwktt/adwktt/master/xp.js, tag=笑谱, 
-loon
-[Script]
-http-request https://veishop.iboxpay.com/nf_gateway/nf_user_center_web/shopkeeper/v1/get_context_info.json script-path= https://raw.githubusercontent.com/adwktt/adwktt/master/xp.js, timeout=10, tag= 笑谱
-cron "0,30 7-23 * * *" script-path= https://raw.githubusercontent.com/adwktt/adwktt/master/xp.js, tag= 笑谱
-surge
-笑谱 = type=cron,cronexp="0,30 7-23 * * *",wake-system=1,script-path=https://raw.githubusercontent.com/adwktt/adwktt/master/xp.js,script-update-interval=0
-笑谱 = type=http-request,pattern=https://veishop.iboxpay.com/nf_gateway/nf_user_center_web/shopkeeper/v1/get_context_info.json,requires-body=0,max-size=0,script-path=https://raw.githubusercontent.com/adwktt/adwktt/master/xp.js,script-update-interval=0
-hostname = veishop.iboxpay.com
-*/
 const $ = Env('笑譜')
 const notify = $.isNode() ?require('./sendNotify') : '';
 $.idx = ($.idx = ($.getval("xpsetting") || "1") - 1) > 0 ? `${$.idx + 1}` : ""; // 賬號擴展字符
 const CookieArr = []
 
-let CookieVal = $.getdata('xp_ck')
+let CookieVal = ('{"Connection":"keep-alive","Accept-Encoding":"gzip, deflate, br","version":"1.4.4","payFlag":"false","mchtNo":"100529600058887","shopkeeperCustomerId":"","source":"VEISHOP_APP_IOS","shopkeeperId":"","User-Agent":"Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148","token":"f96bdea8eedc4df792c91fd2f02b169e","Referer":"https://veishop.iboxpay.com/","Host":"veishop.iboxpay.com","Accept-Language":"zh-cn","Accept":"application/json, text/plain, */*"}')
 
-let refreshToken = $.getdata('xp_rtk')
+let refreshToken = ('1e684cf7b8154474980b282ddf744c39')
 
 var hour=''
 var minute=''
