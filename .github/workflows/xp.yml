@@ -15,8 +15,8 @@
      if: github.event.repository.owner.id == github.event.sender.id
      env:
          XP_iboxpayHEADER: ${{ secrets.XP_iboxpayHEADER }}
+         XP_live: ${{ secrets.XP_live }}
          XP_CASH: ${{ secrets.XP_CASH }}
-     steps:
        - name: Checkout
          run: |
            git clone https://github.com/ziye12/JavaScript.git ~/JavaScript
