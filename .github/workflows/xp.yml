@@ -27,5 +27,6 @@
          run: |
            node xp.js
          env:
+           xp_Cookie: ${{ secrets.XP_iboxpayHEADER }}
            TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
            TG_USER_ID: ${{ secrets.TG_USER_ID }}
