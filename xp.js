@@ -25,11 +25,7 @@ if (isGetCookie) {
    $.done()
 } 
 if ($.isNode()) {
-  if (process.env.xpCookie&& process.env.xpCookie.indexOf('#') > -1) {
-   CookieVal = process.env.xpCookie.split('#');
-   console.log(`您選擇的是用"#"隔開\n`)
-  }
-  else if (process.env.xpCookie && process.env.xpCookie.indexOf('\n') > -1) {
+  if (process.env.xpCookie && process.env.xpCookie.indexOf('\n') > -1) {
    CookieVal = process.env.xpCookie.split('\n');
    console.log(`您選擇的是用換行隔開\n`)
   } else {
