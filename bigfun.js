@@ -1,8 +1,18 @@
 const $ = new Env('bigfun签到');
 const openurl = { "open-url" : "bigfun://" }
-let bfurl = $.getdata('bfurl')
-let bfhd = $.getdata('bfhd')
-let bfbody = $.getdata('bfbody')
+let bfurl = ('"https://api.bigfun.cn/webview/iphone?"')
+let bfhd = ('{"Accept":"application/vnd.api+json","BF-Client-Data":"YWpsSldHWTRWazFPYUVGM1puUlVTM3BYUkc5RlVWSjVUSFl2YVRKVVdsRmlLMnRXTW5KelozaFBaRGRJVG1WS2RqTlNVR2QxZURGTVJESnZZbGR6VFV0bVVtWTNVV2xXUldNNFdESnJhRFF4V2xCaGFsZExOVlkwUjJabmRrOHlaamM1TlZjdmRtaHZRV2RLYmtjdlpuZDNaVk52VG1wMWRFUm5ialZsYVhoRE9WZE9kekJWVkUxVWVXdDFPREptTVdSd2FqZHJibGhSV0daMGNVUndRVzQ0Y3pkamVsTm9lVmd4VnpSV2FsRlpkMDV5VVZaQ1VrVnBNRDA9","Connection":"keep-alive","Content-Type":"application/vnd.api+json","BF-Client-Type":"BF-IOS","Host":"api.bigfun.cn","Content-Length":"554","BF-Client-Version":"3.6.3","User-Agent":"BigFun/3.6.3 (cn.bigfun.firebird; build:3; iOS 14.4.0) Alamofire/4.9.1","Accept-Encoding":"gzip;q=1.0, compress;q=0.5","Accept-Language":"zh-Hans;q=1.0"}')
+let bfbody = ('{
+  "target" : "activity-accept-invite\/a",
+  "activity_id" : 6,
+  "user_agent" : "Mozilla\/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit\/605.1.15 (KHTML, like Gecko) Mobile\/15E148;bigfun_app;3.6.3;iPhone_iPhone10,3;iOS_14.4;viewTheme_light",
+  "ts" : "1611902256",
+  "sign" : "87bfcb2cd545014a6166a818245c4eb1",
+  "invite_user_id" : 10136494,
+  "buvid" : "YA443BAEC455D66F441A99B624479F48EE1D",
+  "device_number" : "B7892C7BA5BF7CE3DB15749ED2E343232019090823431564B0F2EB0946DF14BF",
+  "access_token" : "3cfd2d31f2a20663fd75eb1945055fa7"
+}')
 !(async () => {
   if (typeof $request !== "undefined") {
     await bfck()
