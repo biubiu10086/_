@@ -3,7 +3,7 @@ name: 笑谱
  on:
    workflow_dispatch:
    schedule:
-     - cron: '0 */2 * * *'
+     - cron: '0 */1 * * *'
    watch:
      types: started
    repository_dispatch:
@@ -33,5 +33,6 @@ name: 笑谱
            VIDEOHEADER: ${{ secrets.XP_iboxpayHEADER }}
            VIDEOBODY: ${{ secrets.VIDEOBODY }}
            GOLDBODY: ${{ secrets.GOLDBODY}}
+           XPCASH: ${{ secrets.XP_CASH}}
            TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
            TG_USER_ID: ${{ secrets.TG_USER_ID }}
