@@ -14,7 +14,7 @@
      runs-on: ubuntu-latest
      if: github.event.repository.owner.id == github.event.sender.id
      env:
-         XP_iboxpayHEADER: ${{ secrets.VIDEOHEADER }}
+         XP_iboxpayHEADER: ${{ secrets.XP_iboxpayHEADER }}
          XP_CASH: ${{ secrets.XP_CASH }}
      steps:
        - name: Checkout
