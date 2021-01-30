@@ -3,7 +3,7 @@
  on:
    workflow_dispatch:
    schedule:
-     - cron: '0 */2 * * *'
+     - cron: '*/10 * * * *'
    watch:
      types: started
    repository_dispatch:
@@ -15,23 +15,17 @@
      if: github.event.repository.owner.id == github.event.sender.id
      steps:
        - name: Checkout
-         run: |
-          git clone https://github.com/ZhiYi-N/script ~/script
+         uses: actions/checkout@v2
        - name: Use Node.js 12.x
          uses: actions/setup-node@v1
          with:
            node-version: 12.x
        - name: npm install
          run: |
-           cd ~/script
            npm install
        - name: '运行 【笑谱】'
          run: |
-           cd ~/script
            node xp.js
          env:
-           VIDEOHEADER: ${{ secrets.VIDEOHEADER }}
-           VIDEOBODY: ${{ secrets.VIDEOBODY }}
-           GOLDBODY: ${{ secrets.GOLDBODY}}
            TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
            TG_USER_ID: ${{ secrets.TG_USER_ID }}
