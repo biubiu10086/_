@@ -1,8 +1,8 @@
 const $ = new Env('多看点');
 const openurl = { "open-url" : "dysdk://" }
-let dkdurl = $.getdata('dkdurl')
-let dkdhd = $.getdata('dkdhd')
-let dkdbody = $.getdata('dkdbody')
+let dkdurl = ('"http://dkd-api.dysdk.com/user/index"')
+let dkdhd = ('{"Accept-Encoding":"br;q=1.0, gzip;q=0.9, deflate;q=0.8","Accept":"*/*","Connection":"keep-alive","Content-Type":"application/x-www-form-urlencoded; charset=utf-8","Host":"dkd-api.dysdk.com","User-Agent":"duokandian/3.0.2 (com.duoyou.duokandian1; build:0; iOS 14.4.0) Alamofire/5.4.0","Content-Length":"38","Accept-Language":"zh-Hans;q=1.0","headerinfo":"eyJ0b2tlbiI6ImRkZDRhNzU1OWRkZjhmNDY3MGMyZjk4ZWE0YTc0NTQxIiwidXRkX2lkIjoiODA4NDQzYjdjYWQzYjRlNzE0ZTVjMjAzNzZkODFlNWYwMTBmYzU3ZSIsImRldmljZV9udW0iOiIxIiwiZGV2aWNlX3R5cGUiOiJpT1MiLCJvcyI6ImlPUyIsImxvbmciOiIiICwibGF0IjoiIiwicmVzb2x1dGlvbiI6IjM3NS4wIiwiYm9vdF90aW1lIjoiMjAyMS0wMi0wMSAwOToyMjo1NSArMDAwMCIsInN5c3RlbV92ZXJzaW9uIjoiMTQuNCIsInN5c3RlbV9tb2RlbCI6ImlPUyIsImRldmljZV9icmFuZCI6IkFwcGxlIiwiZGtkX3ZlcnNpb24iOiIzLjAuMiIsIm5ldHdvcmsiOiI0RyIsInZlcnNpb25jb2RlIjoiOCIsImNoYW5uZWwiOiJhcHBsZSJ9"}')
+let dkdbody = ('token=ddd4a7559ddf8f4670c2f98ea4a74541')
 !(async () => {
   if (typeof $request !== "undefined") {
     await dkdck()
