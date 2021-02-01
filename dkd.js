@@ -3,11 +3,16 @@ const openurl = { "open-url" : "dysdk://" }
 let dkdurl = ('"http://dkd-api.dysdk.com/user/index"')
 let dkdhd = ('{"Accept-Encoding":"br;q=1.0, gzip;q=0.9, deflate;q=0.8","Accept":"*/*","Connection":"keep-alive","Content-Type":"application/x-www-form-urlencoded; charset=utf-8","Host":"dkd-api.dysdk.com","User-Agent":"duokandian/3.0.2 (com.duoyou.duokandian1; build:0; iOS 14.4.0) Alamofire/5.4.0","Content-Length":"38","Accept-Language":"zh-Hans;q=1.0","headerinfo":"eyJ0b2tlbiI6ImRkZDRhNzU1OWRkZjhmNDY3MGMyZjk4ZWE0YTc0NTQxIiwidXRkX2lkIjoiODA4NDQzYjdjYWQzYjRlNzE0ZTVjMjAzNzZkODFlNWYwMTBmYzU3ZSIsImRldmljZV9udW0iOiIxIiwiZGV2aWNlX3R5cGUiOiJpT1MiLCJvcyI6ImlPUyIsImxvbmciOiIiICwibGF0IjoiIiwicmVzb2x1dGlvbiI6IjM3NS4wIiwiYm9vdF90aW1lIjoiMjAyMS0wMi0wMSAwOToyMjo1NSArMDAwMCIsInN5c3RlbV92ZXJzaW9uIjoiMTQuNCIsInN5c3RlbV9tb2RlbCI6ImlPUyIsImRldmljZV9icmFuZCI6IkFwcGxlIiwiZGtkX3ZlcnNpb24iOiIzLjAuMiIsIm5ldHdvcmsiOiI0RyIsInZlcnNpb25jb2RlIjoiOCIsImNoYW5uZWwiOiJhcHBsZSJ9"}')
 let dkdbody = ('token=ddd4a7559ddf8f4670c2f98ea4a74541')
+let dkdtxurl = $.getdata('dkdtxurl')
+let dkdtxhd = $.getdata('dkdtxhd')
+let dkdtxbody = $.getdata('dkdtxbody')
 !(async () => {
   if (typeof $request !== "undefined") {
     await dkdck()
+    await dkdtxck()
   } else {
     await dkdqd()
+
   }
 })()
   .catch((e) => $.logErr(e))
@@ -25,7 +30,19 @@ $.log(dkdbody)
    $.msg($.name,"","多看点body获取成功！")
     }
   }
-  $.msg($.name,"",'多看点开始🖨')
+//多看点提现ck
+function dkdtxck() {
+   if ($request.url.indexOf("withdraw_do?") > -1) {
+    $.setdata(JSON.stringify($request.url),'dkdtxurl')
+    $.log(dkdtxurl)
+    $.setdata(JSON.stringify($request.headers),'dkdtxhd')
+$.log(dkdtxhd)
+    $.setdata($request.body,'dkdtxbody')
+$.log(dkdtxbody)
+   $.msg($.name,"","多看点提现数据获取成功！")
+   
+    }
+  }
 
 //多看点广告视频     
 function dkdgg(timeout = 0) {
@@ -194,13 +211,14 @@ if(result.status_code == 10020){
 //多看点提现
 function dkdtx(timeout = 0) {
   return new Promise((resolve) => {
+let str = dkdtxhd.match(/headerInfo":"\w+/)+''
 let url = {
-        url : 'http://dkd-api.dysdk.com/money/withdraw_do?'+dkdbody+'&headerInfo='+dkdhd.match(/headerinfo":"\w+/),
-        headers : JSON.parse($.getdata('dkdhd')),
-        body : '{"money":0.5,"type":2,"withdraw_card":null,"program":8,"is_special":1}',}
+        url : 'http://dkd-api.dysdk.com/money/withdraw_do?'+dkdbody+'&headerInfo='+str.replace('headerInfo":"',""),
+        headers : JSON.parse($.getdata('dkdtxhd')),
+        body : dkdtxbody,}
       $.post(url, async (err, resp, data) => {
         try {
-         //$.log(dkdhd.match(/headerinfo":"\w+/))
+         //$.log(str.replace('headerInfo":"',""))
     const result = JSON.parse(data)
         if(result.status_code == 200){
         console.log('提现回执:成功🌝 '+result.message)
@@ -240,8 +258,8 @@ let url = {
 if(result.status_code == 10020){
         console.log('签到回执:失败🚫 '+result.message)
 
-}
-//await dkdtx()  提现暂时无法使用
+}$.msg($.name,"",'多看点开始🖨')
+await dkdtx() 
 await dkdyq()
 await dkdgg()
 await dkdbx()
@@ -272,7 +290,7 @@ let url = {
            //$.log(dkdbody)
     const result = JSON.parse(data)
         if(result.status_code == 200){
-       $.msg($.name,"",'用户信息回执:成功🌝\n'+'用户名: '+result.data.nickname+'\n当前余额:'+result.data.cash+'\n总金币:'+result.data.gold+'\n今日金币:'+result.data.today_gold)
+       $.msg($.name+'运行完毕！',"",'用户信息回执:成功🌝\n'+'用户名: '+result.data.nickname+'\n当前余额:'+result.data.cash+'\n总金币:'+result.data.gold+'\n今日金币:'+result.data.today_gold)
 }
 if(result.status_code == 10020){
         $.msg($.name,"",'运行完毕，用户信息获取失败🚫 '+result.message)}
