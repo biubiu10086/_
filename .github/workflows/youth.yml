@@ -7,7 +7,7 @@ on:
   watch:
     types: started
   repository_dispatch:
-    types: youth
+    types: Lexho
 
 
 jobs:
