@@ -7,7 +7,7 @@ on:
   watch:
     types: [started]
   repository_dispatch:
-    types: Lexho
+    types: _
 
 jobs:
   build:
