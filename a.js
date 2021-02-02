@@ -1,13 +1,24 @@
-
-const jsname = '腾讯自选股'
+const jsname = '📈腾讯自选股'
 const $ = Env(jsname)
 const logs = 0; //0为关闭日志，1为开启,默认为0
 const notifyInterval = 1; //0为关闭通知，1为所有通知,默认为0
 
 let rndtime = Math.round(new Date().getTime()) //毫秒
 let signday = formatDateTime(new Date());
+
 let tz = '';
-let cash = $.getval('cash') || 0; //0为不自动提现,1为自动提现1元,5为自动提现1元,
+let cash = $.getval('cash') || 0; //0为不自动提现,1为自动提现1元,5为自动提现1元
+
+//time
+var hour='';
+var minute='';
+if ($.isNode()) {
+   hour = new Date( new Date().getTime() + 8 * 60 * 60 * 1000 ).getHours();
+   minute = new Date( new Date().getTime() + 8 * 60 * 60 * 1000 ).getMinutes();
+}else{
+   hour = (new Date()).getHours();
+   minute = (new Date()).getMinutes();
+}
 
 const userheaderArr = 'oA0GbjuovN0In7FNGV-QYOzIYfCg&_appName=ios&_dev=iPhone10,3&_devId=c2746ddaaa8ce93c61148c585907089e1bffa21f&_appver=8.7.1&_ifChId=&_isChId=1&_osVer=14.3&openid=oA0GbjuovN0In7FNGV-QYOzIYfCg&fskey=v0aaf63c2226008b9d15796fb20c41db&appid=wxcbc3ab3807acb685&access_token=41_wG-D-mGonyc7xdzd9xvjwy5qcZx-vE2SNmded1kuAFMURcmBORb6D2ey2zqDHueweuvQJhZ23yICzfo-u-OXWiRgF86lFQT0JZq-6wZubww&buildType=store&check=11&_idfa=00000000-0000-0000-0000-000000000000&lang=zh_CN';
 let userheaderVal = "";
@@ -39,20 +50,98 @@ let WXTASKKEY = [];
 
 ////////////////////////////////////////////////////////////////////
 
+if ($.isNode()) {
+  Object.keys(userheaderVal).forEach((item) => {
+    if (userheaderVal[item]) {
+      userheaderArr.push(cashheaderVal[item])
+    }
+  });
+  Object.keys(userkeyVal).forEach((item) => {
+    if (userkeyVal[item]) {
+      userkeyArr.push(userkeyVal[item])
+    }
+  });
+  Object.keys(cashheaderVal).forEach((item) => {
+    if (cashheaderVal[item]) {
+      cashheaderArr.push(cashheaderVal[item])
+    }
+  });
+  Object.keys(signheaderVal).forEach((item) => {
+    if (signheaderVal[item]) {
+      signheaderArr.push(signheaderVal[item])
+    }
+  });
+  Object.keys(signkeyVal).forEach((item) => {
+    if (signkeyVal[item]) {
+      signkeyArr.push(signkeyVal[item])
+    }
+  });
+  Object.keys(taskheaderVal).forEach((item) => {
+    if (taskheaderVal[item]) {
+      taskheaderArr.push(taskheaderVal[item])
+    }
+  });
+  Object.keys(taskkeyVal).forEach((item) => {
+    if (taskkeyVal[item]) {
+      taskkeyArr.push(taskkeyVal[item])
+    }
+  });
+  Object.keys(wxtaskkeyVal).forEach((item) => {
+    if (wxtaskkeyVal[item]) {
+      wxtaskkeyArr.push(wxtaskkeyVal[item])
+    }
+  });
+
+
+} else {
+  userheaderArr.push($.getdata('userheader'));
+  userkeyArr.push($.getdata('userkey'));
+  cashheaderArr.push($.getdata('cashheader'));
+  signheaderArr.push($.getdata('signheader'));
+  signkeyArr.push($.getdata('signkey'));
+  taskheaderArr.push($.getdata('taskheader'));
+  taskkeyArr.push($.getdata('taskkey'));
+  wxtaskkeyArr.push($.getdata('wxtaskkey'));
+}
 
 
 ///////////////////////////////////////////////////////////////////
 
 !(async () => {
   await Jsname()
-  O = (`🥦${jsname}任务执行通知🔔`);
+  O = (`${jsname}执行通知🔔`);
   userheaderVal = userheaderArr[0];
   userkeyVal = userkeyArr[0];
+  cashheaderVal = cashheaderArr[0];
   signheaderVal = signheaderArr[0];
   signkeyVal = signkeyArr[0];
   taskheaderVal = taskheaderArr[0];
   taskkeyVal = taskkeyArr[0];
   wxtaskkeyVal = wxtaskkeyArr[0];
+  if((hour == 15 && minute >= 15) || (hour == 16) || (hour == 17) || (hour == 18) || (hour == 19) || (hour == 20) || (hour == 21) || (hour == 22) || (hour == 23)){
+    await txstock();
+  }else{
+    $.log(`💖请将定时时间设置到"下午3点15分"之后,\n脚本才会执行`);
+    tz += `💖请将定时时间设置到"下午3点15分"之后,\n脚本才会执行\n`
+  }
+  await showmsg();
+
+})()
+.catch((e) => $.logErr(e))
+  .finally(() => $.done())
+
+//通知
+function showmsg() {
+  if (notifyInterval != 1) {
+    console.log(O + '\n' + tz);
+  }
+
+  if (notifyInterval == 1) {
+    $.msg(O, '\n', tz);
+  }
+}
+
+async function txstock(){
   console.log(`\n✅ 查询目前账户金币\n`)
   await userhome(); //金币查询
   console.log(`\n✅ 执行【签到】任务\n`)
@@ -83,297 +172,35 @@ let WXTASKKEY = [];
   await wxtask9();
   await wxtask10();
   await wxtask11();
+  console.log(`\n✅ 执行【自动提现】任务\n`)
   await cashorder(cash, money);
-  await showmsg();
-
-})()
-.catch((e) => $.logErr(e))
-  .finally(() => $.done())
-
-//通知
-function showmsg() {
-  if (notifyInterval != 1) {
-    console.log(O + '\n' + tz);
-  }
-
-  if (notifyInterval == 1) {
-    $.msg(O, '\n', tz);
-  }
-}
-///////////////////////////////////////////////////////////////////
-//猜涨跌时间
-function guesstime() {
-  return new Promise((resolve) => {
-    let url = {
-      url: `https://zqact.tenpay.com/cgi-bin/guess_home.fcgi?channel=1&source=2&new_version=2&_=${rndtime}&_appName=ios${taskheaderVal}`,
-      body: ``,
-      headers: {
-        'Cookie': `${signkeyVal}`,
-        'Accept': `application/json, text/plain, */*`,
-        'Connection': `keep-alive`,
-        'Referer': `https://zqact.tenpay.com/activity/page/guessRiseFall/`,
-        'Accept-Encoding': `gzip, deflate, br`,
-        'Host': `zqact.tenpay.com`,
-        'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 qqstock/8.7.1`,
-        'Accept-Language': `zh-cn`
-      },
-    };
-    $.get(url, async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log("腾讯自选股: API查询请求失败 ‼️‼️");
-          console.log(JSON.stringify(err));
-          $.logErr(err);
-        } else {
-          if (safeGet(data)) {
-            if (logs == 1) $.log(data)
-            data = JSON.parse(data);
-            guessnum = (data.T_info[0].T_endts)*1000
-            nextguessnum = (data.T_info[0].next_T)*1000
-            $.log(`本次猜涨跌日期：`+ formatDateTime(guessnum));
-            $.log(`下次猜涨跌日期：`+ formatDateTime(nextguessnum));
-            guessdate = formatDateTime(guessnum);
-
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve();
-      }
-    });
-  });
-}
-//提现票据
-function cashticket() {
-  return new Promise((resolve) => {
-    let url = {
-      url: `https://zqact.tenpay.com/cgi-bin/shop.fcgi?action=order_ticket&channel=1&type=2&_=${rndtime}&openid=${signheaderVal}`,
-      body: ``,
-      headers: {
-        'Cookie': `${signkeyVal}`,
-        'Accept': `application/json, text/plain, */*`,
-        'Connection': `keep-alive`,
-        'Referer': `https://zqact.tenpay.com/activity/page/guessRiseFall/`,
-        'Accept-Encoding': `gzip, deflate, br`,
-        'Host': `zqact.tenpay.com`,
-        'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 qqstock/8.7.1`,
-        'Accept-Language': `zh-cn`
-      },
-    };
-    $.get(url, async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log("腾讯自选股: API查询请求失败 ‼️‼️");
-          console.log(JSON.stringify(err));
-          $.logErr(err);
-        } else {
-          if (safeGet(data)) {
-            if (logs == 1) $.log(data)
-            data = JSON.parse(data);
-            $.log(`本次验证时间🕐：` + time(rndtime));
-            $.log(`本次验证票据🎫：${data.ticket}\n`);
-            cashticket = data.ticket
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve();
-      }
-    });
-  });
-}
-//提现请求
-function getcash1(cashticket) {
-  return new Promise((resolve) => {
-    let url = {
-      url: `https://zqact.tenpay.com/cgi-bin/shop.fcgi?action=order&type=2&channel=1&ticket=${cashticket}&item_id=202003102146152a9e8885&_=${rndtime}&openid=${signheaderVal}`,
-      body: ``,
-      headers: {
-        'Cookie': `${signkeyVal}`,
-        'Accept': `application/json, text/plain, */*`,
-        'Connection': `keep-alive`,
-        'Referer': `https://zqact.tenpay.com/activity/page/guessRiseFall/`,
-        'Accept-Encoding': `gzip, deflate, br`,
-        'Host': `zqact.tenpay.com`,
-        'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 qqstock/8.7.1`,
-        'Accept-Language': `zh-cn`
-      },
-    };
-    $.get(url, async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log("腾讯自选股: API查询请求失败 ‼️‼️");
-          console.log(JSON.stringify(err));
-          $.logErr(err);
-        } else {
-          if (safeGet(data)) {
-            if (logs == 1) $.log(data)
-            data = JSON.parse(data);
-            $.log(`【提现1元结果】:${data.retmsg}🎉`);
-            tz += `【提现1元结果】:${data.retmsg}🎉\n`
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve();
-      }
-    });
-  });
 }
 
-function getcash5(cashticket) {
-  return new Promise((resolve) => {
-    let url = {
-      url: `https://zqact.tenpay.com/cgi-bin/shop.fcgi?action=order&type=2&channel=1&ticket=${cashticket}&item_id=202003102147152ecaa605&_=${rndtime}&openid=${signheaderVal}`,
-      body: ``,
-      headers: {
-        'Cookie': `${signkeyVal}`,
-        'Accept': `application/json, text/plain, */*`,
-        'Connection': `keep-alive`,
-        'Referer': `https://zqact.tenpay.com/activity/page/guessRiseFall/`,
-        'Accept-Encoding': `gzip, deflate, br`,
-        'Host': `zqact.tenpay.com`,
-        'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 qqstock/8.7.1`,
-        'Accept-Language': `zh-cn`
-      },
-    };
-    $.get(url, async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log("腾讯自选股: API查询请求失败 ‼️‼️");
-          console.log(JSON.stringify(err));
-          $.logErr(err);
-        } else {
-          if (safeGet(data)) {
-            if (logs == 1) $.log(data)
-            data = JSON.parse(data);
-            $.log(`【提现5元结果】:${data.retmsg}🎉`);
-            tz += `【提现5元结果】:${data.retmsg}🎉\n`
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve();
-      }
-    });
-  });
-}
-//猜涨跌
-function guessop(guessdate) {
-  return new Promise((resolve) => {
-    let url = {
-      url: `https://zqact.tenpay.com/cgi-bin/guess_op.fcgi?action=2&act_id=3&user_answer=1&date=${guessdate}&channel=1&_=${rndtime}&_appName=ios${taskheaderVal}`,
-      body: ``,
-      headers: {
-        'Cookie': `${signkeyVal}`,
-        'Accept': `application/json, text/plain, */*`,
-        'Connection': `keep-alive`,
-        'Referer': `https://zqact.tenpay.com/activity/page/guessRiseFall/`,
-        'Accept-Encoding': `gzip, deflate, br`,
-        'Host': `zqact.tenpay.com`,
-        'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 qqstock/8.7.1`,
-        'Accept-Language': `zh-cn`
-      },
-    };
-    $.get(url, async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log("腾讯自选股: API查询请求失败 ‼️‼️");
-          console.log(JSON.stringify(err));
-          $.logErr(err);
-        } else {
-          if (safeGet(data)) {
-            if (logs == 1) $.log(data)
-            data = JSON.parse(data);
-            if (data.retcode == 0) {
-              $.log(`【自动猜涨跌】:成功🎉\n`);
-              tz += `【自动猜涨跌】:成功🎉\n`
-            } else {
-              console.log(`任务完成失败，错误信息：${JSON.stringify(data)}\n`)
-              tz += `【自动猜涨跌】:${data.retmsg}\n`
-            }
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve();
-      }
-    });
-  });
-}
-//猜涨跌每日礼包
-function guessred() {
-  return new Promise((resolve) => {
-    let guessredurl = {
-      url: `https://zqact.tenpay.com/cgi-bin/activity.fcgi?channel=1&activity=guess_new&guess_act_id=3&guess_date=${signday}&guess_reward_type=1&_=${rndtime}&_appName=ios${taskheaderVal}`,
-      body: ``,
-      headers: {
-        'Cookie': `${signkeyVal}`,
-        'Accept': `application/json, text/plain, */*`,
-        'Connection': `keep-alive`,
-        'Referer': `https://wzq.tenpay.com/activity/page/welwareCenter/`,
-        'Accept-Encoding': `gzip, deflate, br`,
-        'Host': `wzq.tenpay.com`,
-        'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 qqstock/8.7.1`,
-        'Accept-Language': `zh-cn`
-      },
-    };
-    $.get(guessredurl, async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log("腾讯自选股: API查询请求失败 ‼️‼️");
-          console.log(JSON.stringify(err));
-          $.logErr(err);
-        } else {
-          if (safeGet(data)) {
-            if (logs == 1) $.log(data)
-            data = JSON.parse(data);
-            if (data.retcode == 0) {
-              $.log(`【猜涨跌每日礼包】:获得 ${data.reward_desc}`);
-              tz += `【猜涨跌每日礼包】:获得 ${data.reward_desc}\n`
-            } else {
-              console.log(`任务完成失败，错误信息：${JSON.stringify(data)}`)
-              tz += `【猜涨跌每日礼包】:${data.retmsg}\n`
-            }
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve();
-      }
-    });
-  });
-}
+
+///////////////////////测试区//////////////////////////////////////
+
 
 //////////////////////////////////////////////////////////////////
 
 async function cashorder(cash, money) {
-  console.log(`开始【自动提现】任务`)
   if (cash == 1 && money.icon_amount > 10000) {
     console.log(`开始申请票据...`)
     await cashticket(); //申请票据
     console.log(`开始申请提现1元...`)
     await getcash1(cashticket);
-  } else if (cash == 5 && money.icon_amount > 48000){
+  } else if (cash == 5 && money.icon_amount > 48000){
     console.log(`开始申请票据...`)
     await cashticket(); //申请票据
     console.log(`开始申请提现5元...`)
     await getcash5(cashticket);
-  } else if (cash == 0 ){
+  } else if (cash == 0 ){
     console.log(`请到BOXJS设置,目前设置为0,不自动提现...`)
     tz += `请到BOXJS设置,目前设置为0,不自动提现...\n`
-  } else {
+  } else {
     console.log(`准备执行下一个任务...`)
     tz += `【自动提现】:账户提现余额不足🤦‍♀️\n`
   }
 }
-
 async function task1() {
   console.log(`开始验证【股票添加到自选】任务状态`)
   await statuid2()
@@ -540,14 +367,16 @@ async function task7() {
   console.log(`开始验证【猜涨跌活动】任务状态`)
   await statuid3()
   if (statuid3.done == 0) {
-    console.log(`查询猜涨跌活动时间...`)
+    console.log(`检查本次猜涨跌日期...`)
     await guesstime()
     console.log(`开始自动猜涨跌...`)
     await guessop(guessdate)
+    await $.wait(5000); //等待5秒
     console.log(`开始申请票据...`)
     await taskticket(); //申请票据
     console.log(`执行【猜涨跌分享】任务`)
     await taskshare(ticket)
+    await $.wait(5000); //等待5秒
     console.log(`执行【猜涨跌每日礼包】任务`)
     await guessred()
     console.log(`开始申请票据...`)
@@ -642,7 +471,6 @@ async function wxtask10() {
     tz += `【WX浏览社区帖子】:已执行\n`
   }
 }
-
 async function wxtask11() {
   console.log(`开始验证【WX专属红包🧧】任务状态`)
   await wxstatuid10()
@@ -657,14 +485,12 @@ async function wxtask11() {
   }
 }
 
-
 //////////////////////////////////////////////////////////////////
-
 //签到
 async function signtask() {
   return new Promise((resolve) => {
     let signurl = {
-      url: `https://wzq.tenpay.com/cgi-bin/activity_sign_task.fcgi?actid=2002&action=signdone&channel=1&date=${signday}&_=${rndtime}&_appName=ios${taskheaderVal}`,
+      url: `https://wzq.tenpay.com/cgi-bin/activity_sign_task.fcgi?actid=2002&action=signdone&date=${signday}&_=${rndtime}&openid=${signheaderVal}`,
       body: ``,
       headers: {
         'Cookie': `${taskkeyVal}`,
@@ -686,6 +512,8 @@ async function signtask() {
         } else {
           if (safeGet(data)) {
             if (logs == 1) $.log(data)
+            //问题
+            $.log(data)
             data = JSON.parse(data);
             if (data.retcode == 51091020) {
               $.log(`【签到】:${data.retmsg}\n`);
@@ -695,6 +523,254 @@ async function signtask() {
               $.log(`【签到时间】:` + time(rndtime));
               tz += `【签到】:获得${data.amount}金币\n`
               await $.wait(5000); //等待5秒
+            }
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve();
+      }
+    });
+  });
+}
+//猜涨跌时间
+function guesstime() {
+  return new Promise((resolve) => {
+    let url = {
+      url: `https://zqact.tenpay.com/cgi-bin/guess_home.fcgi?channel=1&source=2&new_version=2&_=${rndtime}&_appName=ios${taskheaderVal}`,
+      body: ``,
+      headers: {
+        'Cookie': `${signkeyVal}`,
+        'Accept': `application/json, text/plain, */*`,
+        'Connection': `keep-alive`,
+        'Referer': `https://zqact.tenpay.com/activity/page/guessRiseFall/`,
+        'Accept-Encoding': `gzip, deflate, br`,
+        'Host': `zqact.tenpay.com`,
+        'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 qqstock/8.7.1`,
+        'Accept-Language': `zh-cn`
+      },
+    };
+    $.get(url, async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log("腾讯自选股: API查询请求失败 ‼️‼️");
+          console.log(JSON.stringify(err));
+          $.logErr(err);
+        } else {
+          if (safeGet(data)) {
+            if (logs == 1) $.log(data)
+            data = JSON.parse(data);
+            guessnum = (data.T_info[0].T_endts)*1000
+            nextguessnum = (data.T_info[0].next_T)*1000
+            $.log(`本次猜涨跌日期：`+ formatDateTime(guessnum));
+            $.log(`下次猜涨跌日期：`+ formatDateTime(nextguessnum));
+            guessdate = formatDateTime(guessnum);
+
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve();
+      }
+    });
+  });
+}
+//提现票据
+function cashticket() {
+  return new Promise((resolve) => {
+    let url = {
+      url: `https://zqact.tenpay.com/cgi-bin/shop.fcgi?action=order_ticket&channel=1&type=2&_=${rndtime}&openid=${cashheaderVal}`,
+      body: ``,
+      headers: {
+        'Cookie': `${signkeyVal}`,
+        'Accept': `application/json, text/plain, */*`,
+        'Connection': `keep-alive`,
+        'Referer': `https://zqact.tenpay.com/activity/page/guessRiseFall/`,
+        'Accept-Encoding': `gzip, deflate, br`,
+        'Host': `zqact.tenpay.com`,
+        'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 qqstock/8.7.1`,
+        'Accept-Language': `zh-cn`
+      },
+    };
+    $.get(url, async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log("腾讯自选股: API查询请求失败 ‼️‼️");
+          console.log(JSON.stringify(err));
+          $.logErr(err);
+        } else {
+          if (safeGet(data)) {
+            if (logs == 1) $.log(data)
+            data = JSON.parse(data);
+            $.log(`本次验证时间🕐：` + time(rndtime));
+            $.log(`本次验证票据🎫：${data.ticket}\n`);
+            cashticket = data.ticket
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve();
+      }
+    });
+  });
+}
+//提现请求
+function getcash1(cashticket) {
+  return new Promise((resolve) => {
+    let url = {
+      url: `https://zqact.tenpay.com/cgi-bin/shop.fcgi?action=order&type=2&channel=1&ticket=${cashticket}&item_id=202003102146152a9e8885&_=${rndtime}&openid=${cashheaderVal}`,
+      body: ``,
+      headers: {
+        'Cookie': `${signkeyVal}`,
+        'Accept': `application/json, text/plain, */*`,
+        'Connection': `keep-alive`,
+        'Referer': `https://zqact.tenpay.com/activity/page/guessRiseFall/`,
+        'Accept-Encoding': `gzip, deflate, br`,
+        'Host': `zqact.tenpay.com`,
+        'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 qqstock/8.7.1`,
+        'Accept-Language': `zh-cn`
+      },
+    };
+    $.get(url, async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log("腾讯自选股: API查询请求失败 ‼️‼️");
+          console.log(JSON.stringify(err));
+          $.logErr(err);
+        } else {
+          if (safeGet(data)) {
+            if (logs == 1) $.log(data)
+            data = JSON.parse(data);
+            $.log(`【提现1元结果】:${data.retmsg}🎉`);
+            tz += `【提现1元结果】:${data.retmsg}🎉\n`
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve();
+      }
+    });
+  });
+}
+function getcash5(cashticket) {
+  return new Promise((resolve) => {
+    let url = {
+      url: `https://zqact.tenpay.com/cgi-bin/shop.fcgi?action=order&type=2&channel=1&ticket=${cashticket}&item_id=202003102147152ecaa605&_=${rndtime}&openid=${cashheaderVal}`,
+      body: ``,
+      headers: {
+        'Cookie': `${signkeyVal}`,
+        'Accept': `application/json, text/plain, */*`,
+        'Connection': `keep-alive`,
+        'Referer': `https://zqact.tenpay.com/activity/page/guessRiseFall/`,
+        'Accept-Encoding': `gzip, deflate, br`,
+        'Host': `zqact.tenpay.com`,
+        'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 qqstock/8.7.1`,
+        'Accept-Language': `zh-cn`
+      },
+    };
+    $.get(url, async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log("腾讯自选股: API查询请求失败 ‼️‼️");
+          console.log(JSON.stringify(err));
+          $.logErr(err);
+        } else {
+          if (safeGet(data)) {
+            if (logs == 1) $.log(data)
+            data = JSON.parse(data);
+            $.log(`【提现5元结果】:${data.retmsg}🎉`);
+            tz += `【提现5元结果】:${data.retmsg}🎉\n`
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve();
+      }
+    });
+  });
+}
+//猜涨跌
+function guessop(guessdate) {
+  return new Promise((resolve) => {
+    let url = {
+      url: `https://zqact.tenpay.com/cgi-bin/guess_op.fcgi?action=2&act_id=3&user_answer=1&date=${guessdate}&channel=1&_=${rndtime}&_appName=ios${taskheaderVal}`,
+      body: ``,
+      headers: {
+        'Cookie': `${signkeyVal}`,
+        'Accept': `application/json, text/plain, */*`,
+        'Connection': `keep-alive`,
+        'Referer': `https://zqact.tenpay.com/activity/page/guessRiseFall/`,
+        'Accept-Encoding': `gzip, deflate, br`,
+        'Host': `zqact.tenpay.com`,
+        'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 qqstock/8.7.1`,
+        'Accept-Language': `zh-cn`
+      },
+    };
+    $.get(url, async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log("腾讯自选股: API查询请求失败 ‼️‼️");
+          console.log(JSON.stringify(err));
+          $.logErr(err);
+        } else {
+          if (safeGet(data)) {
+            if (logs == 1) $.log(data)
+            data = JSON.parse(data);
+            if (data.retcode == 0) {
+              $.log(`【自动猜涨跌】:成功🎉\n`);
+              tz += `【自动猜涨跌】:成功🎉\n`
+            } else {
+              console.log(`任务完成失败，错误信息：${JSON.stringify(data)}\n`)
+              tz += `【自动猜涨跌】:${data.retmsg}\n`
+            }
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve();
+      }
+    });
+  });
+}
+//猜涨跌每日礼包
+function guessred() {
+  return new Promise((resolve) => {
+    let guessredurl = {
+      url: `https://zqact.tenpay.com/cgi-bin/activity.fcgi?channel=1&activity=guess_new&guess_act_id=3&guess_date=${signday}&guess_reward_type=1&_=${rndtime}&_appName=ios${taskheaderVal}`,
+      body: ``,
+      headers: {
+        'Cookie': `${signkeyVal}`,
+        'Accept': `application/json, text/plain, */*`,
+        'Connection': `keep-alive`,
+        'Referer': `https://wzq.tenpay.com/activity/page/welwareCenter/`,
+        'Accept-Encoding': `gzip, deflate, br`,
+        'Host': `wzq.tenpay.com`,
+        'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 qqstock/8.7.1`,
+        'Accept-Language': `zh-cn`
+      },
+    };
+    $.get(guessredurl, async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log("腾讯自选股: API查询请求失败 ‼️‼️");
+          console.log(JSON.stringify(err));
+          $.logErr(err);
+        } else {
+          if (safeGet(data)) {
+            if (logs == 1) $.log(data)
+            data = JSON.parse(data);
+            if (data.retcode == 0) {
+              $.log(`【猜涨跌每日礼包】:获得 ${data.reward_value}金币`);
+              tz += `【猜涨跌每日礼包】:获得 ${data.reward_value}金币\n`
+            } else {
+              console.log(`任务完成失败，错误信息：${JSON.stringify(data)}`)
+              tz += `【猜涨跌每日礼包】:${data.retmsg}\n`
             }
           }
         }
@@ -804,7 +880,6 @@ function taskid2(ticket) {
     })
   })
 }
-
 function statuid2() {
   return new Promise((resolve, reject) => {
     let testurl = {
@@ -833,7 +908,6 @@ function statuid2() {
     })
   })
 }
-
 function wxtaskid2(wxticket) {
   return new Promise((resolve) => {
     let url = {
@@ -876,7 +950,6 @@ function wxtaskid2(wxticket) {
     });
   });
 }
-
 function wxstatuid2() {
   return new Promise((resolve, reject) => {
     let url = {
@@ -907,6 +980,7 @@ function wxstatuid2() {
     })
   })
 }
+
 //阅读一篇资讯
 function taskid1(ticket) {
   return new Promise((resolve, reject) => {
@@ -1580,7 +1654,7 @@ function taskid3(ticket) {
       url: `https://zqact.tenpay.com/cgi-bin/activity_task.fcgi?action=taskdone&channel=1&actid=1101&tid=9&id=3&task_ticket=${ticket}&_appName=ios${taskheaderVal}`,
       body: ``,
       headers: {
-        'Cookie': `${taskkeyVal}`,
+        'Cookie': `${signkeyVal}`,
         'Accept': `*/*`,
         'Connection': `keep-alive`,
         'Referer': `http://zixuanguapp.finance.qq.com`,
@@ -1600,6 +1674,7 @@ function taskid3(ticket) {
     })
   })
 }
+
 
 function statuid3() {
   return new Promise((resolve, reject) => {
@@ -2112,6 +2187,7 @@ function wxstatuid10() {
   })
 }
 //票据申请
+
 function taskticket() {
   return new Promise((resolve, reject) => {
     let testurl = {
@@ -2140,7 +2216,6 @@ function taskticket() {
     })
   })
 }
-
 function wxtaskticket() {
   return new Promise((resolve) => {
     let url = {
