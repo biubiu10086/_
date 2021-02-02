@@ -9,55 +9,36 @@ let signday = formatDateTime(new Date());
 let tz = '';
 let cash = $.getval('cash') || 0; //0为不自动提现,1为自动提现1元,5为自动提现1元,
 
-const userheaderArr = [];
+const userheaderArr = 'oA0GbjuovN0In7FNGV-QYOzIYfCg&_appName=ios&_dev=iPhone10,3&_devId=c2746ddaaa8ce93c61148c585907089e1bffa21f&_appver=8.7.1&_ifChId=&_isChId=1&_osVer=14.3&openid=oA0GbjuovN0In7FNGV-QYOzIYfCg&fskey=v0aaf63c2226008b9d15796fb20c41db&appid=wxcbc3ab3807acb685&access_token=41_wG-D-mGonyc7xdzd9xvjwy5qcZx-vE2SNmded1kuAFMURcmBORb6D2ey2zqDHueweuvQJhZ23yICzfo-u-OXWiRgF86lFQT0JZq-6wZubww&buildType=store&check=11&_idfa=00000000-0000-0000-0000-000000000000&lang=zh_CN';
 let userheaderVal = "";
 let USERHEADER = [];
 
-const userkeyArr = [];
+const userkeyArr = 'pgv_pvid=6349304987; ts_last=/activity/page/welwareCenter/; ts_sid=1876593472; ts_uid=2018990695';
 let userkeyVal = "";
 let USERKEY = [];
 
-const signheaderArr = [];
+const signheaderArr = 'oA0GbjuovN0In7FNGV-QYOzIYfCg&fskey=v0aaf63c2226008b9d15796fb20c41db&access_token=41_wG-D-mGonyc7xdzd9xvjwy5qcZx-vE2SNmded1kuAFMURcmBORb6D2ey2zqDHueweuvQJhZ23yICzfo-u-OXWiRgF86lFQT0JZq-6wZubww&_appName=ios&_appver=8.7.1&_osVer=14.3&_devId=c2746ddaaa8ce93c61148c585907089e1bffa21f';
 let signheaderVal = "";
 let SINGHEADER = [];
 
-const signkeyArr = [];
+const signkeyArr = 'pgv_info=ssid=s2291081306; pgv_pvid=5303379583; ts_last=/activity/page/guessRiseFall/; ts_sid=694671846; ts_uid=9625580478';
 let signkeyVal = "";
 let SINGKEY = [];
 
-const taskheaderArr = [];
+const taskheaderArr = '&_dev=iPhone10,3&_devId=c2746ddaaa8ce93c61148c585907089e1bffa21f&_appver=8.7.1&_ifChId=&_isChId=1&_osVer=14.3&openid=oA0GbjuovN0In7FNGV-QYOzIYfCg&fskey=v0aaf63c2226008b9d15796fb20c41db&appid=wxcbc3ab3807acb685&access_token=41_wG-D-mGonyc7xdzd9xvjwy5qcZx-vE2SNmded1kuAFMURcmBORb6D2ey2zqDHueweuvQJhZ23yICzfo-u-OXWiRgF86lFQT0JZq-6wZubww&buildType=store&check=11&_idfa=00000000-0000-0000-0000-000000000000&lang=zh_CN';
 let taskheaderVal = "";
 let TASKHEADER = [];
 
-const taskkeyArr = [];
+const taskkeyArr = 'pgv_info=ssid=s2291081306; pgv_pvid=5303379583; ts_last=/activity/page/welwareCenter/; ts_sid=2733540118; ts_uid=593818088';
 let taskkeyVal = "";
 let TASKKEY = [];
 
-const wxtaskkeyArr = [];
+const wxtaskkeyArr = 'wzq_channel=..osz92p00qb187; pgv_info=ssid=s1191400020; pgv_pvid=8489532896; qlappid=wx9cf8c670ebd68ce4; qlskey=v09582974126005b0d32615cf3f6f67e; qluin=085e9858e1666d3e26a68af08@wx.tenpay.com; qq_logtype=16; wx_session_time=1610985683000; wzq_qlappid=wx9cf8c670ebd68ce4; wzq_qlskey=v09582974126005b0d32615cf3f6f67e; wzq_qluin=os-ppuNk4IDJQwuv7APN-A27pekk';
 let wxtaskkeyVal = "";
 let WXTASKKEY = [];
+
 ////////////////////////////////////////////////////////////////////
 
-
-if ($.isNode()) {
-  
-  userheaderArr.push('oA0GbjuovN0In7FNGV-QYOzIYfCg&_appName=ios&_dev=iPhone10,3&_devId=c2746ddaaa8ce93c61148c585907089e1bffa21f&_appver=8.7.1&_ifChId=&_isChId=1&_osVer=14.3&openid=oA0GbjuovN0In7FNGV-QYOzIYfCg&fskey=v0aaf63c2226008b9d15796fb20c41db&appid=wxcbc3ab3807acb685&access_token=41_wG-D-mGonyc7xdzd9xvjwy5qcZx-vE2SNmded1kuAFMURcmBORb6D2ey2zqDHueweuvQJhZ23yICzfo-u-OXWiRgF86lFQT0JZq-6wZubww&buildType=store&check=11&_idfa=00000000-0000-0000-0000-000000000000&lang=zh_CN');
-  userkeyArr.push('pgv_pvid=6349304987; ts_last=/activity/page/welwareCenter/; ts_sid=1876593472; ts_uid=2018990695');
-  signheaderArr.push('oA0GbjuovN0In7FNGV-QYOzIYfCg&fskey=v0aaf63c2226008b9d15796fb20c41db&access_token=41_wG-D-mGonyc7xdzd9xvjwy5qcZx-vE2SNmded1kuAFMURcmBORb6D2ey2zqDHueweuvQJhZ23yICzfo-u-OXWiRgF86lFQT0JZq-6wZubww&_appName=ios&_appver=8.7.1&_osVer=14.3&_devId=c2746ddaaa8ce93c61148c585907089e1bffa21f');
-  signkeyArr.push('pgv_info=ssid=s2291081306; pgv_pvid=5303379583; ts_last=/activity/page/guessRiseFall/; ts_sid=694671846; ts_uid=9625580478');
-  taskheaderArr.push('&_dev=iPhone10,3&_devId=c2746ddaaa8ce93c61148c585907089e1bffa21f&_appver=8.7.1&_ifChId=&_isChId=1&_osVer=14.3&openid=oA0GbjuovN0In7FNGV-QYOzIYfCg&fskey=v0aaf63c2226008b9d15796fb20c41db&appid=wxcbc3ab3807acb685&access_token=41_wG-D-mGonyc7xdzd9xvjwy5qcZx-vE2SNmded1kuAFMURcmBORb6D2ey2zqDHueweuvQJhZ23yICzfo-u-OXWiRgF86lFQT0JZq-6wZubww&buildType=store&check=11&_idfa=00000000-0000-0000-0000-000000000000&lang=zh_CN');
-  taskkeyArr.push('pgv_info=ssid=s2291081306; pgv_pvid=5303379583; ts_last=/activity/page/welwareCenter/; ts_sid=2733540118; ts_uid=593818088');
-  wxtaskkeyArr.push('wzq_channel=..osz92p00qb187; pgv_info=ssid=s1191400020; pgv_pvid=8489532896; qlappid=wx9cf8c670ebd68ce4; qlskey=v09582974126005b0d32615cf3f6f67e; qluin=085e9858e1666d3e26a68af08@wx.tenpay.com; qq_logtype=16; wx_session_time=1610985683000; wzq_qlappid=wx9cf8c670ebd68ce4; wzq_qlskey=v09582974126005b0d32615cf3f6f67e; wzq_qluin=os-ppuNk4IDJQwuv7APN-A27pekk');
-
-} else {
-  userheaderArr.push($.getdata('userheader'));
-  userkeyArr.push($.getdata('userkey'));
-  signheaderArr.push($.getdata('signheader'));
-  signkeyArr.push($.getdata('signkey'));
-  taskheaderArr.push($.getdata('taskheader'));
-  taskkeyArr.push($.getdata('taskkey'));
-  wxtaskkeyArr.push($.getdata('wxtaskkey'));
-}
 
 
 ///////////////////////////////////////////////////////////////////
