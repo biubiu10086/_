@@ -18,10 +18,10 @@ inputs:
   events: # 触发器
     - timer: # Lexho
         parameters:
-          name: dy_hs_dyhs_kkd_dkd
+          name: dy_hs_dyhs_kkd
           cronExpression: "*/5 * * * *"
           enable: true
-          argument: dy&hs&dyhs&kkd&dkd
+          argument: dy&hs&dyhs&kkd
   environment: #  环境变量
     variables: #  环境变量对象
       AAA: BBB # 不要删除，用来格式化对齐追加的变量的
