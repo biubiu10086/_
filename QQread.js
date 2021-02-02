@@ -41,18 +41,8 @@ QQreadvideohdArr = [], QQreadvideoheaderVal = '',
 }
     
 if ($.isNode()) {
-    Object.keys(QQreadHD).forEach((item) => {
-        if (QQreadHD[item]) {
-          QQreadhdArr.push(QQreadHD[item])
-        }
-      })
- 	  
-    Object.keys(QQreadvideoHD).forEach((item) => {
-        if (QQreadvideoHD[item]) {
-          QQreadvideohdArr.push(QQreadvideoHD[item])
-        }
-      })
-
+          QQreadhdArr.push('{"Accept":"*/*","qrem":"0","qrtm":"1611036233","trustedid":"4ab9e5f8832485375b17dc6aa67610c41","ua":"iPhone X-iOS14.3","rcmd":"1","Accept-Encoding":"gzip","net_type":"1","platform":"ioswp","youngerMode":"0","Cookie":"book_sid=9a2a6f100af3484ba94798770add1209","sid":"161103479664441","usid":"41_9gF_KNXo60Kpq865994s1ky_wNmxN079YvURHEqv8RzmPM1MGYDbYxiCz_nijH0F6efqE5luODKxXS5pWgmayCdjkuRZEl3cQF8HjXbSMLo","loginType":"2","text_type":"1","version":"qqreader_7.5.60.0352_iphone","Accept-Language":"zh-cn","User-Agent":"QQReaderUI/2461 CFNetwork/1209 Darwin/20.2.0","qrsy":"66d61a17cd48fd4b08ec9ae3459deea6","ywkey":"ywKcA1Cv1NHm","safkey":"6645bb346b2f2e6506bb92711165b9cc","sex":"-1","qimei":"4dbb36c3-a8af-4861-b4ab-a494a9e7346d","auditStatus":"0","Host":"commontgw.reader.qq.com","ywguid":"119090636757","server_sex":"1","themeid":"2000","Connection":"keep-alive","IDFA":"00000000-0000-0000-0000-000000000000","nosid":"1","gselect":"-1","jailbreak":"0"}')
+          QQreadvideohdArr.push('{"Origin":"https://yuedu.reader.qq.com","Cookie":"IDFA=00000000-0000-0000-0000-000000000000; appid=1450000540; areaid=1; auditStatus=0; c_version=qqreader_7.5.60.0352_iphone; client=2; gselect=-1; jailbreak=0; loginType=2; net_type=1; nosid=1; platform=ioswp; qimei=4DBB36C3-A8AF-4861-B4AB-A494A9E7346D; qrem=0; qrsy=15de452ff9fcc913c2f6f2cea663fea8; qrtm=1611035277; rcmd=1; safkey=6645bb346b2f2e6506bb92711165b9cc; server_sex=1; sex=-1; sid=161103479664441; text_type=1; themeid=2000; trustedid=7012ad84bac8e51c5017497816e502311; ua=iPhoneX-iOS14.3; usid=41_9gF_KNXo60Kpq865994s1ky_wNmxN079YvURHEqv8RzmPM1MGYDbYxiCz_nijH0F6efqE5luODKxXS5pWgmayCdjkuRZEl3cQF8HjXbSMLo; version=qqreader_7.5.60.0352_iphone; youngerMode=0; ywguid=119090636757; ywkey=ywKcA1Cv1NHm","Connection":"keep-alive","Accept":"application/json, text/plain, */*","Referer":"https://yuedu.reader.qq.com/common/common/wealCollection/index.html?from=free&iosversion=14.3","Host":"eventv36.reader.qq.com","User-Agent":"Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148QQReader  iOS GDTTangramMobSDK/4.10.100 GDTMobSDK/4.10.100","Accept-Encoding":"gzip, deflate, br","Accept-Language":"zh-cn"}')
       console.log(`============ 共${QQreadhdArr.length}个QQ阅读APP账号  =============\n`)
       console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
     } else {
