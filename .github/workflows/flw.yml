@@ -19,6 +19,7 @@
          FL_flwspBODY: ${{ secrets.FL_flwspBODY }}	
          FL_flwqwBODY: ${{ secrets.FL_flwqwBODY }}        
          FL_CASH: ${{ secrets.FL_CASH }}
+         FL_DHCASH: ${{ secrets.FL_DHCASH }}
      steps:
        - name: Checkout
          run: |
