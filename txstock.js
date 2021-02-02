@@ -7,7 +7,7 @@ let rndtime = Math.round(new Date().getTime()) //毫秒
 let signday = formatDateTime(new Date());
 
 let tz = '';
-let cash = $.getval('cash') || 0; //0为不自动提现,1为自动提现1元,5为自动提现1元
+let cash = $.getval('cash') || 5; //0为不自动提现,1为自动提现1元,5为自动提现1元
 
 //time
 var hour='';
@@ -123,11 +123,11 @@ if ($.isNode()) {
   taskheaderVal = taskheaderArr[0];
   taskkeyVal = taskkeyArr[0];
   wxtaskkeyVal = wxtaskkeyArr[0];
-  if((hour == 15 && minute >= 15) || (hour == 16) || (hour == 17) || (hour == 18) || (hour == 19) || (hour == 20) || (hour == 21) || (hour == 22) || (hour == 23)){
+  if(hour >= 0 && minute >= 0){
     await txstock();
   }else{
-    $.log(`💖请将定时时间设置到"下午3点15分"之后,\n脚本才会执行`);
-    tz += `💖请将定时时间设置到"下午3点15分"之后,\n脚本才会执行\n`
+    $.log(`💖请将定时时间设置到"0点0分"之后,\n脚本才会执行`);
+    tz += `💖请将定时时间设置到"0点0分"之后,\n脚本才会执行\n`
   }
   await showmsg();
 
