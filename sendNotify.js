@@ -1,17 +1,3 @@
-631
-632
-633
-634
-635
-636
-637
-638
-/*
- * @Author: LXK9301 https://github.com/LXK9301
- * @Date: 2020-08-19 16:12:40 
- * @Last Modified by: LXK9301
- * @Last Modified time: 2021-1-7 17:52:54
- */
 const querystring = require("querystring");
 const $ = new Env();
 // =======================================微信server酱通知设置区域===========================================
