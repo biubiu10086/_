@@ -3,7 +3,7 @@ name: 中青看点抽奖
 on:
   workflow_dispatch:
   schedule:
-     - cron: '0 */2 * * *'
+     - cron: '0 */6 * * *'
   watch:
     types: started
   repository_dispatch:
