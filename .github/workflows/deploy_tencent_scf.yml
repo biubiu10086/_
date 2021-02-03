@@ -176,6 +176,8 @@ jobs:
           SERVERLESS_PLATFORM_VENDOR: tencent
           TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
           TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
+          TENCENT_REGION: ${{ secrets.SCF_REGION }}
+          TENCENT_FUNCTION_NAME: ${{ secrets.TENCENT_FUNCTION_NAME }}
 
       - name: "替换文件 jd_scripts"
         run: |
@@ -325,3 +327,5 @@ jobs:
           SERVERLESS_PLATFORM_VENDOR: tencent
           TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
           TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
+          TENCENT_REGION: ${{ secrets.SCF_REGION }}
+          TENCENT_FUNCTION_NAME: ${{ secrets.TENCENT_FUNCTION_NAME }}
