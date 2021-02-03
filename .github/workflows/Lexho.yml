@@ -32,9 +32,6 @@
        - name: '运行 【抖音火山版】'
          run: |
            node dyhs.js
-       - name: '运行 【快看点】'
-         run: |
-           node kkd.js
        - name: '运行 【步步宝】'
          run: |
            node bbb.js
