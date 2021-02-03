@@ -32,7 +32,6 @@ jobs:
         run: |
           wget -O index.js https://gitee.com/lxk0301/jd_scripts/raw/master/index.js
           wget -O serverless.yml https://raw.githubusercontent.com/Lexho1/_/master/serverless.yml
-          wget -O sendNotify.js https://gitee.com/lxk0301/jd_scripts/raw/master/sendNotify.js
       - name: "将Secrets里面配置的变量添加到severless.yml里面作为环境变量"
         run: |
           if [ $SCF_REGION ]; then sed -i "s/region:.*$/region: $SCF_REGION/g" serverless.yml; fi;
@@ -186,7 +185,6 @@ jobs:
         run: |
           wget -O index.js https://gitee.com/lxk0301/jd_scripts/raw/master/index.js
           wget -O serverless.yml https://gitee.com/lxk0301/jd_scripts/raw/master/serverless.yml
-          wget -O sendNotify.js https://gitee.com/lxk0301/jd_scripts/raw/master/sendNotify.js
           wget -O jdCookie.js https://gitee.com/lxk0301/jd_scripts/raw/master/jdCookie.js
       - name: "将Secrets里面配置的变量添加到severless.yml里面作为环境变量"
         run: |
