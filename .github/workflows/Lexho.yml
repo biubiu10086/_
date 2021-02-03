@@ -1,9 +1,9 @@
- name: 步步宝
+ name: Lexho
 
  on:
    workflow_dispatch:
    schedule:
-      - cron: '*/10 * * * *'
+      - cron: '*/5 * * * *'
    watch:
      types: started
    repository_dispatch:
@@ -23,6 +23,18 @@
        - name: npm install
          run: |
            npm install
+       - name: '运行 【抖音极速版】'
+         run: |
+           node dy.js
+       - name: '运行 【火山极速版】'
+         run: |
+           node hs.js
+       - name: '运行 【抖音火山版】'
+         run: |
+           node dyhs.js
+       - name: '运行 【快看点】'
+         run: |
+           node kkd.js
        - name: '运行 【步步宝】'
          run: |
            node bbb.js
