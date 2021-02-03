@@ -189,7 +189,7 @@ jobs:
           if [ $JD_DEBUG ]; then sed -i "/variables/a\      JD_DEBUG: $JD_DEBUG" serverless.yml; fi;
           if [ $JD_USER_AGENT ]; then sed -i "/variables/a\      JD_USER_AGENT: $JD_USER_AGENT" serverless.yml; fi;
           if [ $TENCENTSCF_SOURCE_TYPE ]; then sed -i "/variables/a\      TENCENTSCF_SOURCE_TYPE: $TENCENTSCF_SOURCE_TYPE" serverless.yml; fi;
-          if [ $TENCENTSCF_SOURCE_URL1 ]; then sed -i "/variables/a\      TENCENTSCF_SOURCE_URL: $TENCENTSCF_SOURCE_URL1" serverless.yml; fi;
+          if [ $TENCENTSCF_SOURCE_URL ]; then sed -i "/variables/a\      TENCENTSCF_SOURCE_URL: $TENCENTSCF_SOURCE_URL" serverless.yml; fi;
           if [ $PUSH_KEY ]; then sed -i "/variables/a\      PUSH_KEY: $PUSH_KEY" serverless.yml; fi;
           if [ $BARK_PUSH ]; then sed -i "/variables/a\      BARK_PUSH: $BARK_PUSH" serverless.yml; fi;
           if [ $BARK_SOUND ]; then sed -i "/variables/a\      BARK_SOUND: $BARK_SOUND" serverless.yml; fi;
