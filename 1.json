@@ -11,7 +11,7 @@
      "descs_html": [
        "使用说明:",
 	  "测试"],
-    "keys": ["dkdurl", "dkdhd", "dkdbody"],
+    "keys": ["dkdtxurl", "dkdtxhd", "dkdtxbody"],
     "author": "@2ge1",
     "repo": "https://github.com/age174/-/blob/main/dkd.js",
     "icons": ["", ""],
