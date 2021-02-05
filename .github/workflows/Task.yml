@@ -1,9 +1,9 @@
-name: 中青看点抽奖
+name: Task
 
 on:
   workflow_dispatch:
   schedule:
-     - cron: '0 */6 * * *'
+     - cron: '*/10 * * * *'
   watch:
     types: started
   repository_dispatch:
