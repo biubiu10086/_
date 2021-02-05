@@ -9,16 +9,10 @@ on:
   repository_dispatch:
     types: _
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
-    env:
-        YOUTH_HEADER: ${{ secrets.YOUTH_HEADER }}
-        YOUTH_ARTBODY: ${{ secrets.YOUTH_ARTBODY }}
-        YOUTH_REDBODY: ${{ secrets.YOUTH_REDBODY }}
-        YOUTH_TIME: ${{ secrets.YOUTH_TIME }}
     steps:
       - name: Checkout
         run: |
@@ -28,16 +22,36 @@ jobs:
         with:
           node-version: 12.x
       - name: npm install
-        if: env.YOUTH_HEADER
         run: |
           cd ~/TaskAction
           npm install
+      - name: '运行 【百度极速版】'
+        if: env.BAIDU_COOKIE
+        run: |
+          cd ~/TaskAction
+          node workflow/baidu_speed_new.js
+      - name: '运行 【百度极速版】'
+        if: env.BAIDU_COOKIE
+        run: |
+          cd ~/TaskAction
+          node workflow/baidu_speed_cash.js
+      - name: '运行 【中青看点】'
+        if: env.YOUTH_HEADER
+        run: |
+          cd ~/TaskAction
+          node workflow/youth.js
       - name: '运行 【中青看点抽奖】'
         if: env.YOUTH_HEADER
         run: |
           cd ~/TaskAction
           node workflow/youth_sign.js
         env:
+          BAIDU_TASK: ${{ secrets.BAIDU_TASK }}
+          BAIDU_CASH: ${{ secrets.BAIDU_CASH }}
+          YOUTH_HEADER: ${{ secrets.YOUTH_HEADER }}
+          YOUTH_ARTBODY: ${{ secrets.YOUTH_ARTBODY }}
+          YOUTH_REDBODY: ${{ secrets.YOUTH_REDBODY }}
+          YOUTH_TIME: ${{ secrets.YOUTH_TIME }}
           YOUTH_NOTIFY_CONTROL: ${{ secrets.YOUTH_NOTIFY_CONTROL }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
