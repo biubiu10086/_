@@ -15,10 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     env:
+        BAIDU_COOKIE: ${{ secrets.BAIDU_COOKIE }}
+        BAIDU_TASK: ${{ secrets.BAIDU_TASK }}
+        BAIDU_CASH: ${{ secrets.BAIDU_CASH }}
         YOUTH_HEADER: ${{ secrets.YOUTH_HEADER }}
         YOUTH_ARTBODY: ${{ secrets.YOUTH_ARTBODY }}
         YOUTH_REDBODY: ${{ secrets.YOUTH_REDBODY }}
         YOUTH_TIME: ${{ secrets.YOUTH_TIME }}
+        YOUTH_NOTIFY_CONTROL: ${{ secrets.YOUTH_NOTIFY_CONTROL }}
     steps:
       - name: Checkout
         run: |
@@ -32,12 +36,16 @@ jobs:
         run: |
           cd ~/Scripts
           npm install
+      - name: '运行 【百度极速版】'
+        if: env.BAIDU_COOKIE
+        run: |
+          cd ~/Scripts
+          node Task/baidu_speed.js
       - name: '运行 【中青看点】'
         if: env.YOUTH_HEADER
         run: |
           cd ~/Scripts
           node Task/youth.js
         env:
-          YOUTH_NOTIFY_CONTROL: ${{ secrets.YOUTH_NOTIFY_CONTROL }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
