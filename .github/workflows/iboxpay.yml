@@ -1,4 +1,4 @@
- name: 笑谱iboxpay
+ name: 笑谱
 
  on:
    workflow_dispatch:
@@ -31,7 +31,7 @@
          run: |
            cd ~/JavaScript
            npm install
-       - name: '运行 【笑谱】iboxpay'
+       - name: '运行 【笑谱】'
          if: env.XP_iboxpayHEADER
          run: |
            cd ~/JavaScript
