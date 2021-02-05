@@ -1,4 +1,4 @@
- name: Action
+ name: 多看点
 
  on:
    workflow_dispatch:
@@ -25,21 +25,11 @@
          run: |
            cd ~/action-group
            npm install
-      - name: '运行 【百度极速版】'
-        run: |
-          cd ~/action-group
-          node Task/baidu_speed.js
-      - name: '运行 【百度极速版】'
-        run: |
-          cd ~/action-group
-          node Task/baidu_cash.js
        - name: '运行 【多看点】'
          run: |
            cd ~/action-group
            node Node/dkd.js
          env:
-           BAIDU_TASK: ${{ secrets.BAIDU_TASK }}
-           BAIDU_CASH: ${{ secrets.BAIDU_CASH }}
            DKDURL: ${{ secrets.DKDURL }}
            DKDHD: ${{ secrets.DKDHD }}
            DKDBODY: ${{ secrets.DKDBODY }}
