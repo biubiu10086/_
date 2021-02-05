@@ -1,9 +1,9 @@
-name: Task
+name: 中青看点抽奖
 
 on:
   workflow_dispatch:
   schedule:
-     - cron: '*/10 * * * *'
+     - cron: '0 */6 * * *'
   watch:
     types: started
   repository_dispatch:
@@ -25,29 +25,12 @@ jobs:
         run: |
           cd ~/TaskAction
           npm install
-      - name: '运行 【百度极速版】'
-        if: env.BAIDU_COOKIE
-        run: |
-          cd ~/TaskAction
-          node workflow/baidu_speed_new.js
-      - name: '运行 【百度极速版】'
-        if: env.BAIDU_COOKIE
-        run: |
-          cd ~/TaskAction
-          node workflow/baidu_speed_cash.js
-      - name: '运行 【中青看点】'
-        if: env.YOUTH_HEADER
-        run: |
-          cd ~/TaskAction
-          node workflow/youth.js
       - name: '运行 【中青看点抽奖】'
         if: env.YOUTH_HEADER
         run: |
           cd ~/TaskAction
           node workflow/youth_sign.js
         env:
-          BAIDU_TASK: ${{ secrets.BAIDU_TASK }}
-          BAIDU_CASH: ${{ secrets.BAIDU_CASH }}
           YOUTH_HEADER: ${{ secrets.YOUTH_HEADER }}
           YOUTH_ARTBODY: ${{ secrets.YOUTH_ARTBODY }}
           YOUTH_REDBODY: ${{ secrets.YOUTH_REDBODY }}
