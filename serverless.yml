@@ -18,10 +18,10 @@ inputs:
   events: # 触发器
     - timer: # Lexho
         parameters:
-          name: jx_cfd_tx
+          name: jx_cfdtx
           cronExpression: "0 0 * * *"
           enable: true
-          argument: jx_cfd_tx
+          argument: jx_cfdtx
     - timer: # Lexho
         parameters:
           name: jx_cfd
