@@ -13,30 +13,28 @@
    build:
      runs-on: ubuntu-latest
      if: github.event.repository.owner.id == github.event.sender.id
-     env:
-         DKD_URL: ${{ secrets.DKDURL }}
-         DKD_HD: ${{ secrets.DKDHD }}
-         DKD_BD: ${{ secrets.DKDBODY }}
-         DKD_TX_URL: ${{ secrets.DKDTXURL }}
-         DKD_TX_HD: ${{ secrets.DKDTXHD }}
-         DKD_TX_BD: ${{ secrets.DKDTXBODY }}
-         TZ: Asia/shanghai
      steps:
        - name: Checkout
          run: |
-           git clone https://github.com/Sam139/Myself.git ~/Myself
+           git clone https://github.com/tsuyoshi727/action-group.git ~/action-group
        - name: Use Node.js 12.x
          uses: actions/setup-node@v1
          with:
            node-version: 12.x
        - name: npm install
          run: |
-           cd ~/Myself
+           cd ~/action-group
            npm install
        - name: '运行 【多看点】'
          run: |
-           cd ~/Myself
-           node scripts/dkd.js
+           cd ~/action-group
+           node Node/dkd.js
          env:
+           DKDURL: ${{ secrets.DKDURL }}
+           DKDHD: ${{ secrets.DKDHD }}
+           DKDBODY: ${{ secrets.DKDBODY }}
+           DKDTXURL: ${{ secrets.DKDTXURL }}
+           DKDTXHD: ${{ secrets.DKDTXHD }}
+           DKDTXBODY: ${{ secrets.DKDTXBODY }}
            TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
            TG_USER_ID: ${{ secrets.TG_USER_ID }}
