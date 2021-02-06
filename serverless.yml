@@ -18,6 +18,12 @@ inputs:
   events: # 触发器
     - timer: # Lexho
         parameters:
+          name: cfd
+          cronExpression: "0 0 * * *"
+          enable: true
+          argument: cfd
+    - timer: # Lexho
+        parameters:
           name: dy_hs_dyhs_kkd
           cronExpression: "*/5 * * * *"
           enable: true
