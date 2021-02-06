@@ -24,20 +24,17 @@
          TZ: Asia/shanghai
      steps:
        - name: Checkout
-         run: |
-           git clone https://github.com/Sam139/Myself.git ~/Myself
+         uses: actions/checkout@v2
        - name: Use Node.js 12.x
          uses: actions/setup-node@v1
          with:
            node-version: 12.x
        - name: npm install
          run: |
-           cd ~/Myself
            npm install
        - name: '运行 【腾讯自选股】'
          run: |
-           cd ~/Myself
-           node scripts/txstock.js
+           node txstock.js
          env:
            TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
            TG_USER_ID: ${{ secrets.TG_USER_ID }}
