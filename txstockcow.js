@@ -1,10 +1,3 @@
-
-/*
-**** 活动 ****
-活动长牛来啦cookie(cowkey):更新并启动微信重写https://raw.githubusercontent.com/CenBoMin/GithubSync/main/TXSTOCK/txs_wxcookie.conf,打开App,点击左上头像-进入，点击活动页面即可获取
-！！！！！获取完cookie,务必关闭重写引用
-*/
-
 const jsname = '🐮自选股养牛牛'
 const $ = Env(jsname)
 const logs = 0; //0为关闭日志，1为开启,默认为0
@@ -13,7 +6,7 @@ const notifyInterval = 1; //0为关闭通知，1为所有通知,默认为0
 let rndtime = Math.round(new Date().getTime()) //毫秒
 let signday = formatDateTime(new Date());
 let tz = '';
-let cash = $.getval('cash') || 0; //0为不自动提现,1为自动提现1元,5为自动提现1元,
+let cash = $.getval('cash') || 5; //0为不自动提现,1为自动提现1元,5为自动提现1元,
 
 const userheaderArr = [];
 let userheaderVal = "";
@@ -50,6 +43,56 @@ let COWKEY = [];
 
 
 if ($.isNode()) {
+
+if (process.env.TX_USERHEADER && process.env.TX_USERHEADER.indexOf('\n') > -1) {
+  userheader = process.env.TX_USERHEADER.split('\n');
+  console.log(`您选择的是用换行隔开\n`)
+  }  else  {
+  userheader = process.env.TX_USERHEADER.split()
+  } ;
+
+if (process.env.TX_USERKEY && process.env.TX_USERKEY.indexOf('\n') > -1) {
+  userkey = process.env.TX_USERKEY.split('\n');
+  console.log(`您选择的是用换行隔开\n`)
+  }  else  {
+  userkey = process.env.TX_USERKEY.split()
+  } ;
+
+if (process.env.TX_SIGNHEADER && process.env.TX_SIGNHEADER.indexOf('\n') > -1) {
+  signheader = process.env.TX_SIGNHEADER.split('\n');
+  console.log(`您选择的是用换行隔开\n`)
+  }  else  {
+  signheader = process.env.TX_SIGNHEADER.split()
+  } ;
+
+if (process.env.TX_SIGNKEY && process.env.TX_SIGNKEY.indexOf('\n') > -1) {
+  signkey = process.env.TX_SIGNKEY.split('\n');
+  console.log(`您选择的是用换行隔开\n`)
+  }  else  {
+  signkey = process.env.TX_SIGNKEY.split()
+  } ;
+
+if (process.env.TX_TASKHEADER && process.env.TX_TASKHEADER.indexOf('\n') > -1) {
+  taskheader = process.env.TX_TASKHEADER.split('\n');
+  console.log(`您选择的是用换行隔开\n`)
+  }  else  {
+  taskheader = process.env.TX_TASKHEADER.split()
+  } ;
+
+if (process.env.TX_TASKKEY && process.env.TX_TASKKEY.indexOf('\n') > -1) {
+  taskkey = process.env.TX_TASKKEY.split('\n');
+  console.log(`您选择的是用换行隔开\n`)
+  }  else  {
+  taskkey = process.env.TX_TASKKEY.split()
+  } ;
+
+if (process.env.TX_WXTASKKEY && process.env.TX_WXTASKKEY.indexOf('\n') > -1) {
+  wxtaskkey = process.env.TX_WXTASKKEY.split('\n');
+  console.log(`您选择的是用换行隔开\n`)
+  }  else  {
+  wxtaskkey = process.env.TX_WXTASKKEY.split()
+  } ;
+
   Object.keys(userheaderVal).forEach((item) => {
     if (userheaderVal[item]) {
       userheaderArr.push(signheaderVal[item])
