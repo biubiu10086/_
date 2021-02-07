@@ -23,7 +23,7 @@
        - name: npm install
          run: |
            npm install
-      - name: '运行 【腾讯自选股】'
+       - name: '运行 【腾讯自选股】'
          run: |
            node txstock.js
        - name: '运行 【抖音极速版】'
