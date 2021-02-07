@@ -93,6 +93,13 @@ if (process.env.TX_WXTASKKEY && process.env.TX_WXTASKKEY.indexOf('\n') > -1) {
   wxtaskkey = process.env.TX_WXTASKKEY.split()
   } ;
 
+if (process.env.TX_COWKEY && process.env.TX_COWKEY.indexOf('\n') > -1) {
+  cowkey = process.env.TX_COWKEY.split('\n');
+  console.log(`您选择的是用换行隔开\n`)
+  }  else  {
+  cowkey = process.env.TX_COWKEY.split()
+  } ;
+
   Object.keys(userheaderVal).forEach((item) => {
     if (userheaderVal[item]) {
       userheaderArr.push(signheaderVal[item])
@@ -143,7 +150,7 @@ if (process.env.TX_WXTASKKEY && process.env.TX_WXTASKKEY.indexOf('\n') > -1) {
   taskheaderArr.push($.getdata('taskheader'));
   taskkeyArr.push($.getdata('taskkey'));
   wxtaskkeyArr.push($.getdata('wxtaskkey'));
-  cowkeyArr.push('qlappid=wx9cf8c670ebd68ce4; qlskey=v0aaf8a8220601f39b5430ffeb8df49d; qluin=085e9858e1666d3e26a68af08@wx.tenpay.com; qq_logtype=16; wx_session_time=1612659125000; wzq_qlappid=wx9cf8c670ebd68ce4; wzq_qlskey=v0aaf8a8220601f39b5430ffeb8df49d; wzq_qluin=os-ppuNk4IDJQwuv7APN-A27pekk');
+  cowkeyArr.push ($.getdata('cowkey'));
 }
 
 
