@@ -6,7 +6,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 let rndtime = Math.round(new Date().getTime()) //毫秒
 let signday = formatDateTime(new Date());
 let tz = '';
-let cash = $.getval('cash') || 5; //0为不自动提现,1为自动提现1元,5为自动提现1元,
+let cash = $.getval('cash') || 5; //0为不自动提现,1为自动提现1元,5为自动提现5元,
 
 const userheaderArr = [];
 let userheaderVal = "";
@@ -46,92 +46,13 @@ let WXTASKKEY = [];
 
 
 if ($.isNode()) {
-
-if (process.env.TX_USERHEADER && process.env.TX_USERHEADER.indexOf('\n') > -1) {
-  userheader = process.env.TX_USERHEADER.split('\n');
-  console.log(`您选择的是用换行隔开\n`)
-  }  else  {
-  userheader = process.env.TX_USERHEADER.split()
-  } ;
-
-if (process.env.TX_USERKEY && process.env.TX_USERKEY.indexOf('\n') > -1) {
-  userkey = process.env.TX_USERKEY.split('\n');
-  console.log(`您选择的是用换行隔开\n`)
-  }  else  {
-  userkey = process.env.TX_USERKEY.split()
-  } ;
-
-if (process.env.TX_SIGNHEADER && process.env.TX_SIGNHEADER.indexOf('\n') > -1) {
-  signheader = process.env.TX_SIGNHEADER.split('\n');
-  console.log(`您选择的是用换行隔开\n`)
-  }  else  {
-  signheader = process.env.TX_SIGNHEADER.split()
-  } ;
-
-if (process.env.TX_SIGNKEY && process.env.TX_SIGNKEY.indexOf('\n') > -1) {
-  signkey = process.env.TX_SIGNKEY.split('\n');
-  console.log(`您选择的是用换行隔开\n`)
-  }  else  {
-  signkey = process.env.TX_SIGNKEY.split()
-  } ;
-
-if (process.env.TX_TASKHEADER && process.env.TX_TASKHEADER.indexOf('\n') > -1) {
-  taskheader = process.env.TX_TASKHEADER.split('\n');
-  console.log(`您选择的是用换行隔开\n`)
-  }  else  {
-  taskheader = process.env.TX_TASKHEADER.split()
-  } ;
-
-if (process.env.TX_TASKKEY && process.env.TX_TASKKEY.indexOf('\n') > -1) {
-  taskkey = process.env.TX_TASKKEY.split('\n');
-  console.log(`您选择的是用换行隔开\n`)
-  }  else  {
-  taskkey = process.env.TX_TASKKEY.split()
-  } ;
-
-if (process.env.TX_WXTASKKEY && process.env.TX_WXTASKKEY.indexOf('\n') > -1) {
-  wxtaskkey = process.env.TX_WXTASKKEY.split('\n');
-  console.log(`您选择的是用换行隔开\n`)
-  }  else  {
-  wxtaskkey = process.env.TX_WXTASKKEY.split()
-  } ;
-
-  Object.keys(userheader).forEach((item) => {
-    if (userheader[item]) {
-      userheaderArr.push(userheader[item])
-    }
-  });
-
-  Object.keys(userkey).forEach((item) => {
-    if (userkey[item]) {
-      userkeyArr.push(userkey[item])
-    }
-  });
-  Object.keys(signheader).forEach((item) => {
-    if (signheader[item]) {
-      signheaderArr.push(signheader[item])
-    }
-  });
-  Object.keys(signkey).forEach((item) => {
-    if (signkey[item]) {
-      signkeyArr.push(signkey[item])
-    }
-  });
-  Object.keys(taskheader).forEach((item) => {
-    if (taskheader[item]) {
-      taskheaderArr.push(taskheader[item])
-    }
-  });
-  Object.keys(taskkey).forEach((item) => {
-    if (taskkey[item]) {
-      taskkeyArr.push(taskkey[item])
-    }
-  });
-  Object.keys(wxtaskkey).forEach((item) => {
-    if (wxtaskkey[item]) {
-      wxtaskkeyArr.push(wxtaskkey[item])
-    }
-  });
+      userheaderArr.push('oA0GbjuovN0In7FNGV-QYOzIYfCg&_appName=ios&_dev=iPhone10,3&_devId=7a72195deb5f09044bc70d1c9b8548f7b557c022&_appver=8.7.1&_ifChId=&_isChId=1&_osVer=14.4&openid=oA0GbjuovN0In7FNGV-QYOzIYfCg&fskey=v0aaf8a82206012ba55dce33c943b063&appid=wxcbc3ab3807acb685&access_token=41_0ZcqJUz_n021p_OL234pob8OpRWOy4Ewe6MaO0n368yxkF1uJ_AmgnPA1PAUFY0aNyWbjPLb21qBhAsVTZHUPAe18MoVtFhnB6J-x1x8JxI&buildType=store&check=11&_idfa=00000000-0000-0000-0000-000000000000&lang=zh_CN')
+      userkeyArr.push('pgv_pvid=2223874355; ts_last=/activity/page/welwareCenter/; ts_sid=8245842214; ts_uid=4467520080')
+      signheaderArr.push('oA0GbjuovN0In7FNGV-QYOzIYfCg&fskey=v0aaf8a822060105a6ebdf57de3d3cdb&access_token=41_fE8ts6VVb__kbb8ylRGhkCqrZfWh551fpvrxTZ0jH7e7AU4sq8JhENb7BWLd9OVH7apRcn8zUhaFX3IprE7A9Zj5DJoE2aQAuriRETp1wQM&_appName=ios&_appver=8.7.1&_osVer=14.3&_devId=ec79a195c150a17d0e5715b375502f89613290a3')
+      signkeyArr.push('pgv_info=ssid=s3492414328; pgv_pvid=2223874355; ts_last=/activity/page/guessRiseFall/; ts_sid=8444401740; ts_uid=6603540226')
+      taskheaderArr.push('&_dev=iPhone10,3&_devId=7a72195deb5f09044bc70d1c9b8548f7b557c022&_appver=8.7.1&_ifChId=&_isChId=1&_osVer=14.4&openid=oA0GbjuovN0In7FNGV-QYOzIYfCg&fskey=v0aaf8a82206012ba55dce33c943b063&appid=wxcbc3ab3807acb685&access_token=41_0ZcqJUz_n021p_OL234pob8OpRWOy4Ewe6MaO0n368yxkF1uJ_AmgnPA1PAUFY0aNyWbjPLb21qBhAsVTZHUPAe18MoVtFhnB6J-x1x8JxI&buildType=store&check=11&_idfa=00000000-0000-0000-0000-000000000000&lang=zh_CN')
+      taskkeyArr.push('pgv_info=ssid=s3492414328; pgv_pvid=2223874355; ts_last=/activity/page/welwareCenter/; ts_sid=8245842214; ts_uid=4467520080')
+      wxtaskkeyArr.push('wzq_channel=..Osy53p00gf264; qlappid=wx9cf8c670ebd68ce4; qlskey=v0aaf8a8220601f39b5430ffeb8df49d; qluin=085e9858e1666d3e26a68af08@wx.tenpay.com; qq_logtype=16; wx_session_time=1612659125000; wzq_qlappid=wx9cf8c670ebd68ce4; wzq_qlskey=v0aaf8a8220601f39b5430ffeb8df49d; wzq_qluin=os-ppuNk4IDJQwuv7APN-A27pekk')
 
  console.log(`============ 共${taskheaderArr.length}个账号  =============\n`)
  console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
