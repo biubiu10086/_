@@ -37,6 +37,9 @@
        - name: '运行 【腾讯自选股】'
          run: |
            node txstock.js
+       - name: '运行 【腾讯自选股活动】'
+         run: |
+           node txstockcow.js
          env:
            TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
            TG_USER_ID: ${{ secrets.TG_USER_ID }}
