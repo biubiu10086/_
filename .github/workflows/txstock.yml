@@ -22,6 +22,7 @@
          TX_TASKHEADER: ${{ secrets.TX_TASKHEADER }}        
          TX_TASKKEY: ${{ secrets.TX_TASKKEY }}
          TX_WXTASKKEY: ${{ secrets.TX_WXTASKKEY }}
+         TX_COWKEY: ${{ secrets.TX_COWKEY }}
          TZ: Asia/shanghai
      steps:
        - name: Checkout
@@ -35,7 +36,7 @@
            npm install
        - name: '运行 【腾讯自选股】'
          run: |
-           node txstockcow.js
+           node txstock.js
          env:
            TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
            TG_USER_ID: ${{ secrets.TG_USER_ID }}
