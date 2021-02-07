@@ -36,8 +36,8 @@ const wxtaskkeyArr = [];
 let wxtaskkeyVal = "";
 let WXTASKKEY = [];
 
-const cowkeyArr = [];
-let cowkeyVal = "";
+const cowkeyArr = [pgv_pvid=9480883648; ts_last=/activity/page/raisebull/; ts_sid=8980429240; ts_uid=7982631016];
+let cowkeyVal = "pgv_pvid=9480883648; ts_last=/activity/page/raisebull/; ts_sid=8980429240; ts_uid=7982631016";
 let COWKEY = [];
 ////////////////////////////////////////////////////////////////////
 
