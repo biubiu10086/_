@@ -31,7 +31,7 @@ let userkeyVal = "";
 let USERKEY = [];
 
 const cashheaderArr = [];
-//let cashheaderVal = "";
+let cashheaderVal = "";
 let CASHHEADER = [];
 
 const signheaderArr = [];
