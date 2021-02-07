@@ -30,10 +30,6 @@ let userkeyVal = "";
 //let userkey = $.getdata('userkey')
 let USERKEY = [];
 
-const cashheaderArr = [];
-let cashheaderVal = "";
-let CASHHEADER = [];
-
 const signheaderArr = [];
 let signheaderVal = "";
 //let signheader = $.getdata('signheader')
@@ -75,13 +71,6 @@ if (process.env.TX_USERKEY && process.env.TX_USERKEY.indexOf('\n') > -1) {
   console.log(`您选择的是用换行隔开\n`)
   }  else  {
   userkey = process.env.TX_USERKEY.split()
-  } ;
-
-if (process.env.TX_CASHHEADER && process.env.TX_CASHHEADER.indexOf('\n') > -1) {
-  cashheader = process.env.TX_CASHHEADER.split('\n');
-  console.log(`您选择的是用换行隔开\n`)
-  }  else  {
-  cashheader = process.env.TX_CASHHEADER.split()
   } ;
 
 if (process.env.TX_SIGNHEADER && process.env.TX_SIGNHEADER.indexOf('\n') > -1) {
@@ -129,11 +118,6 @@ if (process.env.TX_TASKKEY && process.env.TX_TASKKEY.indexOf('\n') > -1) {
       userkeyArr.push(userkeyVal[item])
     }
   });
-  Object.keys(cashheaderVal).forEach((item) => {
-    if (cashheaderVal[item]) {
-      cashheaderArr.push(cashheaderVal[item])
-    }
-  });
   Object.keys(signheaderVal).forEach((item) => {
     if (signheaderVal[item]) {
       signheaderArr.push(signheaderVal[item])
@@ -164,7 +148,6 @@ if (process.env.TX_TASKKEY && process.env.TX_TASKKEY.indexOf('\n') > -1) {
 } else {
   userheaderArr.push($.getdata('userheader'));
   userkeyArr.push($.getdata('userkey'));
-  cashheaderArr.push($.getdata('cashheader'));
   signheaderArr.push($.getdata('signheader'));
   signkeyArr.push($.getdata('signkey'));
   taskheaderArr.push($.getdata('taskheader'));
@@ -180,7 +163,6 @@ if (process.env.TX_TASKKEY && process.env.TX_TASKKEY.indexOf('\n') > -1) {
   O = (`${jsname}执行通知🔔`);
   userheaderVal = userheaderArr[0];
   userkeyVal = userkeyArr[0];
-  cashheaderVal = cashheaderArr[0];
   signheaderVal = signheaderArr[0];
   signkeyVal = signkeyArr[0];
   taskheaderVal = taskheaderArr[0];
