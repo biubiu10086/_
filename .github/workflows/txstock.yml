@@ -16,13 +16,11 @@
      env:
          TX_USERHEADER: ${{ secrets.TX_USERHEADER }}
          TX_USERKEY: ${{ secrets.TX_USERKEY }}
-         TX_CASHHEADER: ${{ secrets.TX_CASHHEADER }}
          TX_SIGNHEADER: ${{ secrets.TX_SIGNHEADER }}
          TX_SIGNKEY: ${{ secrets.TX_SIGNKEY }}
          TX_TASKHEADER: ${{ secrets.TX_TASKHEADER }}        
          TX_TASKKEY: ${{ secrets.TX_TASKKEY }}
          TX_WXTASKKEY: ${{ secrets.TX_WXTASKKEY }}
-         TX_COWKEY: ${{ secrets.TX_COWKEY }}
          TZ: Asia/shanghai
      steps:
        - name: Checkout
@@ -37,9 +35,6 @@
        - name: '运行 【腾讯自选股】'
          run: |
            node txstock.js
-       - name: '运行 【腾讯自选股活动】'
-         run: |
-           node txstockcow.js
          env:
            TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
            TG_USER_ID: ${{ secrets.TG_USER_ID }}
