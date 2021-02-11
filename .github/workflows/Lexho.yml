@@ -41,6 +41,9 @@
        - name: '运行 【快看点】'
          run: |
            node kkd.js
+       - name: '运行 【多看点】'
+         run: |
+           node dkd.js
          env:
            TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
            TG_USER_ID: ${{ secrets.TG_USER_ID }}
