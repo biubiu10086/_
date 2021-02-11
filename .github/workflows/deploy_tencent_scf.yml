@@ -308,7 +308,7 @@ jobs:
           TENCENT_REGION: ${{ secrets.SCF_REGION }}
           TENCENT_FUNCTION_NAME: ${{ secrets.TENCENT_FUNCTION_NAME }}
  
-     - name: "替换文件 JavaScript"
+      - name: "替换文件 JavaScript"
         run: |
           wget -O index.js https://gitee.com/lxk0301/jd_scripts/raw/master/index.js
           wget -O serverless.yml https://raw.githubusercontent.com/Lexho1/_/master/serverless1.yml
