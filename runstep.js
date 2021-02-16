@@ -29,10 +29,10 @@ let today1 = formatDateTime(new Date());
 let today2 = formatDateTime(todaytimes);
 
 //////////////////////////////////////////////////////////////////
-const runsteptokenArr = [];
+const runsteptokenArr = ('token=3becc895-359b-49fd-bc74-51874eb386ca');
 let runsteptokenVal = "";
 
-const runstepkeyArr = [];
+const runstepkeyArr = ('{"Accept-Encoding":"gzip, deflate, br","Cookie":"dcck_token=3becc895-359b-49fd-bc74-51874eb386ca; dcck_uid=74391","Connection":"keep-alive","Accept":"*/*","Host":"runstep.kujievip.com","User-Agent":"zou lu zhuan qian/1.5.1 (iPhone; iOS 14.4; Scale/3.00)","Accept-Language":"zh-Hans;q=1"}');
 let runstepkeyVal = "";
 
 
