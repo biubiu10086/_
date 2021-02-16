@@ -29,10 +29,10 @@ let today1 = formatDateTime(new Date());
 let today2 = formatDateTime(todaytimes);
 
 //////////////////////////////////////////////////////////////////
-const runsteptokenArr = ('token=3becc895-359b-49fd-bc74-51874eb386ca');
+const runsteptokenArr = [];
 let runsteptokenVal = "";
 
-const runstepkeyArr = ('{"Accept-Encoding":"gzip, deflate, br","Cookie":"dcck_token=3becc895-359b-49fd-bc74-51874eb386ca; dcck_uid=74391","Connection":"keep-alive","Accept":"*/*","Host":"runstep.kujievip.com","User-Agent":"zou lu zhuan qian/1.5.1 (iPhone; iOS 14.4; Scale/3.00)","Accept-Language":"zh-Hans;q=1"}');
+const runstepkeyArr = [];
 let runstepkeyVal = "";
 
 
@@ -48,10 +48,6 @@ if ($.isNode()) {
 
 !(async () => {
   cc = (`🥦${jsname}任务执行通知🔔`);
-  if (typeof $.getdata('runsteptoken') === "undefined") {
-    console.log($.name, '【提示】请先前往获取cookie📲')
-    return;
-  }
   runsteptokenVal = runsteptokenArr[0];
   runstepkeyVal = runstepkeyArr[0];
 
