@@ -38,6 +38,9 @@
        - name: '运行 【步步宝】'
          run: |
            node bbb.js
+       - name: '运行 【走路赚钱】'
+         run: |
+           node runstep.js
        - name: '运行 【快看点】'
          run: |
            node kkd.js
