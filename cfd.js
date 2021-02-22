@@ -1,4 +1,4 @@
-const $ = new Env("财富岛兑换💸");
+const $ = new Env("京喜财富岛提现");
 const JD_API_HOST = "https://m.jingxi.com/";
 const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
 const jdTokenNode = $.isNode() ? require('./jdJxncTokens.js') : '';
@@ -16,7 +16,7 @@ $.userName = '';
   if (!getTokens()) return;
   for (let i = 0; i < $.cookieArr.length; i++) {
     $.currentCookie = $.cookieArr[i];
-    $.currentToken = $.tokenArr[i] || {};
+    $.currentToken = $.tokenArr[i];
     if ($.currentCookie) {
       $.userName =  decodeURIComponent($.currentCookie.match(/pt_pin=(.+?);/) && $.currentCookie.match(/pt_pin=(.+?);/)[1]);
       $.log(`\n开始【京东账号${i + 1}】${$.userName}`);
@@ -34,7 +34,7 @@ function cashOut() {
     $.get(
       taskUrl(
         `consume/CashOut`,
-        `ddwMoney=100&dwIsCreateToken=0&ddwMinPaperMoney=50000&strPgtimestamp=${$.currentToken['timestamp']}&strPhoneID=${$.currentToken['phoneid']}&strPgUUNum=${$.currentToken['farm_jstoken']}`
+        `ddwMoney=100&dwIsCreateToken=0&ddwMinPaperMoney=100000&strPgtimestamp=${$.currentToken['timestamp']}&strPhoneID=${$.currentToken['phoneid']}&strPgUUNum=${$.currentToken['farm_jstoken']}`
       ), 
       async (err, resp, data) => {
         try {
@@ -42,6 +42,7 @@ function cashOut() {
           const { iRet, sErrMsg } = JSON.parse(data);
           $.log(sErrMsg);
           $.result.push(`【${$.userName}】\n ${sErrMsg == "" ? sErrMsg="今天手气太棒了" : sErrMsg}`);
+          resolve(sErrMsg);
         } catch (e) {
           $.logErr(e, resp);
         } finally {
