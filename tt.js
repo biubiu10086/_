@@ -25,8 +25,8 @@ if (isGetCookie) {
    $.done()
 } 
 if ($.isNode()) {
-    TTreferArr.push('undefined')
-    TTbodyArr.push('{"token":"eyJhbGciOiAiSFM1MTIiLCAidHlwIjogIkpXUyJ9.eyJleHAiOiAxNjE0MzI5MTE1LCAiaWF0IjogMTYxNDMyODIxNSwgImlzcyI6ICI1MnR0LmNvbSIsICJzZXNzIjogIiIsICJzdWIiOiAidHQyNzIxMjM3NDUiLCAidGVybSI6IDExNzk2NDgsICJ0eXAiOiAxLCAidWlkIjogMjE2ODMzMDk3fQ.jQfCZrcYc238N6CzVWtRT-A4rrJQKL_Q5gmPu1LvfzwnJncb5oqs43IL1rtWYulc-agy6-mEdhukzpA9voH48g","uid":"216833097"}')
+    TTreferArr.push('http://appcdn.52tt.com/web/frontend-web-activity-new-user-clock-in-thirty-day/index.html?device_id=2021022616300583139c56706655968ca9ad6720a1df6c00a9b66705e16549&ip=14.209.65.152&uid=216833097&version=84213766&appid=0&os_type=2&platform=1&app=0&market_id=0')
+    TTbodyArr.push('{"device_id":"2021022616300583139c56706655968ca9ad6720a1df6c00a9b66705e16549","ip":"14.209.65.152","uid":"216833097","version":"84213766","appid":"0","os_type":"2","platform":"1","app":"0","market_id":"0","token":"eyJhbGciOiAiSFM1MTIiLCAidHlwIjogIkpXUyJ9.eyJleHAiOiAxNjE0NjI3ODE5LCAiaWF0IjogMTYxNDYyNjkxOSwgImlzcyI6ICI1MnR0LmNvbSIsICJzZXNzIjogIiIsICJzdWIiOiAidHQyNzIxMjM3NDUiLCAidGVybSI6IDExNzk2NDgsICJ0eXAiOiAxLCAidWlkIjogMjE2ODMzMDk3fQ.knkF7BmPGYvGRXV-NBG3sQrrmP14lyfKO9dVHHb86N7CEnLhjlQqGrM5h-yhLdGdIoo07sV4J-3C6mTLTtMQkA"}')
     let TTcount = ($.getval('TTcount') || '1');
       console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
