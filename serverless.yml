@@ -18,10 +18,10 @@ inputs:
   events: # 触发器
     - timer: # Lexho
         parameters:
-          name: txstock_tt_flw
+          name: txstock_flw
           cronExpression: "0 */2 * * *"
           enable: true
-          argument: txstock&tt
+          argument: txstock&flw
     - timer: # Lexho
         parameters:
           name: cfd
