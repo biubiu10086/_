@@ -1,1 +1,0 @@
-shadowsocks=101.32.221.127:59556, method=aes-256-cfb, password=O72RvP, fast-open=false, udp-relay=false, tag=.
