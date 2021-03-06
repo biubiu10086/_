@@ -30,10 +30,10 @@ inputs:
           argument: cfd
     - timer: # Lexho
         parameters:
-          name: dy_hs_dyhs_kkd
+          name: dy_hs_dyhs
           cronExpression: "*/5 * * * *"
           enable: true
-          argument: dy&hs&dyhs&kkd
+          argument: dy&hs&dyhs
     - timer: # Lexho
         parameters:
           name: bububao
